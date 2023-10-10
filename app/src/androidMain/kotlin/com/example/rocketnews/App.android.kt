@@ -1,4 +1,4 @@
-package com.example.rocketnews.App
+package com.example.rocketnews
 
 import android.app.Application
 import android.content.Context
@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.example.rocketnews.di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.logger.Level

@@ -3,12 +3,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name="com.example.rocketnews.App.AndroidApp"
+        android:name="com.example.rocketnews.AndroidApp"
         android:icon="@android:drawable/ic_menu_compass"
         android:label="Rocket News"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
-            android:name="com.example.rocketnews.App.AppActivity"
+            android:name="com.example.rocketnews.AppActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true"
             android:launchMode="singleInstance"

@@ -95,16 +95,16 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.rocketnews"
-        minSdk = 24
+        applicationId = "com.example.rocketnews.androidApp"
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
     }
     sourceSets["main"].apply {
-        manifest.srcFile("src/main/AndroidManifest.xml")
-        res.srcDirs("src/main/res")
+        manifest.srcFile("src/androidMain/AndroidManifest.xml")
+        res.srcDirs("src/androidMain/res")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
