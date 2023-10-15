@@ -1,0 +1,30 @@
+import kotlin.Boolean;
+
+
+CREATE TABLE RocketFavorite(
+     patchSmal TEXT NOT NULL,
+     patchLarge TEXT NOT NULL,
+     webcast TEXT NOT NULL,
+     youtube_id TEXT NOT NULL,
+     article TEXT NOT NULL,
+     wikipedia TEXT NOT NULL,
+     static_fire_date_utc TEXT NOT NULL,
+     success TEXT AS Boolean NOT NULL,
+     date_utc TEXT NOT NULL,
+     name TEXT NOT NULL,
+     upcoming TEXT AS Boolean NOT NULL,
+     id INTEGER NOT NULL PRIMARY KEY
+);
+
+insertRocketFavorite:
+INSERT INTO RocketFavorite(patchSmal, patchLarge, webcast, youtube_id, article, wikipedia, static_fire_date_utc, success, date_utc, name, upcoming, id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);
+
+removeRocketFavorite:
+DELETE FROM RocketFavorite WHERE id = ?;
+
+selectAllRocketFavorite:
+SELECT * FROM RocketFavorite;
+
+selectRocketFavoriteById:
+-- SELECT * FROM RocketFavorite WHERE id = ?;
+SELECT EXISTS(SELECT 1 FROM RocketFavorite WHERE id = ? LIMIT 1);

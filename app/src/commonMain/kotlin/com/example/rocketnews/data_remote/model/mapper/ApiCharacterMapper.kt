@@ -15,11 +15,10 @@ class ApiRocketMapper : Mapper<ApiRocket, Rocket>() {
             links.wikipedia,
             staticFireDateUtc,
             success,
-            payloads,
             dateUtc,
             name,
             upcoming,
-            id,
+            id.toLong(),
         )
     }
 

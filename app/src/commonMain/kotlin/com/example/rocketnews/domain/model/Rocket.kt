@@ -9,9 +9,8 @@ data class Rocket(
     val wikipedia: String,
     val static_fire_date_utc: String,
     val success: Boolean,
-    val payloads: List<String>,
     val date_utc: String,
     val name: String,
     val upcoming: Boolean,
-    val id: String,
+    val id: Long,
 )
