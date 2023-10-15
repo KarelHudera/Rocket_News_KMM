@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.theme
+package com.example.rocketnews.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape

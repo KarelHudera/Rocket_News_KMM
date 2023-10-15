@@ -1,13 +1,12 @@
 package com.example.rocketnews.domain
 
-import com.example.rocketnews.domain.model.Character
+import com.example.rocketnews.domain.model.Rocket
 import kotlinx.coroutines.flow.Flow
 
 interface IRepository {
-    suspend fun getCharacters(): List<Character>
-    suspend fun getCharactersFavorites(): Flow<List<Character>>
-    suspend fun getCharacter(id: Int): Character
-    suspend fun addCharacterToFavorites(character: Character)
-    suspend fun removeCharacterFromFavorite(idCharacter: Int)
-    suspend fun isCharacterFavorite(idCharacter: Int): Boolean
+    suspend fun getCharacters(): List<Rocket>
+    suspend fun getCharactersFavorites(): Flow<List<Rocket>>
+    suspend fun addCharacterToFavorites(character: Rocket)
+    suspend fun removeCharacterFromFavorite(idCharacter: String) // tohle bude string
+    suspend fun isCharacterFavorite(idCharacter: String): Boolean // tohe taky
 }

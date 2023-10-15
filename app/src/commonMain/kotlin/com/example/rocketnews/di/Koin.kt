@@ -1,21 +1,8 @@
 package com.example.rocketnews.di
 
-import com.example.rocketnews.data_cache.CacheDataImp
-import com.example.rocketnews.data_cache.sqldelight.SharedDatabase
+import com.example.rocketnews.data_remote.IRemoteData
 import com.example.rocketnews.data_remote.RemoteDataImp
-import com.example.rocketnews.data_remote.model.mapper.ApiCharacterMapper
-import com.example.rocketnews.domain.IRepository
-import com.example.rocketnews.domain.interactors.GetCharacterUseCase
-import com.example.rocketnews.domain.interactors.GetCharactersFavoritesUseCase
-import com.example.rocketnews.domain.interactors.GetCharactersUseCase
-import com.example.rocketnews.domain.interactors.IsCharacterFavoriteUseCase
-import com.example.rocketnews.domain.interactors.SwitchCharacterFavoriteUseCase
-import com.example.rocketnews.repository.ICacheData
-import com.example.rocketnews.repository.IRemoteData
-import com.example.rocketnews.repository.RepositoryImp
-import com.example.rocketnews.presentation.ui.features.character_detail.CharacterDetailViewModel
-import com.example.rocketnews.presentation.ui.features.characters.CharactersViewModel
-import com.example.rocketnews.presentation.ui.features.characters_favorites.CharactersFavoritesViewModel
+import com.example.rocketnews.data_remote.model.mapper.ApiRocketMapper
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.DEFAULT
@@ -38,7 +25,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
             useCasesModule,
             repositoryModule,
             ktorModule,
-            sqlDelightModule,
+//            sqlDelightModule,
             mapperModule,
             dispatcherModule,
             platformModule()
@@ -46,22 +33,22 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
     }
 
 val viewModelModule = module {
-    factory { CharactersViewModel(get()) }
-    factory { CharactersFavoritesViewModel(get()) }
-    factory { params -> CharacterDetailViewModel(get(), get(), get(), params.get()) }
+//    factory { CharactersViewModel(get()) }
+//    factory { CharactersFavoritesViewModel(get()) }
+//    factory { params -> CharacterDetailViewModel(get(), get(), get(), params.get()) }
 }
 
 val useCasesModule: Module = module {
-    factory { GetCharactersUseCase(get(), get()) }
-    factory { GetCharactersFavoritesUseCase(get(), get()) }
-    factory { GetCharacterUseCase(get(), get()) }
-    factory { IsCharacterFavoriteUseCase(get(), get()) }
-    factory { SwitchCharacterFavoriteUseCase(get(), get()) }
+//    factory { GetCharactersUseCase(get(), get()) }
+//    factory { GetCharactersFavoritesUseCase(get(), get()) }
+//    factory { GetCharacterUseCase(get(), get()) }
+//    factory { IsCharacterFavoriteUseCase(get(), get()) }
+//    factory { SwitchCharacterFavoriteUseCase(get(), get()) }
 }
 
 val repositoryModule = module {
-    single<IRepository> { RepositoryImp(get(), get()) }
-    single<ICacheData> { CacheDataImp(get()) }
+//    single<IRepository> { RepositoryImp(get(), get()) }
+//    single<ICacheData> { CacheDataImp(get()) }
     single<IRemoteData> { RemoteDataImp(get(), get(), get()) }
 
 
@@ -86,11 +73,7 @@ val ktorModule = module {
         }
     }
 
-    single { "https://rickandmortyapi.com" }
-}
-
-val sqlDelightModule = module {
-    single { SharedDatabase(get()) }
+    single { "https://api.spacexdata.com/v5/launches/" }
 }
 
 val dispatcherModule = module {
@@ -98,7 +81,7 @@ val dispatcherModule = module {
 }
 
 val mapperModule = module {
-    factory { ApiCharacterMapper() }
+    factory { ApiRocketMapper() }
 }
 
 fun initKoin() = initKoin {}
