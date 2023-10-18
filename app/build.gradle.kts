@@ -57,6 +57,7 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose)
                 implementation(libs.sqlDelight.extensions)
+                implementation(libs.kermit)
             }
         }
 

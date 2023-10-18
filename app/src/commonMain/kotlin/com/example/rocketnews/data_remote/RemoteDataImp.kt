@@ -1,5 +1,6 @@
 package com.example.rocketnews.data_remote
 
+import com.example.rocketnews.data_remote.model.ApiRocket
 import com.example.rocketnews.data_remote.model.mapper.ApiRocketMapper
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.data_remote.model.ApiRocketsResponse
@@ -15,5 +16,9 @@ class RemoteDataImp(
     override suspend fun getRocketsFromApi(): List<Rocket> =
         apiRocketMapper.map(
             (httpClient.get(endPoint).body<ApiRocketsResponse>()).results
+        )
+    override suspend fun getRocketFromApi(id: Long): Rocket =
+        apiRocketMapper.map(
+            httpClient.get("$endPoint$id").body<ApiRocket>()
         )
 }

@@ -17,6 +17,7 @@ kotlinx-serialization = "1.5.1"
 koin = "3.4.3"
 koinCompose = "1.0.4"
 sqlDelight = "2.0.0-alpha05"
+kermit = "2.0.0-RC4"
 
 [libraries]
 
@@ -46,6 +47,7 @@ sqlDelight-driver-android = { module = "app.cash.sqldelight:android-driver", ver
 sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-sqljs = { module = "app.cash.sqldelight:sqljs-driver", version.ref = "sqlDelight" }
 sqlDelight-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 
 [plugins]
 

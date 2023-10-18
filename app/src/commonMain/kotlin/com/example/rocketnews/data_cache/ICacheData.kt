@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ICacheData {
     suspend fun addRocketToFavorite(rocket: Rocket)
-    suspend fun removeRocketFromFavorite(idRocket: Int)
+    suspend fun removeRocketFromFavorite(idRocket: Long)
     suspend fun getAllRocketFavorites(): Flow<List<Rocket>>
-    suspend fun isRocketFavorite(idRocket: Int): Boolean
+    suspend fun isRocketFavorite(idRocket: Long): Boolean
 }

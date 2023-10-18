@@ -1,11 +1,23 @@
 package com.example.rocketnews.di
 
+import com.example.rocketnews.data_cache.CacheDataImp
+import com.example.rocketnews.data_cache.ICacheData
+import com.example.rocketnews.data_cache.sqldelight.SharedDatabase
 import com.example.rocketnews.data_remote.IRemoteData
 import com.example.rocketnews.data_remote.RemoteDataImp
 import com.example.rocketnews.data_remote.model.mapper.ApiRocketMapper
+import com.example.rocketnews.domain.IRepository
+import com.example.rocketnews.domain.RepositoryImp
+import com.example.rocketnews.domain.interactors.GetRocketUseCase
+import com.example.rocketnews.domain.interactors.GetRocketsFavoritesUseCase
+import com.example.rocketnews.domain.interactors.GetRocketsUseCase
+import com.example.rocketnews.domain.interactors.IsRocketFavoriteUseCase
+import com.example.rocketnews.domain.interactors.SwitchRocketFavoriteUseCase
+import com.example.rocketnews.presentation.ui.features.character_detail.RocketDetailViewModel
+import com.example.rocketnews.presentation.ui.features.characters.RocketsViewModel
+import com.example.rocketnews.presentation.ui.features.characters_favorites.RocketsFavoritesViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
@@ -25,7 +37,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
             useCasesModule,
             repositoryModule,
             ktorModule,
-//            sqlDelightModule,
+            sqlDelightModule,
             mapperModule,
             dispatcherModule,
             platformModule()
@@ -33,22 +45,22 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
     }
 
 val viewModelModule = module {
-//    factory { CharactersViewModel(get()) }
-//    factory { CharactersFavoritesViewModel(get()) }
-//    factory { params -> CharacterDetailViewModel(get(), get(), get(), params.get()) }
+    factory { RocketsViewModel(get()) }
+    factory { RocketsFavoritesViewModel(get()) }
+    factory { params -> RocketDetailViewModel(get(), get(), get(), params.get()) }
 }
 
 val useCasesModule: Module = module {
-//    factory { GetCharactersUseCase(get(), get()) }
-//    factory { GetCharactersFavoritesUseCase(get(), get()) }
-//    factory { GetCharacterUseCase(get(), get()) }
-//    factory { IsCharacterFavoriteUseCase(get(), get()) }
-//    factory { SwitchCharacterFavoriteUseCase(get(), get()) }
+    factory { GetRocketsUseCase(get(), get()) }
+    factory { GetRocketsFavoritesUseCase(get(), get()) }
+    factory { GetRocketUseCase(get(), get()) }
+    factory { IsRocketFavoriteUseCase(get(), get()) }
+    factory { SwitchRocketFavoriteUseCase(get(), get()) }
 }
 
 val repositoryModule = module {
-//    single<IRepository> { RepositoryImp(get(), get()) }
-//    single<ICacheData> { CacheDataImp(get()) }
+    single<IRepository> { RepositoryImp(get(), get()) }
+    single<ICacheData> { CacheDataImp(get()) }
     single<IRemoteData> { RemoteDataImp(get(), get(), get()) }
 
 
@@ -67,13 +79,22 @@ val ktorModule = module {
                 )
             }
             install(Logging) {
-                logger = Logger.DEFAULT
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        co.touchlab.kermit.Logger.d(tag = "KERMIT",
+                            messageString = message)
+                    }
+                }
                 level = LogLevel.ALL
             }
         }
     }
 
     single { "https://api.spacexdata.com/v5/launches/" }
+}
+
+val sqlDelightModule = module {
+    single { SharedDatabase(get()) }
 }
 
 val dispatcherModule = module {
