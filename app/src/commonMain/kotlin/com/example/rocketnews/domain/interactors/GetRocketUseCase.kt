@@ -8,6 +8,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 class GetRocketUseCase(
     private val repository: IRepository,
     dispatcher: CoroutineDispatcher,
-) : BaseUseCase<Long, Rocket>(dispatcher){
-    override suspend fun block(param: Long): Rocket = repository.getRocket(param)
+) : BaseUseCase<String, Rocket>(dispatcher){
+    override suspend fun block(param: String): Rocket = repository.getRocket(param)
 }

@@ -7,6 +7,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 class IsRocketFavoriteUseCase(
     private val repository: IRepository,
     dispatcher: CoroutineDispatcher,
-) : BaseUseCase<Long, Boolean>(dispatcher) {
-    override suspend fun block(param: Long): Boolean = repository.isRocketFavorite(param)
+) : BaseUseCase<String, Boolean>(dispatcher) {
+    override suspend fun block(param: String): Boolean = repository.isRocketFavorite(param)
 }

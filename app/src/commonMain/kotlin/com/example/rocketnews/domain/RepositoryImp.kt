@@ -16,15 +16,15 @@ class RepositoryImp(
     override suspend fun getRocketsFavorites(): Flow<List<Rocket>> =
         cacheData.getAllRocketFavorites()
 
-    override suspend fun getRocket(id: Long): Rocket =
+    override suspend fun getRocket(id: String): Rocket =
         remoteData.getRocketFromApi(id)
 
     override suspend fun addRocketToFavorites(character: Rocket) =
         cacheData.addRocketToFavorite(character)
 
-    override suspend fun removeRocketFromFavorite(idRocket: Long) =
+    override suspend fun removeRocketFromFavorite(idRocket: String) =
         cacheData.removeRocketFromFavorite(idRocket)
 
-    override suspend fun isRocketFavorite(idRocket: Long): Boolean =
+    override suspend fun isRocketFavorite(idRocket: String): Boolean =
         cacheData.isRocketFavorite(idRocket)
 }

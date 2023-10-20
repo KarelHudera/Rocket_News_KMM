@@ -12,5 +12,5 @@ data class Rocket(
     val date_utc: String,
     val name: String,
     val upcoming: Boolean,
-    val id: Long,
+    val id: String,
 )

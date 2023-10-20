@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 interface IRepository {
     suspend fun getRockets(): List<Rocket>
     suspend fun getRocketsFavorites(): Flow<List<Rocket>>
-    suspend fun getRocket(id: Long): Rocket
+    suspend fun getRocket(id: String): Rocket
     suspend fun addRocketToFavorites(character: Rocket)
-    suspend fun removeRocketFromFavorite(idRocket: Long)
-    suspend fun isRocketFavorite(idRocket: Long): Boolean
+    suspend fun removeRocketFromFavorite(idRocket: String)
+    suspend fun isRocketFavorite(idRocket: String): Boolean
 }

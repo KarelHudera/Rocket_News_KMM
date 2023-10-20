@@ -11,7 +11,7 @@ import com.example.rocketnews.domain.model.Rocket
 @Composable
 fun CharactersList(
     characters: List<Rocket>,
-    onCharacterClick: (Long) -> Unit,
+    onCharacterClick: (String) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),

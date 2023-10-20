@@ -18,6 +18,7 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import co.touchlab.kermit.Logger.Companion.tag
 import daniel.avila.rnm.kmm.presentation.ui.common.ActionBarIcon
 import com.example.rocketnews.presentation.ui.common.CharactersList
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
@@ -30,6 +31,8 @@ class CharactersScreen : Screen {
 
     @Composable
     override fun Content() {
+        co.touchlab.kermit.Logger.i { "test" }
+
         val rocketsViewModel = getScreenModel<RocketsViewModel>()
 
         val state by rocketsViewModel.uiState.collectAsState()

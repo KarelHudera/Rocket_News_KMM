@@ -4,6 +4,7 @@ import cafe.adriel.voyager.core.model.coroutineScope
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.BaseViewModel
+import io.ktor.util.logging.Logger
 import kotlinx.coroutines.launch
 
 class RocketsViewModel(
@@ -43,8 +44,12 @@ class RocketsViewModel(
                                 ResourceUiState.Success(it)
                         )
                     }
+                    co.touchlab.kermit.Logger.i { "$it SUCCESS" }
+
                 }
-                .onFailure { setState { copy(characters = ResourceUiState.Error()) } }
+                .onFailure { setState { copy(characters = ResourceUiState.Error()) }
+                    co.touchlab.kermit.Logger.i { "$it FAIL" }
+                }
         }
     }
 }

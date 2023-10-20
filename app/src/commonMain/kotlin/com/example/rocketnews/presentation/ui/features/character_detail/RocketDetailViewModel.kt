@@ -12,7 +12,7 @@ class RocketDetailViewModel(
     private val getCharacterUseCase: GetRocketUseCase,
     private val isCharacterFavoriteUseCase: IsRocketFavoriteUseCase,
     private val switchCharacterFavoriteUseCase: SwitchRocketFavoriteUseCase,
-    private val characterId: Long,
+    private val characterId: String,
 ) : BaseViewModel<RocketDetailContract.Event, RocketDetailContract.State, RocketDetailContract.Effect>() {
 
     init {
@@ -34,7 +34,7 @@ class RocketDetailViewModel(
         }
     }
 
-    private fun getCharacter(rocketId: Long) {
+    private fun getCharacter(rocketId: String) {
         setState { copy(rocket = ResourceUiState.Loading) }
         coroutineScope.launch {
             getCharacterUseCase(rocketId)
@@ -43,7 +43,7 @@ class RocketDetailViewModel(
         }
     }
 
-    private fun checkIfIsFavorite(idRocket: Long) {
+    private fun checkIfIsFavorite(idRocket: String) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
         coroutineScope.launch {
             isCharacterFavoriteUseCase(idRocket)
@@ -52,7 +52,7 @@ class RocketDetailViewModel(
         }
     }
 
-    private fun switchCharacterFavorite(idRocket: Long) {
+    private fun switchCharacterFavorite(idRocket: String) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
         coroutineScope.launch {
             switchCharacterFavoriteUseCase(idRocket)

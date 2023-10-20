@@ -10,7 +10,7 @@ interface CharactersFavoritesContract {
     sealed interface Event : UiEvent {
         object OnBackPressed : Event
         object OnTryCheckAgainClick : Event
-        data class OnCharacterClick(val idRocket: Long) : Event
+        data class OnCharacterClick(val idRocket: String) : Event
     }
 
     data class State(
@@ -18,7 +18,7 @@ interface CharactersFavoritesContract {
     ) : UiState
 
     sealed interface Effect : UiEffect {
-        data class NavigateToDetailCharacter(val idRocket: Long) : Effect
+        data class NavigateToDetailCharacter(val idRocket: String) : Effect
         object BackNavigation : Effect
 
     }

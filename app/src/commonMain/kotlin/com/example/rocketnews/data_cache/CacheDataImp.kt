@@ -29,7 +29,7 @@ class CacheDataImp(
         }
     }
 
-    override suspend fun removeRocketFromFavorite(idRocket: Long) {
+    override suspend fun removeRocketFromFavorite(idRocket: String) {
         sharedDatabase {
             it.appDatabaseQueries.removeRocketFavorite(idRocket)
         }
@@ -41,7 +41,7 @@ class CacheDataImp(
                 .map { it.executeAsList() }
         }
 
-    override suspend fun isRocketFavorite(idRocket: Long): Boolean =
+    override suspend fun isRocketFavorite(idRocket: String): Boolean =
         sharedDatabase {
             it.appDatabaseQueries.selectRocketFavoriteById(idRocket).executeAsOne()
         }
@@ -58,7 +58,7 @@ class CacheDataImp(
         date_utc: String,
         name: String,
         upcoming: Boolean,
-        id: Long,
+        id: String,
     ): Rocket = Rocket(
         patchSmall,
         patchLarge,
