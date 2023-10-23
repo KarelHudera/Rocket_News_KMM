@@ -1,4 +1,4 @@
-package daniel.avila.rnm.kmm.presentation.ui.common
+package com.example.rocketnews.presentation.ui.common
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

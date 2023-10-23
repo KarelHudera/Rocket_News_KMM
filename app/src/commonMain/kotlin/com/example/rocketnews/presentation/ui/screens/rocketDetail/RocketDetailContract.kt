@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.features.character_detail
+package com.example.rocketnews.presentation.ui.screens.rocketDetail
 
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.presentation.model.ResourceUiState
@@ -8,9 +8,9 @@ import com.example.rocketnews.presentation.mvi.UiState
 
 interface RocketDetailContract {
     sealed interface Event : UiEvent {
-        object OnFavoriteClick : Event
-        object OnTryCheckAgainClick : Event
-        object OnBackPressed : Event
+        data object OnFavoriteClick : Event
+        data object OnTryCheckAgainClick : Event
+        data object OnBackPressed : Event
     }
 
     data class State(
@@ -19,8 +19,8 @@ interface RocketDetailContract {
     ) : UiState
 
     sealed interface Effect : UiEffect {
-        object CharacterAdded : Effect
-        object CharacterRemoved : Effect
-        object BackNavigation : Effect
+        data object CharacterAdded : Effect
+        data object CharacterRemoved : Effect
+        data object BackNavigation : Effect
     }
 }

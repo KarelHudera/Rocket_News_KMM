@@ -13,9 +13,9 @@ import com.example.rocketnews.domain.interactors.GetRocketsFavoritesUseCase
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
 import com.example.rocketnews.domain.interactors.IsRocketFavoriteUseCase
 import com.example.rocketnews.domain.interactors.SwitchRocketFavoriteUseCase
-import com.example.rocketnews.presentation.ui.features.character_detail.RocketDetailViewModel
-import com.example.rocketnews.presentation.ui.features.characters.RocketsViewModel
-import com.example.rocketnews.presentation.ui.features.characters_favorites.RocketsFavoritesViewModel
+import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
+import com.example.rocketnews.presentation.ui.screens.rockets.RocketsViewModel
+import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel

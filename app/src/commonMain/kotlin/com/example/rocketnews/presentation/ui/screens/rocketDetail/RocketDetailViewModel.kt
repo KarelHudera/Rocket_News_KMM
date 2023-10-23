@@ -1,6 +1,7 @@
-package com.example.rocketnews.presentation.ui.features.character_detail
+package com.example.rocketnews.presentation.ui.screens.rocketDetail
 
 import cafe.adriel.voyager.core.model.coroutineScope
+import co.touchlab.kermit.Logger
 import com.example.rocketnews.domain.interactors.GetRocketUseCase
 import com.example.rocketnews.domain.interactors.IsRocketFavoriteUseCase
 import com.example.rocketnews.domain.interactors.SwitchRocketFavoriteUseCase
@@ -38,8 +39,13 @@ class RocketDetailViewModel(
         setState { copy(rocket = ResourceUiState.Loading) }
         coroutineScope.launch {
             getCharacterUseCase(rocketId)
-                .onSuccess { setState { copy(rocket = ResourceUiState.Success(it)) } }
-                .onFailure { setState { copy(rocket = ResourceUiState.Error()) } }
+                .onSuccess {
+                    setState { copy(rocket = ResourceUiState.Success(it)) }
+                    Logger.i { "$it SUCCESS" }
+                }
+                .onFailure { setState { copy(rocket = ResourceUiState.Error()) }
+                    Logger.i { "$it FAILURE" }
+                }
         }
     }
 

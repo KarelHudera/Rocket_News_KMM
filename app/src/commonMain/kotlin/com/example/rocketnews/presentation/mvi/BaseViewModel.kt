@@ -14,7 +14,7 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
     private val initialState: State by lazy { createInitialState() }
     abstract fun createInitialState(): State
 
-    protected val currentState: State
+    private val currentState: State
         get() = uiState.value
 
     private val _uiState: MutableStateFlow<State> = MutableStateFlow(initialState)

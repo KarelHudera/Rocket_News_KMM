@@ -15,8 +15,6 @@ class SharedDatabase(
             "true" -> true
             "false" -> false
             else -> false
-
-
         }
 
         override fun encode(value: Boolean): String = when (value) {

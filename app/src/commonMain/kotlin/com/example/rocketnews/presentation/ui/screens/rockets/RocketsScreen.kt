@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.features.characters
+package com.example.rocketnews.presentation.ui.screens.rockets
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,21 +18,18 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import co.touchlab.kermit.Logger.Companion.tag
-import daniel.avila.rnm.kmm.presentation.ui.common.ActionBarIcon
+import com.example.rocketnews.presentation.ui.common.ActionBarIcon
 import com.example.rocketnews.presentation.ui.common.CharactersList
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
-import com.example.rocketnews.presentation.ui.features.character_detail.CharacterDetailScreen
-import com.example.rocketnews.presentation.ui.features.characters_favorites.CharactersFavoritesScreen
+import com.example.rocketnews.presentation.ui.screens.rocketDetail.CharacterDetailScreen
+import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.CharactersFavoritesScreen
 import kotlinx.coroutines.flow.collectLatest
 
-class CharactersScreen : Screen {
+class RocketsScreen : Screen {
     override val key: ScreenKey = uniqueScreenKey
 
     @Composable
     override fun Content() {
-        co.touchlab.kermit.Logger.i { "test" }
-
         val rocketsViewModel = getScreenModel<RocketsViewModel>()
 
         val state by rocketsViewModel.uiState.collectAsState()
@@ -45,7 +42,7 @@ class CharactersScreen : Screen {
                     is CharactersContract.Effect.NavigateToDetailCharacter ->
                         navigator.push(CharacterDetailScreen(effect.idRocket))
 
-                    CharactersContract.Effect.NavigateToFavorites ->
+                    is CharactersContract.Effect.NavigateToFavorites ->
                         navigator.push(CharactersFavoritesScreen())
                 }
             }
@@ -83,7 +80,7 @@ fun ActionAppBar(
     onClickFavorite: () -> Unit,
 ) {
     TopAppBar(
-        title = { Text(text = "Test") },
+        title = { Text(text = "Rockets goes brrr") },
         actions = {
             ActionBarIcon(
                 onClick = onClickFavorite,

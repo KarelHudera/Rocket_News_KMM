@@ -1,10 +1,9 @@
-package com.example.rocketnews.presentation.ui.features.characters
+package com.example.rocketnews.presentation.ui.screens.rockets
 
 import cafe.adriel.voyager.core.model.coroutineScope
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.BaseViewModel
-import io.ktor.util.logging.Logger
 import kotlinx.coroutines.launch
 
 class RocketsViewModel(
@@ -26,7 +25,6 @@ class RocketsViewModel(
                     event.idRocket
                 )
             }
-
             CharactersContract.Event.OnFavoritesClick -> setEffect { CharactersContract.Effect.NavigateToFavorites }
         }
     }
@@ -44,11 +42,10 @@ class RocketsViewModel(
                                 ResourceUiState.Success(it)
                         )
                     }
-                    co.touchlab.kermit.Logger.i { "$it SUCCESS" }
-
+                    co.touchlab.kermit.Logger.i { "$it" }
                 }
                 .onFailure { setState { copy(characters = ResourceUiState.Error()) }
-                    co.touchlab.kermit.Logger.i { "$it FAIL" }
+                    co.touchlab.kermit.Logger.i { "$it " }
                 }
         }
     }

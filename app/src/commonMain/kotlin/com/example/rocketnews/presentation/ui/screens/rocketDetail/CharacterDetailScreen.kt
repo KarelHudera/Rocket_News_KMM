@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.features.character_detail
+package com.example.rocketnews.presentation.ui.screens.rocketDetail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -33,8 +33,8 @@ import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.seiko.imageloader.rememberAsyncImagePainter
-import daniel.avila.rnm.kmm.presentation.ui.common.ActionBarIcon
-import daniel.avila.rnm.kmm.presentation.ui.common.ArrowBackIcon
+import com.example.rocketnews.presentation.ui.common.ActionBarIcon
+import com.example.rocketnews.presentation.ui.common.ArrowBackIcon
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.core.parameter.parametersOf
 
@@ -56,13 +56,14 @@ class CharacterDetailScreen(
         LaunchedEffect(key1 = Unit) {
             rocketDetailViewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    RocketDetailContract.Effect.CharacterAdded ->
+                    is RocketDetailContract.Effect.CharacterAdded ->
                         scaffoldState.snackbarHostState.showSnackbar("Character added to favorites")
 
-                    RocketDetailContract.Effect.CharacterRemoved ->
+                    is RocketDetailContract.Effect.CharacterRemoved ->
                         scaffoldState.snackbarHostState.showSnackbar("Character removed from favorites")
 
-                    RocketDetailContract.Effect.BackNavigation -> navigator.pop()
+                    is RocketDetailContract.Effect.BackNavigation ->
+                        navigator.pop()
                 }
             }
         }
@@ -116,7 +117,6 @@ fun CharacterDetail(rocket: Rocket) {
             style = MaterialTheme.typography.h6
         )
         Spacer(modifier = Modifier.size(10.dp))
-
     }
 }
 

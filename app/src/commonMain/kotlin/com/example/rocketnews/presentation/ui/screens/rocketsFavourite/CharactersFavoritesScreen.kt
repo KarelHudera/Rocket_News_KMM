@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.features.characters_favorites
+package com.example.rocketnews.presentation.ui.screens.rocketsFavourite
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,10 +16,10 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import daniel.avila.rnm.kmm.presentation.ui.common.ArrowBackIcon
+import com.example.rocketnews.presentation.ui.common.ArrowBackIcon
 import com.example.rocketnews.presentation.ui.common.CharactersList
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
-import com.example.rocketnews.presentation.ui.features.character_detail.CharacterDetailScreen
+import com.example.rocketnews.presentation.ui.screens.rocketDetail.CharacterDetailScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class CharactersFavoritesScreen : Screen {
@@ -36,10 +36,10 @@ class CharactersFavoritesScreen : Screen {
         LaunchedEffect(key1 = Unit) {
             rocketsFavoritesViewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    is CharactersFavoritesContract.Effect.NavigateToDetailCharacter ->
+                    is RocketsFavoritesContract.Effect.NavigateToDetailCharacter ->
                         navigator.push(CharacterDetailScreen(effect.idRocket))
 
-                    CharactersFavoritesContract.Effect.BackNavigation -> navigator.pop()
+                    is RocketsFavoritesContract.Effect.BackNavigation -> navigator.pop()
                 }
             }
         }
@@ -48,7 +48,7 @@ class CharactersFavoritesScreen : Screen {
             topBar = {
                 ActionBar(onBackPressed = {
                     rocketsFavoritesViewModel.setEvent(
-                        CharactersFavoritesContract.Event.OnBackPressed
+                        RocketsFavoritesContract.Event.OnBackPressed
                     )
                 })
             }
@@ -63,15 +63,15 @@ class CharactersFavoritesScreen : Screen {
                         characters = favorites,
                         onCharacterClick = { idCharacter ->
                             rocketsFavoritesViewModel.setEvent(
-                                CharactersFavoritesContract.Event.OnCharacterClick(
+                                RocketsFavoritesContract.Event.OnCharacterClick(
                                     idCharacter
                                 )
                             )
                         }
                     )
                 },
-                onTryAgain = { rocketsFavoritesViewModel.setEvent(CharactersFavoritesContract.Event.OnTryCheckAgainClick) },
-                onCheckAgain = { rocketsFavoritesViewModel.setEvent(CharactersFavoritesContract.Event.OnTryCheckAgainClick) },
+                onTryAgain = { rocketsFavoritesViewModel.setEvent(RocketsFavoritesContract.Event.OnTryCheckAgainClick) },
+                onCheckAgain = { rocketsFavoritesViewModel.setEvent(RocketsFavoritesContract.Event.OnTryCheckAgainClick) },
                 msgCheckAgain = "You don't have favorite characters yet"
             )
         }

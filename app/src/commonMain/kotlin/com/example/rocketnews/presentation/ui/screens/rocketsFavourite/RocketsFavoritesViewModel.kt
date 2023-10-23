@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.features.characters_favorites
+package com.example.rocketnews.presentation.ui.screens.rocketsFavourite
 
 import cafe.adriel.voyager.core.model.coroutineScope
 import com.example.rocketnews.domain.interactors.GetRocketsFavoritesUseCase
@@ -8,25 +8,25 @@ import kotlinx.coroutines.launch
 
 class RocketsFavoritesViewModel(
     private val getCharactersFavoritesUseCase: GetRocketsFavoritesUseCase
-) : BaseViewModel<CharactersFavoritesContract.Event, CharactersFavoritesContract.State, CharactersFavoritesContract.Effect>() {
+) : BaseViewModel<RocketsFavoritesContract.Event, RocketsFavoritesContract.State, RocketsFavoritesContract.Effect>() {
 
     init {
         getCharactersFavorites()
     }
 
-    override fun createInitialState(): CharactersFavoritesContract.State =
-        CharactersFavoritesContract.State(
+    override fun createInitialState(): RocketsFavoritesContract.State =
+        RocketsFavoritesContract.State(
             charactersFavorites = ResourceUiState.Idle
         )
 
-    override fun handleEvent(event: CharactersFavoritesContract.Event) {
+    override fun handleEvent(event: RocketsFavoritesContract.Event) {
         when (event) {
-            CharactersFavoritesContract.Event.OnTryCheckAgainClick -> getCharactersFavorites()
-            is CharactersFavoritesContract.Event.OnCharacterClick ->
-                setEffect { CharactersFavoritesContract.Effect.NavigateToDetailCharacter(event.idRocket) }
+            RocketsFavoritesContract.Event.OnTryCheckAgainClick -> getCharactersFavorites()
+            is RocketsFavoritesContract.Event.OnCharacterClick ->
+                setEffect { RocketsFavoritesContract.Effect.NavigateToDetailCharacter(event.idRocket) }
 
-            CharactersFavoritesContract.Event.OnBackPressed ->
-                setEffect { CharactersFavoritesContract.Effect.BackNavigation }
+            RocketsFavoritesContract.Event.OnBackPressed ->
+                setEffect { RocketsFavoritesContract.Effect.BackNavigation }
         }
     }
 
