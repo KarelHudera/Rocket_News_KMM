@@ -15,6 +15,7 @@ import com.example.rocketnews.domain.interactors.GetRocketsFavoritesUseCase
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
 import com.example.rocketnews.domain.interactors.IsRocketFavoriteUseCase
 import com.example.rocketnews.domain.interactors.SwitchRocketFavoriteUseCase
+import com.example.rocketnews.presentation.ui.screens.news.NewsViewModel
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsViewModel
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesViewModel
@@ -50,6 +51,8 @@ val viewModelModule = module {
     factory { RocketsViewModel(get()) }
     factory { RocketsFavoritesViewModel(get()) }
     factory { params -> RocketDetailViewModel(get(), get(), get(), params.get()) }
+    factory { NewsViewModel(get()) }
+
 }
 
 val useCasesModule: Module = module {

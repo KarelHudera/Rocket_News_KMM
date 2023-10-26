@@ -26,6 +26,7 @@ class RocketsViewModel(
                 )
             }
             is RocketsContract.Event.OnFavoritesClick -> setEffect { RocketsContract.Effect.NavigateToFavorites }
+            is RocketsContract.Event.OnBackPressed -> setEffect { RocketsContract.Effect.BackNavigation }
         }
     }
 

@@ -3,23 +3,19 @@ package com.example.rocketnews.presentation.ui.screens.rockets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import cafe.adriel.voyager.core.screen.Screen
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.rocketnews.presentation.ui.common.ActionBarIcon
 import com.example.rocketnews.presentation.ui.common.CharactersList
+import com.example.rocketnews.presentation.ui.common.RocketsActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.CharacterDetailScreen
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesScreen
@@ -44,13 +40,20 @@ class RocketsScreen : Screen {
 
                     is RocketsContract.Effect.NavigateToFavorites ->
                         navigator.push(RocketsFavoritesScreen())
+
+                    is RocketsContract.Effect.BackNavigation -> navigator.pop()
                 }
             }
         }
 
         Scaffold(
-            topBar = { ActionAppBar { rocketsViewModel.setEvent(RocketsContract.Event.OnFavoritesClick) } },
-            //bottomBar = { BottomBarNavigation(navigator, 1) }
+            topBar = {
+                RocketsActionAppBar(
+                    title = "SpaceX Rockets",
+                    onClickFavorite = { rocketsViewModel.setEvent(RocketsContract.Event.OnFavoritesClick) },
+                    onBackPressed = { rocketsViewModel.setEvent(RocketsContract.Event.OnBackPressed) }
+                )
+            },
         ) { padding ->
             ManagementResourceUiState(
                 modifier = Modifier
@@ -75,20 +78,3 @@ class RocketsScreen : Screen {
         }
     }
 }
-
-@Composable
-fun ActionAppBar(
-    onClickFavorite: () -> Unit,
-) {
-    TopAppBar(
-        title = { Text(text = "Rockets goes brrr") },
-        actions = {
-            ActionBarIcon(
-                onClick = onClickFavorite,
-                icon = Icons.Filled.Favorite
-            )
-        }
-    )
-}
-
-

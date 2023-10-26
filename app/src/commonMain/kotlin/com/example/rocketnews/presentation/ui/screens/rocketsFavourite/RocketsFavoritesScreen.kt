@@ -3,8 +3,6 @@ package com.example.rocketnews.presentation.ui.screens.rocketsFavourite
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -18,6 +16,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.ArrowBackIcon
 import com.example.rocketnews.presentation.ui.common.CharactersList
+import com.example.rocketnews.presentation.ui.common.FavouriteActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.CharacterDetailScreen
 import kotlinx.coroutines.flow.collectLatest
@@ -46,11 +45,16 @@ class RocketsFavoritesScreen : Screen {
 
         Scaffold(
             topBar = {
-                ActionBar(onBackPressed = {
-                    rocketsFavoritesViewModel.setEvent(
-                        RocketsFavoritesContract.Event.OnBackPressed
-                    )
-                })
+                FavouriteActionAppBar(
+                    title = "Favourite Rockets",
+                    navIcon = {
+                        ArrowBackIcon {
+                            rocketsFavoritesViewModel.setEvent(
+                                RocketsFavoritesContract.Event.OnBackPressed
+                            )
+                        }
+                    },
+                )
             },
         ) { padding ->
             ManagementResourceUiState(
@@ -78,12 +82,3 @@ class RocketsFavoritesScreen : Screen {
     }
 }
 
-@Composable
-fun ActionBar(
-    onBackPressed: () -> Unit,
-) {
-    TopAppBar(
-        title = { Text(text = "Characters Favorites") },
-        navigationIcon = { ArrowBackIcon(onBackPressed) }
-    )
-}

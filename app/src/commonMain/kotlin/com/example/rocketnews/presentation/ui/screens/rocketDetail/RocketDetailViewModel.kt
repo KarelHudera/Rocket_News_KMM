@@ -29,9 +29,9 @@ class RocketDetailViewModel(
 
     override fun handleEvent(event: RocketDetailContract.Event) {
         when (event) {
-            RocketDetailContract.Event.OnFavoriteClick -> switchCharacterFavorite(characterId)
-            RocketDetailContract.Event.OnTryCheckAgainClick -> getCharacter(characterId)
-            RocketDetailContract.Event.OnBackPressed -> setEffect { RocketDetailContract.Effect.BackNavigation }
+            is RocketDetailContract.Event.OnFavoriteClick -> switchCharacterFavorite(characterId)
+            is RocketDetailContract.Event.OnTryCheckAgainClick -> getCharacter(characterId)
+            is RocketDetailContract.Event.OnBackPressed -> setEffect { RocketDetailContract.Effect.BackNavigation }
         }
     }
 

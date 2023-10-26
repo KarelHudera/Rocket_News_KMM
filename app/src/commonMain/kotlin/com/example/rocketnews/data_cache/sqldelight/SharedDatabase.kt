@@ -2,7 +2,7 @@ package com.example.rocketnews.data_cache.sqldelight
 
 import app.cash.sqldelight.ColumnAdapter
 import com.example.rocketnews.datacache.sqldelight.RocketFavorite
-import com.example.rocketnews.domain.model.Rocket
+
 
 
 class SharedDatabase(

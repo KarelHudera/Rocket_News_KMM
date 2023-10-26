@@ -1,6 +1,5 @@
 import kotlin.Boolean;
 
-
 CREATE TABLE RocketFavorite(
      patchSmal TEXT NOT NULL,
      patchLarge TEXT NOT NULL,
@@ -17,7 +16,7 @@ CREATE TABLE RocketFavorite(
 );
 
 insertRocketFavorite:
-INSERT INTO RocketFavorite(patchSmal, patchLarge, webcast, youtube_id, article, wikipedia, static_fire_date_utc, success, date_utc, name, upcoming, id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);
+INSERT OR REPLACE INTO RocketFavorite(patchSmal, patchLarge, webcast, youtube_id, article, wikipedia, static_fire_date_utc, success, date_utc, name, upcoming, id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);
 
 removeRocketFavorite:
 DELETE FROM RocketFavorite WHERE id = ?;

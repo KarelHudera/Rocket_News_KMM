@@ -1,7 +1,6 @@
 package com.example.rocketnews.presentation.ui.screens.news
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,12 +24,10 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.rocketnews.presentation.ui.common.MainActionAppBar
+import com.example.rocketnews.presentation.ui.common.NewsComponent
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
-import com.example.rocketnews.presentation.ui.screens.rocketDetail.CharacterDetailScreen
-import com.example.rocketnews.presentation.ui.screens.rockets.ActionAppBar
-import com.example.rocketnews.presentation.ui.screens.rockets.RocketsContract
-import com.example.rocketnews.presentation.ui.screens.rockets.RocketsViewModel
-import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesScreen
+import com.example.rocketnews.presentation.ui.screens.rockets.RocketsScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class NewsScreen : Screen {
@@ -38,29 +35,26 @@ class NewsScreen : Screen {
 
     @Composable
     override fun Content() {
-        val rocketsViewModel = getScreenModel<RocketsViewModel>()
+        val newsViewModel = getScreenModel<NewsViewModel>()
 
-        val state by rocketsViewModel.uiState.collectAsState()
+        val state by newsViewModel.uiState.collectAsState()
 
         val navigator = LocalNavigator.currentOrThrow
 
         LaunchedEffect(key1 = Unit) {
-            rocketsViewModel.effect.collectLatest { effect ->
+            newsViewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    is RocketsContract.Effect.NavigateToDetailCharacter ->
-                        navigator.push(CharacterDetailScreen(effect.idRocket))
-
-                    is RocketsContract.Effect.NavigateToFavorites ->
-                        navigator.push(RocketsFavoritesScreen())
+                    is NewsContract.Effect.NavigateToRockets ->
+                        navigator.push(RocketsScreen())
                 }
             }
         }
 
         Scaffold(
-            topBar = { ActionAppBar { rocketsViewModel.setEvent(RocketsContract.Event.OnFavoritesClick) } },
+            topBar = { MainActionAppBar(title = "Daily News From NASA") },
             floatingActionButton = {
                 IconButton(
-                    onClick = {},
+                    onClick = { newsViewModel.setEvent(NewsContract.Event.OnRocketButtonClick) },
                     modifier = Modifier.clip(RoundedCornerShape(16.dp)).background(Color.DarkGray).size(58.dp)
                 ) {
                     Icon(
@@ -75,13 +69,14 @@ class NewsScreen : Screen {
                 modifier = Modifier
                     .padding(padding)
                     .fillMaxSize(),
-                resourceUiState = state.characters,
-                successView = {
-                    Box(Modifier.fillMaxSize().background(Color.White))
+                resourceUiState = state.news,
+                successView = { news ->
+                    NewsComponent(news)
                 },
-                onTryAgain = { rocketsViewModel.setEvent(RocketsContract.Event.OnTryCheckAgainClick) },
-                onCheckAgain = { rocketsViewModel.setEvent(RocketsContract.Event.OnTryCheckAgainClick) },
+                onTryAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
+                onCheckAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
             )
         }
     }
 }
+
