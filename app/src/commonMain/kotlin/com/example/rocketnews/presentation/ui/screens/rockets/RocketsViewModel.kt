@@ -8,24 +8,24 @@ import kotlinx.coroutines.launch
 
 class RocketsViewModel(
     private val getCharactersUseCase: GetRocketsUseCase,
-) : BaseViewModel<CharactersContract.Event, CharactersContract.State, CharactersContract.Effect>() {
+) : BaseViewModel<RocketsContract.Event, RocketsContract.State, RocketsContract.Effect>() {
 
     init {
         getCharacters()
     }
 
-    override fun createInitialState(): CharactersContract.State =
-        CharactersContract.State(characters = ResourceUiState.Idle)
+    override fun createInitialState(): RocketsContract.State =
+        RocketsContract.State(characters = ResourceUiState.Idle)
 
-    override fun handleEvent(event: CharactersContract.Event) {
+    override fun handleEvent(event: RocketsContract.Event) {
         when (event) {
-            CharactersContract.Event.OnTryCheckAgainClick -> getCharacters()
-            is CharactersContract.Event.OnCharacterClick -> setEffect {
-                CharactersContract.Effect.NavigateToDetailCharacter(
+            is RocketsContract.Event.OnTryCheckAgainClick -> getCharacters()
+            is RocketsContract.Event.OnCharacterClick -> setEffect {
+                RocketsContract.Effect.NavigateToDetailCharacter(
                     event.idRocket
                 )
             }
-            CharactersContract.Event.OnFavoritesClick -> setEffect { CharactersContract.Effect.NavigateToFavorites }
+            is RocketsContract.Event.OnFavoritesClick -> setEffect { RocketsContract.Effect.NavigateToFavorites }
         }
     }
 

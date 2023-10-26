@@ -5,9 +5,11 @@ import com.example.rocketnews.data_cache.ICacheData
 import com.example.rocketnews.data_cache.sqldelight.SharedDatabase
 import com.example.rocketnews.data_remote.IRemoteData
 import com.example.rocketnews.data_remote.RemoteDataImp
+import com.example.rocketnews.data_remote.model.mapper.ApiNewsMapper
 import com.example.rocketnews.data_remote.model.mapper.ApiRocketMapper
 import com.example.rocketnews.domain.IRepository
 import com.example.rocketnews.domain.RepositoryImp
+import com.example.rocketnews.domain.interactors.GetNewsUseCase
 import com.example.rocketnews.domain.interactors.GetRocketUseCase
 import com.example.rocketnews.domain.interactors.GetRocketsFavoritesUseCase
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
@@ -56,14 +58,14 @@ val useCasesModule: Module = module {
     factory { GetRocketUseCase(get(), get()) }
     factory { IsRocketFavoriteUseCase(get(), get()) }
     factory { SwitchRocketFavoriteUseCase(get(), get()) }
+    factory { GetNewsUseCase(get(), get()) }
+
 }
 
 val repositoryModule = module {
     single<IRepository> { RepositoryImp(get(), get()) }
     single<ICacheData> { CacheDataImp(get()) }
     single<IRemoteData> { RemoteDataImp(get(), get(), get()) }
-
-
 }
 
 val ktorModule = module {
@@ -90,7 +92,6 @@ val ktorModule = module {
         }
     }
 
-    single { "https://api.spacexdata.com/v5/launches/" }
 }
 
 val sqlDelightModule = module {
@@ -103,6 +104,7 @@ val dispatcherModule = module {
 
 val mapperModule = module {
     factory { ApiRocketMapper() }
+    factory { ApiNewsMapper() }
 }
 
 fun initKoin() = initKoin {}

@@ -22,7 +22,7 @@ import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiS
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.CharacterDetailScreen
 import kotlinx.coroutines.flow.collectLatest
 
-class CharactersFavoritesScreen : Screen {
+class RocketsFavoritesScreen : Screen {
     override val key: ScreenKey = uniqueScreenKey
 
     @Composable
@@ -51,7 +51,7 @@ class CharactersFavoritesScreen : Screen {
                         RocketsFavoritesContract.Event.OnBackPressed
                     )
                 })
-            }
+            },
         ) { padding ->
             ManagementResourceUiState(
                 modifier = Modifier
@@ -72,7 +72,7 @@ class CharactersFavoritesScreen : Screen {
                 },
                 onTryAgain = { rocketsFavoritesViewModel.setEvent(RocketsFavoritesContract.Event.OnTryCheckAgainClick) },
                 onCheckAgain = { rocketsFavoritesViewModel.setEvent(RocketsFavoritesContract.Event.OnTryCheckAgainClick) },
-                msgCheckAgain = "You don't have favorite characters yet"
+                msgCheckAgain = "You don't have favorite rocket yet"
             )
         }
     }

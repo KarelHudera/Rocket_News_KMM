@@ -1,4 +1,4 @@
-package com.example.rocketnews.data_remote.model
+package com.example.rocketnews.data_remote.model.apiRocket
 
 import kotlinx.serialization.Serializable
 

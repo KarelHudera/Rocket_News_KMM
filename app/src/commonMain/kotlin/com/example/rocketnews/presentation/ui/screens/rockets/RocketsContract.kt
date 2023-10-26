@@ -6,7 +6,7 @@ import com.example.rocketnews.presentation.mvi.UiEffect
 import com.example.rocketnews.presentation.mvi.UiEvent
 import com.example.rocketnews.presentation.mvi.UiState
 
-interface CharactersContract {
+interface RocketsContract {
     sealed interface Event : UiEvent {
         data object OnTryCheckAgainClick : Event
         data object OnFavoritesClick : Event

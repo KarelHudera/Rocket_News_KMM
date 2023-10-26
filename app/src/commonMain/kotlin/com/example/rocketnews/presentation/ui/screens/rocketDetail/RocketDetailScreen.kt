@@ -77,7 +77,7 @@ class CharacterDetailScreen(
                     onActionFavorite = { rocketDetailViewModel.setEvent(RocketDetailContract.Event.OnFavoriteClick) },
                     onBackPressed = { rocketDetailViewModel.setEvent(RocketDetailContract.Event.OnBackPressed) }
                 )
-            }
+            },
         ) { padding ->
             ManagementResourceUiState(
                 modifier = Modifier

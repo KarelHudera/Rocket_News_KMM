@@ -1,5 +1,6 @@
 package com.example.rocketnews.domain
 
+import com.example.rocketnews.domain.model.News
 import com.example.rocketnews.domain.model.Rocket
 import kotlinx.coroutines.flow.Flow
 
@@ -10,4 +11,6 @@ interface IRepository {
     suspend fun addRocketToFavorites(character: Rocket)
     suspend fun removeRocketFromFavorite(idRocket: String)
     suspend fun isRocketFavorite(idRocket: String): Boolean
+    suspend fun getNews(): News
+
 }
