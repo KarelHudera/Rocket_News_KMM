@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -17,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key.Companion.R
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
@@ -29,10 +31,12 @@ import com.example.rocketnews.presentation.ui.common.NewsComponent
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsScreen
 import kotlinx.coroutines.flow.collectLatest
+import org.jetbrains.skia.Drawable
 
 class NewsScreen : Screen {
     override val key: ScreenKey = uniqueScreenKey
 
+    @OptIn(ExperimentalMaterialApi::class)
     @Composable
     override fun Content() {
         val newsViewModel = getScreenModel<NewsViewModel>()

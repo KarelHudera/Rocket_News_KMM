@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name="com.example.rocketnews.AndroidApp"
-        android:icon="@android:drawable/ic_menu_compass"
+        android:icon="@drawable/rocket_icon"
         android:label="Rocket News"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
