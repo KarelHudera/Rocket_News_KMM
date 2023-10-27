@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.screens.rockets
+package com.example.rocketnews.presentation.ui.screens.search
 
 import cafe.adriel.voyager.core.model.coroutineScope
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
@@ -6,28 +6,26 @@ import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.BaseViewModel
 import kotlinx.coroutines.launch
 
-class RocketsViewModel(
+class RocketsSearchViewModel(
     private val getCharactersUseCase: GetRocketsUseCase,
-) : BaseViewModel<RocketsContract.Event, RocketsContract.State, RocketsContract.Effect>() {
+) : BaseViewModel<RocketsSearchContract.Event, RocketsSearchContract.State, RocketsSearchContract.Effect>() {
 
     init {
         getCharacters()
     }
 
-    override fun createInitialState(): RocketsContract.State =
-        RocketsContract.State(rockets = ResourceUiState.Idle)
+    override fun createInitialState(): RocketsSearchContract.State =
+        RocketsSearchContract.State(rockets = ResourceUiState.Idle)
 
-    override fun handleEvent(event: RocketsContract.Event) {
+    override fun handleEvent(event: RocketsSearchContract.Event) {
         when (event) {
-            is RocketsContract.Event.OnTryCheckAgainClick -> getCharacters()
-            is RocketsContract.Event.OnRocketClick -> setEffect {
-                RocketsContract.Effect.NavigateToDetailCharacter(
+            is RocketsSearchContract.Event.OnTryCheckAgainClick -> getCharacters()
+            is RocketsSearchContract.Event.OnRocketClick -> setEffect {
+                RocketsSearchContract.Effect.NavigateToDetailCharacter(
                     event.idRocket
                 )
             }
-            is RocketsContract.Event.OnFavoritesClick -> setEffect { RocketsContract.Effect.NavigateToFavorites }
-            is RocketsContract.Event.OnBackPressed -> setEffect { RocketsContract.Effect.BackNavigation }
-            is RocketsContract.Event.OnSearchClick -> setEffect { RocketsContract.Effect.NavigateToSearch }
+            is RocketsSearchContract.Event.OnBackPressed -> setEffect { RocketsSearchContract.Effect.BackNavigation }
         }
     }
 

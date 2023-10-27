@@ -9,6 +9,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -31,7 +32,6 @@ import com.example.rocketnews.presentation.ui.common.NewsComponent
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsScreen
 import kotlinx.coroutines.flow.collectLatest
-import org.jetbrains.skia.Drawable
 
 class NewsScreen : Screen {
     override val key: ScreenKey = uniqueScreenKey
@@ -62,7 +62,7 @@ class NewsScreen : Screen {
                     modifier = Modifier.clip(RoundedCornerShape(16.dp)).background(Color.DarkGray).size(58.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Home,
+                        imageVector = Icons.Default.Add,
                         modifier = Modifier.size(38.dp),
                         contentDescription = null
                     )

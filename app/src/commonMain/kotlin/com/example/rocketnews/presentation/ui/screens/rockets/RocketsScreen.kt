@@ -17,8 +17,9 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.CharactersList
 import com.example.rocketnews.presentation.ui.common.RocketsActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
-import com.example.rocketnews.presentation.ui.screens.rocketDetail.CharacterDetailScreen
+import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesScreen
+import com.example.rocketnews.presentation.ui.screens.search.RocketsSearchScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class RocketsScreen : Screen {
@@ -36,10 +37,13 @@ class RocketsScreen : Screen {
             rocketsViewModel.effect.collectLatest { effect ->
                 when (effect) {
                     is RocketsContract.Effect.NavigateToDetailCharacter ->
-                        navigator.push(CharacterDetailScreen(effect.idRocket))
+                        navigator.push(RocketDetailScreen(effect.idRocket))
 
                     is RocketsContract.Effect.NavigateToFavorites ->
                         navigator.push(RocketsFavoritesScreen())
+
+                    is RocketsContract.Effect.NavigateToSearch ->
+                        navigator.push(RocketsSearchScreen())
 
                     is RocketsContract.Effect.BackNavigation -> navigator.pop()
                 }
@@ -51,6 +55,7 @@ class RocketsScreen : Screen {
                 RocketsActionAppBar(
                     title = "SpaceX Rockets",
                     onClickFavorite = { rocketsViewModel.setEvent(RocketsContract.Event.OnFavoritesClick) },
+                    onClickSearch = { rocketsViewModel.setEvent(RocketsContract.Event.OnSearchClick) },
                     onBackPressed = { rocketsViewModel.setEvent(RocketsContract.Event.OnBackPressed) }
                 )
             },
@@ -59,13 +64,13 @@ class RocketsScreen : Screen {
                 modifier = Modifier
                     .padding(padding)
                     .fillMaxSize(),
-                resourceUiState = state.characters,
-                successView = { characters ->
+                resourceUiState = state.rockets,
+                successView = { rockets ->
                     CharactersList(
-                        characters = characters,
+                        characters = rockets,
                         onCharacterClick = { idRocket ->
                             rocketsViewModel.setEvent(
-                                RocketsContract.Event.OnCharacterClick(
+                                RocketsContract.Event.OnRocketClick(
                                     idRocket
                                 )
                             )

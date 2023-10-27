@@ -16,9 +16,9 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.ArrowBackIcon
 import com.example.rocketnews.presentation.ui.common.CharactersList
-import com.example.rocketnews.presentation.ui.common.FavouriteActionAppBar
+import com.example.rocketnews.presentation.ui.common.BackNavActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
-import com.example.rocketnews.presentation.ui.screens.rocketDetail.CharacterDetailScreen
+import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class RocketsFavoritesScreen : Screen {
@@ -36,7 +36,7 @@ class RocketsFavoritesScreen : Screen {
             rocketsFavoritesViewModel.effect.collectLatest { effect ->
                 when (effect) {
                     is RocketsFavoritesContract.Effect.NavigateToDetailCharacter ->
-                        navigator.push(CharacterDetailScreen(effect.idRocket))
+                        navigator.push(RocketDetailScreen(effect.idRocket))
 
                     is RocketsFavoritesContract.Effect.BackNavigation -> navigator.pop()
                 }
@@ -45,7 +45,7 @@ class RocketsFavoritesScreen : Screen {
 
         Scaffold(
             topBar = {
-                FavouriteActionAppBar(
+                BackNavActionAppBar(
                     title = "Favourite Rockets",
                     navIcon = {
                         ArrowBackIcon {

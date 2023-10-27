@@ -156,18 +156,21 @@ fun NewsComponent(
                         Text(
                             news.title,
                             fontSize = 28.sp,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.Black.copy(0.85f)
                         )
                         Spacer(modifier = Modifier.size(10.dp))
                         Text(
                             news.date,
                             fontSize = 20.sp,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.Black.copy(0.85f)
                         )
                         Spacer(modifier = Modifier.size(10.dp))
                         Text(
                             news.explanation,
-                            fontSize = 20.sp
+                            fontSize = 20.sp,
+                            color = Color.Black.copy(0.85f)
                         )
                     }
                 }

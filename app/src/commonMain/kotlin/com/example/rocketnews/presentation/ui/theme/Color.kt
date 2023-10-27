@@ -36,7 +36,7 @@ internal val md_theme_light_surfaceTint = Color(0xFF00687A)
 internal val md_theme_light_outlineVariant = Color(0xFFBFC8CB)
 internal val md_theme_light_scrim = Color(0xFF000000)
 
-internal val md_theme_dark_primary = Color(0xFF55D6F4)
+internal val md_theme_dark_primary = Color(0xFF000000)
 internal val md_theme_dark_onPrimary = Color(0xFF003640)
 internal val md_theme_dark_primaryContainer = Color(0xFF004E5C)
 internal val md_theme_dark_onPrimaryContainer = Color(0xFFABEDFF)
@@ -68,4 +68,4 @@ internal val md_theme_dark_outlineVariant = Color(0xFF3F484B)
 internal val md_theme_dark_scrim = Color(0xFF000000)
 
 
-internal val seed = Color(0xFF2C3639)
+internal val seed = Color(0xFF000000)

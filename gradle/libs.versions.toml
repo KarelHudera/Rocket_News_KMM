@@ -5,7 +5,7 @@ agp = "8.1.0"
 compose = "1.5.0"
 androidx-appcompat = "1.6.1"
 androidx-activityCompose = "1.8.0"
-compose-uitooling = "1.5.3"
+compose-uitooling = "1.5.4"
 libres = "1.1.8"
 voyager = "1.0.0-rc07"
 composeImageLoader = "1.4.1"
@@ -18,6 +18,7 @@ koin = "3.4.3"
 koinCompose = "1.0.4"
 sqlDelight = "2.0.0-alpha05"
 kermit = "2.0.0-RC4"
+moko-generator = "0.22.3"
 
 [libraries]
 
@@ -48,6 +49,8 @@ sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", versi
 sqlDelight-driver-sqljs = { module = "app.cash.sqldelight:sqljs-driver", version.ref = "sqlDelight" }
 sqlDelight-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+moko-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko-generator" }
+moko-api = { module = "dev.icerock.moko:resources", version.ref = "moko-generator" }
 
 [plugins]
 

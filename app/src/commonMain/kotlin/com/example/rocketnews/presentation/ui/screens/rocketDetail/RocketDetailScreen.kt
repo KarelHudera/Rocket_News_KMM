@@ -22,7 +22,7 @@ import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiS
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.core.parameter.parametersOf
 
-class CharacterDetailScreen(
+class RocketDetailScreen(
     private val rocketId: String,
 ) : Screen {
     override val key: ScreenKey = uniqueScreenKey

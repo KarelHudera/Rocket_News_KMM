@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.libres)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.sqlDelight)
+    //id("dev.icerock.mobile.multiplatform-resources")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -58,6 +59,7 @@ kotlin {
                 implementation(libs.koin.compose)
                 implementation(libs.sqlDelight.extensions)
                 implementation(libs.kermit)
+                //api(libs.moko.api)
             }
         }
 
@@ -124,3 +126,8 @@ sqldelight {
         }
     }
 }
+
+//multiplatformResources {
+//    multiplatformResourcesPackage = "com.example.rocketnews"
+//    multiplatformResourcesClassName = "SharedRes"
+//}
