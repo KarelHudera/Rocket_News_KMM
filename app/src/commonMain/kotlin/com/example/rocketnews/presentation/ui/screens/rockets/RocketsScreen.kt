@@ -14,7 +14,7 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.rocketnews.presentation.ui.common.CharactersList
+import com.example.rocketnews.presentation.ui.common.RocketsList
 import com.example.rocketnews.presentation.ui.common.RocketsActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
@@ -66,9 +66,9 @@ class RocketsScreen : Screen {
                     .fillMaxSize(),
                 resourceUiState = state.rockets,
                 successView = { rockets ->
-                    CharactersList(
-                        characters = rockets,
-                        onCharacterClick = { idRocket ->
+                    RocketsList(
+                        rockets = rockets,
+                        onRocketClick = { idRocket ->
                             rocketsViewModel.setEvent(
                                 RocketsContract.Event.OnRocketClick(
                                     idRocket

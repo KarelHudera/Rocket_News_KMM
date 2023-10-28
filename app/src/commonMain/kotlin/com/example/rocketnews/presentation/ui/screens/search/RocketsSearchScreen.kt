@@ -4,11 +4,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,7 +26,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.ArrowBackIcon
 import com.example.rocketnews.presentation.ui.common.BackNavActionAppBar
-import com.example.rocketnews.presentation.ui.common.CharactersList
+import com.example.rocketnews.presentation.ui.common.RocketsList
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
 import kotlinx.coroutines.flow.collectLatest
@@ -58,14 +57,18 @@ class RocketsSearchScreen : Screen {
         }
 
         Scaffold(
-            topBar = { BackNavActionAppBar(title = "Search Rockets",
-                navIcon = {
-                    ArrowBackIcon {
-                        rocketsSearchViewModel.setEvent(
-                            RocketsSearchContract.Event.OnBackPressed
-                        )
-                    }
-                },) },
+            topBar = {
+                BackNavActionAppBar(
+                    title = "Search Rockets",
+                    navIcon = {
+                        ArrowBackIcon {
+                            rocketsSearchViewModel.setEvent(
+                                RocketsSearchContract.Event.OnBackPressed
+                            )
+                        }
+                    },
+                )
+            },
         ) { padding ->
             ManagementResourceUiState(
                 modifier = Modifier
@@ -74,22 +77,24 @@ class RocketsSearchScreen : Screen {
                 resourceUiState = state.rockets,
                 successView = { rockets ->
                     Column {
-
                         OutlinedTextField(
                             value = text,
-                            onValueChange = { text = it },
+                            onValueChange = {
+                                text = it
+                                rocketsSearchViewModel.setEvent(
+                                    RocketsSearchContract.Event.OnSearchTextChanged(it)
+                                )
+                            },
                             modifier = Modifier
                                 .padding(16.dp)
                                 .fillMaxWidth(),
                             placeholder = { Text(text = "Search rocket") },
                         )
-                        CharactersList(
-                            characters = rockets,
-                            onCharacterClick = { idRocket ->
+                        RocketsList(
+                            rockets = rockets,
+                            onRocketClick = { idRocket ->
                                 rocketsSearchViewModel.setEvent(
-                                    RocketsSearchContract.Event.OnRocketClick(
-                                        idRocket
-                                    )
+                                    RocketsSearchContract.Event.OnRocketClick(idRocket)
                                 )
                             }
                         )

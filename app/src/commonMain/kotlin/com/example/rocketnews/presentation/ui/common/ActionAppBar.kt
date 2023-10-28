@@ -1,14 +1,11 @@
 package com.example.rocketnews.presentation.ui.common
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import com.example.rocketnews.presentation.ui.theme.AppTheme
-import com.example.rocketnews.presentation.ui.theme.md_theme_dark_onPrimary
 
 @Composable
 fun BackNavActionAppBar(
@@ -27,7 +24,6 @@ fun MainActionAppBar(
 ) {
     TopAppBar(
         title = { Text(text = title) },
-        backgroundColor = MaterialTheme.colors.primary
     )
 }
 

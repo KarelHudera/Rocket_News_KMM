@@ -1,7 +1,9 @@
 package com.example.rocketnews.presentation.ui.screens.search
 
 import cafe.adriel.voyager.core.model.coroutineScope
+import co.touchlab.kermit.Logger
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
+import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.BaseViewModel
 import kotlinx.coroutines.launch
@@ -9,6 +11,10 @@ import kotlinx.coroutines.launch
 class RocketsSearchViewModel(
     private val getCharactersUseCase: GetRocketsUseCase,
 ) : BaseViewModel<RocketsSearchContract.Event, RocketsSearchContract.State, RocketsSearchContract.Effect>() {
+
+    private var searchText = ""
+
+    var list = emptyList<Rocket>()
 
     init {
         getCharacters()
@@ -26,6 +32,10 @@ class RocketsSearchViewModel(
                 )
             }
             is RocketsSearchContract.Event.OnBackPressed -> setEffect { RocketsSearchContract.Effect.BackNavigation }
+            is RocketsSearchContract.Event.OnSearchTextChanged -> {
+                searchText = event.searchText
+                filterRockets(searchText)
+            }
         }
     }
 
@@ -42,11 +52,23 @@ class RocketsSearchViewModel(
                                 ResourceUiState.Success(it)
                         )
                     }
-                    co.touchlab.kermit.Logger.i { "$it" }
+                    Logger.i { "$it" }
+                    list = it
                 }
                 .onFailure { setState { copy(rockets = ResourceUiState.Error()) }
-                    co.touchlab.kermit.Logger.i { "$it " }
+                    Logger.i { "$it " }
                 }
         }
     }
+
+    private fun filterRockets(searchText: String) {
+        val filteredRockets = list.filter { rocket ->
+            rocket.name.contains(searchText, ignoreCase = true)
+        }
+
+        setState {
+            copy(rockets = ResourceUiState.Success(filteredRockets))
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ interface RocketsSearchContract {
         data object OnTryCheckAgainClick : Event
         data object OnBackPressed : Event
         data class OnRocketClick(val idRocket: String) : Event
+        data class OnSearchTextChanged(val searchText: String) : Event
     }
 
     data class State(
@@ -19,7 +20,6 @@ interface RocketsSearchContract {
 
     sealed interface Effect : UiEffect {
         data class NavigateToDetailCharacter(val idRocket: String) : Effect
-
         data object BackNavigation : Effect
 
     }

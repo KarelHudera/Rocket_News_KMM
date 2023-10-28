@@ -9,18 +9,18 @@ import androidx.compose.ui.Modifier
 import com.example.rocketnews.domain.model.Rocket
 
 @Composable
-fun CharactersList(
-    characters: List<Rocket>,
-    onCharacterClick: (String) -> Unit,
+fun RocketsList(
+    rockets: List<Rocket>,
+    onRocketClick: (String) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top
     ) {
-        items(characters) { character ->
-            CharacterItem(
-                character = character,
-                onClick = { onCharacterClick(character.id) }
+        items(rockets) { character ->
+            RocketItem(
+                rocket = character,
+                onClick = { onRocketClick(character.id) }
             )
         }
     }

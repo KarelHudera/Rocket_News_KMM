@@ -15,7 +15,7 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.ArrowBackIcon
-import com.example.rocketnews.presentation.ui.common.CharactersList
+import com.example.rocketnews.presentation.ui.common.RocketsList
 import com.example.rocketnews.presentation.ui.common.BackNavActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
@@ -63,9 +63,9 @@ class RocketsFavoritesScreen : Screen {
                     .fillMaxSize(),
                 resourceUiState = state.charactersFavorites,
                 successView = { favorites ->
-                    CharactersList(
-                        characters = favorites,
-                        onCharacterClick = { idCharacter ->
+                    RocketsList(
+                        rockets = favorites,
+                        onRocketClick = { idCharacter ->
                             rocketsFavoritesViewModel.setEvent(
                                 RocketsFavoritesContract.Event.OnCharacterClick(
                                     idCharacter
