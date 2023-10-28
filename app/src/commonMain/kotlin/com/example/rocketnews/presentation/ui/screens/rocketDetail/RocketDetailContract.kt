@@ -19,8 +19,8 @@ interface RocketDetailContract {
     ) : UiState
 
     sealed interface Effect : UiEffect {
-        data object CharacterAdded : Effect
-        data object CharacterRemoved : Effect
+        data object RocketAdded : Effect
+        data object RocketRemoved : Effect
         data object BackNavigation : Effect
     }
 }

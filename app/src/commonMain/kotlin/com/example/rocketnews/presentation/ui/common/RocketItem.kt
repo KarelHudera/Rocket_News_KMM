@@ -3,6 +3,7 @@ package com.example.rocketnews.presentation.ui.common
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,26 +18,38 @@ fun RocketItem(
     rocket: Rocket,
     onClick: () -> Unit
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable(onClick = onClick)
+    Card(
+        Modifier.padding(vertical =4.dp , horizontal = 16.dp)
     ) {
-        Box{
-            CircularProgressIndicator(Modifier.align(Alignment.Center))
-            Image(
-                painter = rememberAsyncImagePainter(rocket.patchLarge),
-                contentDescription = null,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickable(onClick = onClick)
+        ) {
+            Box{
+                CircularProgressIndicator(Modifier.align(Alignment.Center))
+                Image(
+                    painter = rememberAsyncImagePainter(rocket.patchSmall),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .width(110.dp)
+                        .height(110.dp)
+                )
+                Image(
+                    painter = rememberAsyncImagePainter(rocket.patchLarge),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .width(110.dp)
+                        .height(110.dp)
+                )
+            }
+            Text(
+                text = rocket.name,
                 modifier = Modifier
-                    .padding(end = 10.dp, start = 10.dp, bottom = 10.dp)
-                    .width(110.dp)
-                    .height(110.dp)
+                    .fillMaxWidth(),
             )
         }
-        Text(
-            text = rocket.name,
-            modifier = Modifier
-                .fillMaxWidth(),
-        )
     }
 }
 

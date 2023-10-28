@@ -40,11 +40,11 @@ class RocketDetailScreen(
         LaunchedEffect(key1 = Unit) {
             rocketDetailViewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    is RocketDetailContract.Effect.CharacterAdded ->
-                        scaffoldState.snackbarHostState.showSnackbar("Character added to favorites")
+                    is RocketDetailContract.Effect.RocketAdded ->
+                        scaffoldState.snackbarHostState.showSnackbar("Rocket added to favorites")
 
-                    is RocketDetailContract.Effect.CharacterRemoved ->
-                        scaffoldState.snackbarHostState.showSnackbar("Character removed from favorites")
+                    is RocketDetailContract.Effect.RocketRemoved ->
+                        scaffoldState.snackbarHostState.showSnackbar("Rocket removed from favorites")
 
                     is RocketDetailContract.Effect.BackNavigation ->
                         navigator.pop()

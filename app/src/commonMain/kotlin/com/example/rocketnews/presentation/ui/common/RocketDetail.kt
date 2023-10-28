@@ -33,6 +33,11 @@ fun RocketDetail(rocket: Rocket) {
             CircularProgressIndicator(Modifier.align(Alignment.Center))
             Image(
                 modifier = Modifier.size(200.dp),
+                painter = rememberAsyncImagePainter(rocket.patchSmall),
+                contentDescription = null
+            )
+            Image(
+                modifier = Modifier.size(200.dp),
                 painter = rememberAsyncImagePainter(rocket.patchLarge),
                 contentDescription = null
             )

@@ -19,7 +19,7 @@ import com.example.rocketnews.presentation.ui.common.RocketsActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesScreen
-import com.example.rocketnews.presentation.ui.screens.search.RocketsSearchScreen
+import com.example.rocketnews.presentation.ui.screens.rocketsSearch.RocketsSearchScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class RocketsScreen : Screen {
@@ -36,7 +36,7 @@ class RocketsScreen : Screen {
         LaunchedEffect(key1 = Unit) {
             rocketsViewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    is RocketsContract.Effect.NavigateToDetailCharacter ->
+                    is RocketsContract.Effect.NavigateToDetailRocket ->
                         navigator.push(RocketDetailScreen(effect.idRocket))
 
                     is RocketsContract.Effect.NavigateToFavorites ->

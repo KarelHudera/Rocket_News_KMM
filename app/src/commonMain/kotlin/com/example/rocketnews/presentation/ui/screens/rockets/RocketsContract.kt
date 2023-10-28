@@ -20,10 +20,9 @@ interface RocketsContract {
     ) : UiState
 
     sealed interface Effect : UiEffect {
-        data class NavigateToDetailCharacter(val idRocket: String) : Effect
+        data class NavigateToDetailRocket(val idRocket: String) : Effect
         data object NavigateToFavorites : Effect
         data object NavigateToSearch : Effect
-
         data object BackNavigation : Effect
 
     }

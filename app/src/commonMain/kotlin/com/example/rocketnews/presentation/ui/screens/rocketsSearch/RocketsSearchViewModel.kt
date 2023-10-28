@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.screens.search
+package com.example.rocketnews.presentation.ui.screens.rocketsSearch
 
 import cafe.adriel.voyager.core.model.coroutineScope
 import co.touchlab.kermit.Logger
@@ -11,9 +11,6 @@ import kotlinx.coroutines.launch
 class RocketsSearchViewModel(
     private val getCharactersUseCase: GetRocketsUseCase,
 ) : BaseViewModel<RocketsSearchContract.Event, RocketsSearchContract.State, RocketsSearchContract.Effect>() {
-
-    private var searchText = ""
-
     var list = emptyList<Rocket>()
 
     init {
@@ -21,7 +18,7 @@ class RocketsSearchViewModel(
     }
 
     override fun createInitialState(): RocketsSearchContract.State =
-        RocketsSearchContract.State(rockets = ResourceUiState.Idle)
+        RocketsSearchContract.State(filteredRockets = ResourceUiState.Idle)
 
     override fun handleEvent(event: RocketsSearchContract.Event) {
         when (event) {
@@ -33,20 +30,20 @@ class RocketsSearchViewModel(
             }
             is RocketsSearchContract.Event.OnBackPressed -> setEffect { RocketsSearchContract.Effect.BackNavigation }
             is RocketsSearchContract.Event.OnSearchTextChanged -> {
-                searchText = event.searchText
+                val searchText = event.searchText
                 filterRockets(searchText)
             }
         }
     }
 
     private fun getCharacters() {
-        setState { copy(rockets = ResourceUiState.Loading) }
+        setState { copy(filteredRockets = ResourceUiState.Loading) }
         coroutineScope.launch {
             getCharactersUseCase(Unit)
                 .onSuccess {
                     setState {
                         copy(
-                            rockets = if (it.isEmpty())
+                            filteredRockets = if (it.isEmpty())
                                 ResourceUiState.Empty
                             else
                                 ResourceUiState.Success(it)
@@ -55,7 +52,7 @@ class RocketsSearchViewModel(
                     Logger.i { "$it" }
                     list = it
                 }
-                .onFailure { setState { copy(rockets = ResourceUiState.Error()) }
+                .onFailure { setState { copy(filteredRockets = ResourceUiState.Error()) }
                     Logger.i { "$it " }
                 }
         }
@@ -67,7 +64,7 @@ class RocketsSearchViewModel(
         }
 
         setState {
-            copy(rockets = ResourceUiState.Success(filteredRockets))
+            copy(filteredRockets = ResourceUiState.Success(filteredRockets))
         }
     }
 

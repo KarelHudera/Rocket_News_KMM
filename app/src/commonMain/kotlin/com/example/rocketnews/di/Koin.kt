@@ -19,8 +19,7 @@ import com.example.rocketnews.presentation.ui.screens.news.NewsViewModel
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsViewModel
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesViewModel
-import com.example.rocketnews.presentation.ui.screens.search.RocketsSearchScreen
-import com.example.rocketnews.presentation.ui.screens.search.RocketsSearchViewModel
+import com.example.rocketnews.presentation.ui.screens.rocketsSearch.RocketsSearchViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel

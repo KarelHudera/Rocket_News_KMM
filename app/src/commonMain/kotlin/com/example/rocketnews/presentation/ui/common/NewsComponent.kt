@@ -6,7 +6,6 @@ import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -105,6 +104,8 @@ fun NewsComponent(
                 private fun Float.toOffset() = Offset(0f, this)
             }
         }
+
+        Box(Modifier.fillMaxSize().background(Color.LightGray))
 
         CircularProgressIndicator(Modifier.align(Alignment.Center))
 

@@ -10,15 +10,15 @@ import com.example.rocketnews.presentation.mvi.BaseViewModel
 import kotlinx.coroutines.launch
 
 class RocketDetailViewModel(
-    private val getCharacterUseCase: GetRocketUseCase,
-    private val isCharacterFavoriteUseCase: IsRocketFavoriteUseCase,
-    private val switchCharacterFavoriteUseCase: SwitchRocketFavoriteUseCase,
-    private val characterId: String,
+    private val getRocketUseCase: GetRocketUseCase,
+    private val isRocketFavoriteUseCase: IsRocketFavoriteUseCase,
+    private val switchRocketFavoriteUseCase: SwitchRocketFavoriteUseCase,
+    private val rocketId: String,
 ) : BaseViewModel<RocketDetailContract.Event, RocketDetailContract.State, RocketDetailContract.Effect>() {
 
     init {
-        getCharacter(characterId)
-        checkIfIsFavorite(characterId)
+        getCharacter(rocketId)
+        checkIfIsFavorite(rocketId)
     }
 
     override fun createInitialState(): RocketDetailContract.State =
@@ -29,8 +29,8 @@ class RocketDetailViewModel(
 
     override fun handleEvent(event: RocketDetailContract.Event) {
         when (event) {
-            is RocketDetailContract.Event.OnFavoriteClick -> switchCharacterFavorite(characterId)
-            is RocketDetailContract.Event.OnTryCheckAgainClick -> getCharacter(characterId)
+            is RocketDetailContract.Event.OnFavoriteClick -> switchCharacterFavorite(rocketId)
+            is RocketDetailContract.Event.OnTryCheckAgainClick -> getCharacter(rocketId)
             is RocketDetailContract.Event.OnBackPressed -> setEffect { RocketDetailContract.Effect.BackNavigation }
         }
     }
@@ -38,12 +38,13 @@ class RocketDetailViewModel(
     private fun getCharacter(rocketId: String) {
         setState { copy(rocket = ResourceUiState.Loading) }
         coroutineScope.launch {
-            getCharacterUseCase(rocketId)
+            getRocketUseCase(rocketId)
                 .onSuccess {
                     setState { copy(rocket = ResourceUiState.Success(it)) }
                     Logger.i { "$it SUCCESS" }
                 }
-                .onFailure { setState { copy(rocket = ResourceUiState.Error()) }
+                .onFailure {
+                    setState { copy(rocket = ResourceUiState.Error()) }
                     Logger.i { "$it FAILURE" }
                 }
         }
@@ -52,7 +53,7 @@ class RocketDetailViewModel(
     private fun checkIfIsFavorite(idRocket: String) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
         coroutineScope.launch {
-            isCharacterFavoriteUseCase(idRocket)
+            isRocketFavoriteUseCase(idRocket)
                 .onSuccess { setState { copy(isFavorite = ResourceUiState.Success(it)) } }
                 .onFailure { setState { copy(isFavorite = ResourceUiState.Error()) } }
         }
@@ -61,11 +62,17 @@ class RocketDetailViewModel(
     private fun switchCharacterFavorite(idRocket: String) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
         coroutineScope.launch {
-            switchCharacterFavoriteUseCase(idRocket)
+            switchRocketFavoriteUseCase(idRocket)
                 .onSuccess {
                     setState { copy(isFavorite = ResourceUiState.Success(it)) }
-                    setEffect { RocketDetailContract.Effect.CharacterAdded }
+                    if (it) {
+                        setEffect { RocketDetailContract.Effect.RocketAdded }
+                    } else {
+                        setEffect { RocketDetailContract.Effect.RocketRemoved }
+                    }
+
                 }.onFailure { setState { copy(isFavorite = ResourceUiState.Error()) } }
         }
     }
+
 }

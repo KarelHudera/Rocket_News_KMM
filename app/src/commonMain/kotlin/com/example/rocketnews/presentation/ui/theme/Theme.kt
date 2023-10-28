@@ -80,7 +80,7 @@ private val darkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
-private val AppShapes = Shapes(
+private val shapes = Shapes(
     extraSmall = RoundedCornerShape(2.dp),
     small = RoundedCornerShape(4.dp),
     medium = RoundedCornerShape(8.dp),
@@ -88,7 +88,7 @@ private val AppShapes = Shapes(
     extraLarge = RoundedCornerShape(32.dp)
 )
 
-private val AppTypography = Typography(
+private val typography = Typography(
     bodyMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
@@ -109,8 +109,8 @@ internal fun AppTheme(
 
     MaterialTheme(
         colorScheme = colors,
-        typography = AppTypography,
-        shapes = AppShapes,
+        typography = typography,
+        shapes = shapes,
         content = {
             Surface(content = content)
         }

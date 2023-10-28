@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.screens.search
+package com.example.rocketnews.presentation.ui.screens.rocketsSearch
 
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.presentation.model.ResourceUiState
@@ -15,7 +15,7 @@ interface RocketsSearchContract {
     }
 
     data class State(
-        val rockets: ResourceUiState<List<Rocket>>
+        val filteredRockets: ResourceUiState<List<Rocket>>
     ) : UiState
 
     sealed interface Effect : UiEffect {

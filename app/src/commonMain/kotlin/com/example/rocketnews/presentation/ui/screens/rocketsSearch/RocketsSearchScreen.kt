@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.screens.search
+package com.example.rocketnews.presentation.ui.screens.rocketsSearch
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -74,7 +72,7 @@ class RocketsSearchScreen : Screen {
                 modifier = Modifier
                     .padding(padding)
                     .fillMaxSize(),
-                resourceUiState = state.rockets,
+                resourceUiState = state.filteredRockets,
                 successView = { rockets ->
                     Column {
                         OutlinedTextField(
