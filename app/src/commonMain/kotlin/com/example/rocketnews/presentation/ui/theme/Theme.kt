@@ -9,6 +9,7 @@ import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -107,12 +108,14 @@ internal fun AppTheme(
         darkColors
     }
 
-    MaterialTheme(
-        colorScheme = colors,
-        typography = typography,
-        shapes = shapes,
-        content = {
-            Surface(content = content)
-        }
-    )
+    CompositionLocalProvider(LocalSpacing  provides Spacing()){
+        MaterialTheme(
+            colorScheme = colors,
+            typography = typography,
+            shapes = shapes,
+            content = {
+                Surface(content = content)
+            }
+        )
+    }
 }

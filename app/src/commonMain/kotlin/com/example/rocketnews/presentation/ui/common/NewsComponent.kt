@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.swipeable
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.News
+import com.example.rocketnews.presentation.ui.theme.spacing
 import com.seiko.imageloader.rememberAsyncImagePainter
 import kotlin.math.roundToInt
 
@@ -151,7 +153,7 @@ fun NewsComponent(
                     )
                 }
                 Box(
-                    Modifier.fillMaxWidth().verticalScroll(scrollState).padding(horizontal = 16.dp)
+                    Modifier.fillMaxWidth().verticalScroll(scrollState).padding(horizontal = MaterialTheme.spacing.horizontal)
                 ) {
                     Column {
                         Text(
