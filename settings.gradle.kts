@@ -1,4 +1,4 @@
-rootProject.name = "Rocket News"
+rootProject.name = "Rocket_News_KMM"
 include(":app")
 
 pluginManagement {

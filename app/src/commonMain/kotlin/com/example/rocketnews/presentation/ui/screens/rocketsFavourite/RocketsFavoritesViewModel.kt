@@ -7,44 +7,44 @@ import com.example.rocketnews.presentation.mvi.BaseViewModel
 import kotlinx.coroutines.launch
 
 class RocketsFavoritesViewModel(
-    private val getCharactersFavoritesUseCase: GetRocketsFavoritesUseCase
+    private val getRocketsFavoritesUseCase: GetRocketsFavoritesUseCase
 ) : BaseViewModel<RocketsFavoritesContract.Event, RocketsFavoritesContract.State, RocketsFavoritesContract.Effect>() {
 
     init {
-        getCharactersFavorites()
+        getRocketsFavorites()
     }
 
     override fun createInitialState(): RocketsFavoritesContract.State =
         RocketsFavoritesContract.State(
-            charactersFavorites = ResourceUiState.Idle
+            rocketsFavorites = ResourceUiState.Idle
         )
 
     override fun handleEvent(event: RocketsFavoritesContract.Event) {
         when (event) {
-            RocketsFavoritesContract.Event.OnTryCheckAgainClick -> getCharactersFavorites()
-            is RocketsFavoritesContract.Event.OnCharacterClick ->
-                setEffect { RocketsFavoritesContract.Effect.NavigateToDetailCharacter(event.idRocket) }
+            RocketsFavoritesContract.Event.OnTryCheckAgainClick -> getRocketsFavorites()
+            is RocketsFavoritesContract.Event.OnRocketClick ->
+                setEffect { RocketsFavoritesContract.Effect.NavigateToDetailRocket(event.idRocket) }
 
             RocketsFavoritesContract.Event.OnBackPressed ->
                 setEffect { RocketsFavoritesContract.Effect.BackNavigation }
         }
     }
 
-    private fun getCharactersFavorites() {
-        setState { copy(charactersFavorites = ResourceUiState.Loading) }
+    private fun getRocketsFavorites() {
+        setState { copy(rocketsFavorites = ResourceUiState.Loading) }
         coroutineScope.launch {
-            getCharactersFavoritesUseCase(Unit).collect {
+            getRocketsFavoritesUseCase(Unit).collect {
                 it.onSuccess {
                     setState {
                         copy(
-                            charactersFavorites =
+                            rocketsFavorites =
                             if (it.isEmpty())
                                 ResourceUiState.Empty
                             else
                                 ResourceUiState.Success(it)
                         )
                     }
-                }.onFailure { setState { copy(charactersFavorites = ResourceUiState.Error()) } }
+                }.onFailure { setState { copy(rocketsFavorites = ResourceUiState.Error()) } }
             }
         }
     }

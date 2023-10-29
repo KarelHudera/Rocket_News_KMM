@@ -48,7 +48,7 @@ class RocketsSearchScreen : Screen {
                     is RocketsSearchContract.Effect.BackNavigation ->
                         navigator.pop()
 
-                    is RocketsSearchContract.Effect.NavigateToDetailCharacter ->
+                    is RocketsSearchContract.Effect.NavigateToDetailRocket ->
                         navigator.push(RocketDetailScreen(effect.idRocket))
                 }
             }

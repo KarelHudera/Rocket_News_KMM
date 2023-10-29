@@ -17,10 +17,10 @@ fun RocketsList(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top
     ) {
-        items(rockets) { character ->
+        items(rockets) { rocket ->
             RocketItem(
-                rocket = character,
-                onClick = { onRocketClick(character.id) }
+                rocket = rocket,
+                onClick = { onRocketClick(rocket.id) }
             )
         }
     }

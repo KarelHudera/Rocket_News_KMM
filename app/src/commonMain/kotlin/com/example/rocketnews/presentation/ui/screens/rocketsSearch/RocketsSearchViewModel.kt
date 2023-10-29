@@ -9,12 +9,12 @@ import com.example.rocketnews.presentation.mvi.BaseViewModel
 import kotlinx.coroutines.launch
 
 class RocketsSearchViewModel(
-    private val getCharactersUseCase: GetRocketsUseCase,
+    private val getRocketsUseCase: GetRocketsUseCase,
 ) : BaseViewModel<RocketsSearchContract.Event, RocketsSearchContract.State, RocketsSearchContract.Effect>() {
     var list = emptyList<Rocket>()
 
     init {
-        getCharacters()
+        getRockets()
     }
 
     override fun createInitialState(): RocketsSearchContract.State =
@@ -22,9 +22,9 @@ class RocketsSearchViewModel(
 
     override fun handleEvent(event: RocketsSearchContract.Event) {
         when (event) {
-            is RocketsSearchContract.Event.OnTryCheckAgainClick -> getCharacters()
+            is RocketsSearchContract.Event.OnTryCheckAgainClick -> getRockets()
             is RocketsSearchContract.Event.OnRocketClick -> setEffect {
-                RocketsSearchContract.Effect.NavigateToDetailCharacter(
+                RocketsSearchContract.Effect.NavigateToDetailRocket(
                     event.idRocket
                 )
             }
@@ -36,10 +36,10 @@ class RocketsSearchViewModel(
         }
     }
 
-    private fun getCharacters() {
+    private fun getRockets() {
         setState { copy(filteredRockets = ResourceUiState.Loading) }
         coroutineScope.launch {
-            getCharactersUseCase(Unit)
+            getRocketsUseCase(Unit)
                 .onSuccess {
                     setState {
                         copy(

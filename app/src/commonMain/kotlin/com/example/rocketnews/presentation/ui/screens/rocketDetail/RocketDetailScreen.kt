@@ -56,7 +56,7 @@ class RocketDetailScreen(
             scaffoldState = scaffoldState,
             topBar = {
                 ActionBar(
-                    character = state.rocket,
+                    rocket = state.rocket,
                     favorite = state.isFavorite,
                     onActionFavorite = { rocketDetailViewModel.setEvent(RocketDetailContract.Event.OnFavoriteClick) },
                     onBackPressed = { rocketDetailViewModel.setEvent(RocketDetailContract.Event.OnBackPressed) }

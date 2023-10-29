@@ -12,7 +12,7 @@ import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiS
 
 @Composable
 fun ActionBar(
-    character: ResourceUiState<Rocket>,
+    rocket: ResourceUiState<Rocket>,
     favorite: ResourceUiState<Boolean>,
     onActionFavorite: () -> Unit,
     onBackPressed: () -> Unit,
@@ -20,7 +20,7 @@ fun ActionBar(
     TopAppBar(
         title = {
             ManagementResourceUiState(
-                resourceUiState = character,
+                resourceUiState = rocket,
                 successView = { Text(text = it.name) },
                 loadingView = { Text(text = "....") },
                 onCheckAgain = {},

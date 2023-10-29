@@ -17,7 +17,7 @@ class RocketDetailViewModel(
 ) : BaseViewModel<RocketDetailContract.Event, RocketDetailContract.State, RocketDetailContract.Effect>() {
 
     init {
-        getCharacter(rocketId)
+        getRocket(rocketId)
         checkIfIsFavorite(rocketId)
     }
 
@@ -29,13 +29,13 @@ class RocketDetailViewModel(
 
     override fun handleEvent(event: RocketDetailContract.Event) {
         when (event) {
-            is RocketDetailContract.Event.OnFavoriteClick -> switchCharacterFavorite(rocketId)
-            is RocketDetailContract.Event.OnTryCheckAgainClick -> getCharacter(rocketId)
+            is RocketDetailContract.Event.OnFavoriteClick -> switchRocketFavorite(rocketId)
+            is RocketDetailContract.Event.OnTryCheckAgainClick -> getRocket(rocketId)
             is RocketDetailContract.Event.OnBackPressed -> setEffect { RocketDetailContract.Effect.BackNavigation }
         }
     }
 
-    private fun getCharacter(rocketId: String) {
+    private fun getRocket(rocketId: String) {
         setState { copy(rocket = ResourceUiState.Loading) }
         coroutineScope.launch {
             getRocketUseCase(rocketId)
@@ -59,7 +59,7 @@ class RocketDetailViewModel(
         }
     }
 
-    private fun switchCharacterFavorite(idRocket: String) {
+    private fun switchRocketFavorite(idRocket: String) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
         coroutineScope.launch {
             switchRocketFavoriteUseCase(idRocket)

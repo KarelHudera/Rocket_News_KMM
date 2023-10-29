@@ -8,7 +8,7 @@ interface IRepository {
     suspend fun getRockets(): List<Rocket>
     suspend fun getRocketsFavorites(): Flow<List<Rocket>>
     suspend fun getRocket(id: String): Rocket
-    suspend fun addRocketToFavorites(character: Rocket)
+    suspend fun addRocketToFavorites(rocket: Rocket)
     suspend fun removeRocketFromFavorite(idRocket: String)
     suspend fun isRocketFavorite(idRocket: String): Boolean
     suspend fun getNews(): News

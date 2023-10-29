@@ -35,7 +35,7 @@ class RocketsFavoritesScreen : Screen {
         LaunchedEffect(key1 = Unit) {
             rocketsFavoritesViewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    is RocketsFavoritesContract.Effect.NavigateToDetailCharacter ->
+                    is RocketsFavoritesContract.Effect.NavigateToDetailRocket ->
                         navigator.push(RocketDetailScreen(effect.idRocket))
 
                     is RocketsFavoritesContract.Effect.BackNavigation -> navigator.pop()
@@ -61,14 +61,14 @@ class RocketsFavoritesScreen : Screen {
                 modifier = Modifier
                     .padding(padding)
                     .fillMaxSize(),
-                resourceUiState = state.charactersFavorites,
+                resourceUiState = state.rocketsFavorites,
                 successView = { favorites ->
                     RocketsList(
                         rockets = favorites,
-                        onRocketClick = { idCharacter ->
+                        onRocketClick = { idRocket ->
                             rocketsFavoritesViewModel.setEvent(
-                                RocketsFavoritesContract.Event.OnCharacterClick(
-                                    idCharacter
+                                RocketsFavoritesContract.Event.OnRocketClick(
+                                    idRocket
                                 )
                             )
                         }
