@@ -19,7 +19,7 @@ fun RocketItem(
     onClick: () -> Unit
 ) {
     Card(
-        Modifier.padding(vertical =4.dp , horizontal = 16.dp)
+        Modifier.padding(vertical =8.dp , horizontal = 16.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
