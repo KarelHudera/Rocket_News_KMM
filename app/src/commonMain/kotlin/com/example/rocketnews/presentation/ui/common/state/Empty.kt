@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.rocketnews.presentation.ui.common.Space
 
 @Composable
 fun Empty(
@@ -26,7 +27,7 @@ fun Empty(
                 text = msg,
                 style = MaterialTheme.typography.h5
             )
-            Spacer(modifier = Modifier.size(10.dp))
+            Space()
             OutlinedButton(
                 onClick = onCheckAgain
             ) {
