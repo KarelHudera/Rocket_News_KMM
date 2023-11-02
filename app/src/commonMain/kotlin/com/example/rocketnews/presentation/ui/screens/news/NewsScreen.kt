@@ -10,6 +10,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -60,7 +61,7 @@ class NewsScreen : Screen {
                     modifier = Modifier.clip(RoundedCornerShape(16.dp)).background(Color.DarkGray).size(58.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Add,
+                        imageVector = Icons.Rounded.Star,
                         modifier = Modifier.size(38.dp),
                         contentDescription = null
                     )

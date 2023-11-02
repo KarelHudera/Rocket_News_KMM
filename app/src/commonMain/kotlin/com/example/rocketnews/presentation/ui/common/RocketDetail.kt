@@ -1,6 +1,7 @@
 package com.example.rocketnews.presentation.ui.common
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.Rocket
 import com.seiko.imageloader.rememberAsyncImagePainter
@@ -30,7 +32,7 @@ fun RocketDetail(rocket: Rocket) {
         )
         Spacer(modifier = Modifier.size(10.dp))
         Box {
-            CircularProgressIndicator(Modifier.align(Alignment.Center))
+            ProgressIndicator(Modifier.align(Alignment.Center))
             Image(
                 modifier = Modifier.size(200.dp),
                 painter = rememberAsyncImagePainter(rocket.patchSmall),

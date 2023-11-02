@@ -27,6 +27,5 @@ import com.example.rocketnews.presentation.ui.theme.AppTheme
 
 @Composable
 internal fun App() = AppTheme {
-    //Navigator(NewsScreen())
-    Navigator(RocketsScreen())
+    Navigator(NewsScreen())
 }

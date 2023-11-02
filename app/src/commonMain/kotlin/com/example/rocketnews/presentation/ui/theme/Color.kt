@@ -2,6 +2,8 @@ package com.example.rocketnews.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val color = Color(0xFFFFFFFF)
+
 internal val md_theme_light_primary = Color(0xFF00687A)
 internal val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 internal val md_theme_light_primaryContainer = Color(0xFFABEDFF)
@@ -33,35 +35,35 @@ internal val md_theme_light_surfaceTint = Color(0xFF00687A)
 internal val md_theme_light_outlineVariant = Color(0xFFBFC8CB)
 internal val md_theme_light_scrim = Color(0xFF000000)
 
-internal val md_theme_dark_primary = Color(0xFF000000)
-internal val md_theme_dark_onPrimary = Color(0xFF003640)
-internal val md_theme_dark_primaryContainer = Color(0xFF004E5C)
-internal val md_theme_dark_onPrimaryContainer = Color(0xFFABEDFF)
-internal val md_theme_dark_secondary = Color(0xFF4CD9E2)
-internal val md_theme_dark_onSecondary = Color(0xFF00373A)
-internal val md_theme_dark_secondaryContainer = Color(0xFF004F53)
-internal val md_theme_dark_onSecondaryContainer = Color(0xFF6FF6FE)
-internal val md_theme_dark_tertiary = Color(0xFFFFB77C)
-internal val md_theme_dark_onTertiary = Color(0xFF4D2700)
-internal val md_theme_dark_tertiaryContainer = Color(0xFF6D3900)
-internal val md_theme_dark_onTertiaryContainer = Color(0xFFFFDCC2)
-internal val md_theme_dark_error = Color(0xFFFFB4AB)
-internal val md_theme_dark_errorContainer = Color(0xFF93000A)
-internal val md_theme_dark_onError = Color(0xFF690005)
-internal val md_theme_dark_onErrorContainer = Color(0xFFFFDAD6)
-internal val md_theme_dark_background = Color(0xFF221B00)
-internal val md_theme_dark_onBackground = Color(0xFFFFE264)
-internal val md_theme_dark_surface = Color(0xFF221B00)
-internal val md_theme_dark_onSurface = Color(0xFFFFE264)
-internal val md_theme_dark_surfaceVariant = Color(0xFF3F484B)
-internal val md_theme_dark_onSurfaceVariant = Color(0xFFBFC8CB)
-internal val md_theme_dark_outline = Color(0xFF899295)
-internal val md_theme_dark_inverseOnSurface = Color(0xFF221B00)
-internal val md_theme_dark_inverseSurface = Color(0xFFFFE264)
-internal val md_theme_dark_inversePrimary = Color(0xFF00687A)
-internal val md_theme_dark_shadow = Color(0xFF000000)
-internal val md_theme_dark_surfaceTint = Color(0xFF55D6F4)
-internal val md_theme_dark_outlineVariant = Color(0xFF3F484B)
-internal val md_theme_dark_scrim = Color(0xFF000000)
+internal val md_theme_dark_primary = color
+internal val md_theme_dark_onPrimary = color
+internal val md_theme_dark_primaryContainer = color
+internal val md_theme_dark_onPrimaryContainer = color
+internal val md_theme_dark_secondary = color
+internal val md_theme_dark_onSecondary = color
+internal val md_theme_dark_secondaryContainer = color
+internal val md_theme_dark_onSecondaryContainer = color
+internal val md_theme_dark_tertiary = color
+internal val md_theme_dark_onTertiary = color
+internal val md_theme_dark_tertiaryContainer = color
+internal val md_theme_dark_onTertiaryContainer = color
+internal val md_theme_dark_error = color
+internal val md_theme_dark_errorContainer = color
+internal val md_theme_dark_onError = color
+internal val md_theme_dark_onErrorContainer = color
+internal val md_theme_dark_background = color
+internal val md_theme_dark_onBackground = color
+internal val md_theme_dark_surface = color
+internal val md_theme_dark_onSurface = color
+internal val md_theme_dark_surfaceVariant = color
+internal val md_theme_dark_onSurfaceVariant = color
+internal val md_theme_dark_outline = color
+internal val md_theme_dark_inverseOnSurface = color
+internal val md_theme_dark_inverseSurface = color
+internal val md_theme_dark_inversePrimary = color
+internal val md_theme_dark_shadow = color
+internal val md_theme_dark_surfaceTint =color
+internal val md_theme_dark_outlineVariant = color
+internal val md_theme_dark_scrim = color
 
 internal val seed = Color(0xFF000000)

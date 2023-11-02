@@ -109,7 +109,7 @@ fun NewsComponent(
 
         Box(Modifier.fillMaxSize().background(Color.LightGray))
 
-        CircularProgressIndicator(Modifier.align(Alignment.Center))
+        ProgressIndicator(Modifier.align(Alignment.Center))
 
         Image(
             modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density),
@@ -164,7 +164,7 @@ fun NewsComponent(
                         )
                         Space()
                         Text(
-                            news.date,
+                            formatSimpleDate(news.date),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color.Black.copy(0.85f)
@@ -180,4 +180,14 @@ fun NewsComponent(
             }
         }
     }
+}
+
+fun formatSimpleDate(date: String): String {
+
+    val parts = date.split("-")
+    val year = parts[0]
+    val month = parts[1]
+    val day = parts[2]
+
+    return "$year $month. $day."
 }

@@ -6,6 +6,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
@@ -18,6 +19,8 @@ fun ActionBar(
     onBackPressed: () -> Unit,
 ) {
     TopAppBar(
+        backgroundColor = Color(0xFF434343),
+        contentColor = Color.White,
         title = {
             ManagementResourceUiState(
                 resourceUiState = rocket,

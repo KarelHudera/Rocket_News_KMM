@@ -108,6 +108,9 @@ internal fun AppTheme(
         darkColors
     }
 
+    //val systemUiController = rememberSystemUiController()
+
+
     CompositionLocalProvider(LocalSpacing  provides Spacing()){
         MaterialTheme(
             colorScheme = colors,

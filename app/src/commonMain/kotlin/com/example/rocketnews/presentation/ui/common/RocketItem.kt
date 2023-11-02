@@ -12,7 +12,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -26,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.Rocket
+import com.example.rocketnews.presentation.ui.theme.color
 import com.example.rocketnews.presentation.ui.theme.spacing
 import com.seiko.imageloader.rememberAsyncImagePainter
 
@@ -33,8 +33,6 @@ import com.seiko.imageloader.rememberAsyncImagePainter
 fun RocketItem(
     rocket: Rocket, onClick: () -> Unit
 ) {
-
-
     Card(
         Modifier.padding(vertical = 8.dp, horizontal = MaterialTheme.spacing.horizontal)
     ) {
@@ -43,7 +41,7 @@ fun RocketItem(
             modifier = Modifier.clickable(onClick = onClick).fillMaxWidth()
         ) {
             Box {
-                CircularProgressIndicator(Modifier.align(Alignment.Center))
+                ProgressIndicator(Modifier.align(Alignment.Center))
                 Image(
                     painter = rememberAsyncImagePainter(rocket.patchSmall),
                     contentDescription = null,
@@ -60,38 +58,73 @@ fun RocketItem(
                 Text(
                     text = rocket.name,
                     color = Color.Black.copy(0.85f),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Medium
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Medium,
                 )
-                Space()
+                Space(4.dp)
                 Row {
-                    IconButton(
-                        onClick = { (rocket.youtube_id) }, //TODO: youtube
-                        modifier = Modifier.clip(
-                            RoundedCornerShape(16.dp)
-                        ).width(56.dp).height(40.dp).background(Color.Red),
-                    ) {
-                        Icon(
-                            imageVector = Icons.Rounded.PlayArrow,
-                            tint = Color.White,
-                            modifier = Modifier.size(24.dp),
-                            contentDescription = null
-                        )
-                    }
-                    Space()
-                    Button(
-                        onClick = { rocket.wikipedia }, //TODO: wikipedia
-                        modifier = Modifier.clip(
-                            RoundedCornerShape(16.dp)
-                        ).height(40.dp).wrapContentWidth(),
-                        colors = ButtonDefaults.buttonColors(Color.White),
-                    ) {
-                        Text(
-                            "WIKI", fontFamily = FontFamily.Serif, fontWeight = FontWeight.Medium
-                        )
-                    }
+                    Text(
+                        text = formatDate(rocket.date_utc),
+                        color = Color.Black.copy(0.85f),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                    Box(
+                        Modifier
+                            .padding(start = 8.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .size(18.dp)
+                            .background(
+                                if (rocket.success) {
+                                    Color.Green.copy(0.7f)
+                                } else {
+                                    Color.Red.copy(0.7f)
+                                }
+                            )
+                            .align(Alignment.CenterVertically)
+                    )
                 }
+                // Space()
+//                Row {
+//                    IconButton(
+//                        onClick = { (rocket.youtube_id) }, //TODO: youtube
+//                        modifier = Modifier.clip(
+//                            RoundedCornerShape(16.dp)
+//                        ).width(56.dp).height(38.dp).background(Color.Red),
+//                    ) {
+//                        Icon(
+//                            imageVector = Icons.Rounded.PlayArrow,
+//                            tint = Color.White,
+//                            modifier = Modifier.size(26.dp),
+//                            contentDescription = null
+//                        )
+//                    }
+//                    Space()
+//                    Button(
+//                        onClick = { rocket.wikipedia }, //TODO: wikipedia
+//                        modifier = Modifier.clip(
+//                            RoundedCornerShape(16.dp)
+//                        ).height(38.dp).wrapContentWidth(),
+//                        colors = ButtonDefaults.buttonColors(Color.White),
+//                    ) {
+//                        Text(
+//                            "WIKI", fontFamily = FontFamily.Serif, fontWeight = FontWeight.Medium
+//                        )
+//                    }
+//                }
             }
         }
     }
+}
+
+fun formatDate(date: String): String {
+
+    val parts = date.split("T", "-", ":", ".", "Z")
+    val year = parts[0]
+    val month = parts[1]
+    val day = parts[2]
+    val hour = parts[3]
+    val minute = parts[4]
+
+    return "$year $month. $day. $hour:$minute"
 }
