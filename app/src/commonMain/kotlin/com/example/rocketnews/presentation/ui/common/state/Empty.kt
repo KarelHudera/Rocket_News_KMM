@@ -7,25 +7,22 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.presentation.ui.common.Space
 
 @Composable
 fun Empty(
-    modifier: Modifier = Modifier,
-    msg: String,
-    onCheckAgain: () -> Unit = {}
+    modifier: Modifier = Modifier, msg: String, onCheckAgain: () -> Unit = {}
 ) {
     Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier
+        contentAlignment = Alignment.Center, modifier = modifier
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = msg,
-                style = MaterialTheme.typography.h5
+                text = msg, style = MaterialTheme.typography.h5
             )
             Space()
             OutlinedButton(
@@ -33,7 +30,8 @@ fun Empty(
             ) {
                 Text(
                     text = "Check Again",
-                    style = MaterialTheme.typography.h6
+                    style = MaterialTheme.typography.h6,
+                    color = Color.Black.copy(0.85f),
                 )
             }
         }

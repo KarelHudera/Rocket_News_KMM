@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.presentation.ui.common.Space
 
@@ -33,7 +34,8 @@ fun Error(
             ) {
                 Text(
                     text = "Try Again",
-                    style = MaterialTheme.typography.h6
+                    style = MaterialTheme.typography.h6,
+                    color = Color.Black.copy(0.85f)
                 )
             }
         }

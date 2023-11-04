@@ -4,7 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ApiNews(
-    val copyright: String,
     val date: String,
     val explanation: String,
     val hdurl: String,

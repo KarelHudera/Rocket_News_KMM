@@ -46,7 +46,7 @@ fun RocketDetail(rocket: Rocket) {
         }
         Spacer(modifier = Modifier.size(10.dp))
         Text(
-            text = "${rocket.date_utc}, ${rocket.name}",
+            text = "${formatDate(rocket.date_utc)}, ${rocket.name}",
             style = MaterialTheme.typography.h6
         )
         Spacer(modifier = Modifier.size(10.dp))
