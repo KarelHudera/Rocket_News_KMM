@@ -12,7 +12,9 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.rounded.PlayArrow
+import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
@@ -25,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.Rocket
-import com.example.rocketnews.presentation.ui.theme.color
 import com.example.rocketnews.presentation.ui.theme.spacing
 import com.seiko.imageloader.rememberAsyncImagePainter
 
@@ -41,17 +42,35 @@ fun RocketItem(
             modifier = Modifier.clickable(onClick = onClick).fillMaxWidth()
         ) {
             Box {
-                ProgressIndicator(Modifier.align(Alignment.Center))
-                Image(
-                    painter = rememberAsyncImagePainter(rocket.patchSmall),
-                    contentDescription = null,
-                    modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
-                )
-                Image(
-                    painter = rememberAsyncImagePainter(rocket.patchLarge),
-                    contentDescription = null,
-                    modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
-                )
+                if (rocket.patchLarge == "") {
+                    Box(
+                        modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp),
+                        contentAlignment = Alignment.Center
+                    ){
+                        Column {
+                            Icon(
+                                imageVector = Icons.Rounded.Warning,
+                                modifier = Modifier.align(Alignment.CenterHorizontally),
+                                contentDescription = null
+                            )
+                            Space()
+                            Text("No image")
+                        }
+
+                    }
+                } else {
+                    ProgressIndicator(Modifier.align(Alignment.Center))
+                    Image(
+                        painter = rememberAsyncImagePainter(rocket.patchSmall),
+                        contentDescription = null,
+                        modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
+                    )
+                    Image(
+                        painter = rememberAsyncImagePainter(rocket.patchLarge),
+                        contentDescription = null,
+                        modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
+                    )
+                }
             }
             Space()
             Column {
@@ -63,15 +82,8 @@ fun RocketItem(
                 )
                 Space(4.dp)
                 Row {
-                    Text(
-                        text = formatDate(rocket.date_utc),
-                        color = Color.Black.copy(0.85f),
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
-                    )
                     Box(
                         Modifier
-                            .padding(start = 8.dp)
                             .clip(RoundedCornerShape(16.dp))
                             .size(18.dp)
                             .background(
@@ -82,6 +94,13 @@ fun RocketItem(
                                 }
                             )
                             .align(Alignment.CenterVertically)
+                    )
+                    Space()
+                    Text(
+                        text = formatDate(rocket.date_utc),
+                        color = Color.Black.copy(0.85f),
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
                     )
                 }
                 // Space()

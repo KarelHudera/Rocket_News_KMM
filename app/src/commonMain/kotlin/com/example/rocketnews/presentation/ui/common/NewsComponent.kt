@@ -112,13 +112,13 @@ fun NewsComponent(
         ProgressIndicator(Modifier.align(Alignment.Center))
 
         Image(
-            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density),
+            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density/1.8f),
             painter = rememberAsyncImagePainter(news.url),
             contentDescription = null
         )
 
         Image(
-            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density),
+            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density/1.8f),
             painter = rememberAsyncImagePainter(news.hdurl),
             contentDescription = null
         )

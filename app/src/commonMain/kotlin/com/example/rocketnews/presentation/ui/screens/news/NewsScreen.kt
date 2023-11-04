@@ -63,6 +63,7 @@ class NewsScreen : Screen {
                     Icon(
                         imageVector = Icons.Rounded.Star,
                         modifier = Modifier.size(38.dp),
+                        tint = Color.White,
                         contentDescription = null
                     )
                 }
