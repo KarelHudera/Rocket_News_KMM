@@ -6,19 +6,16 @@ import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -42,6 +39,7 @@ import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.News
+import com.example.rocketnews.helpers.formatNewsDate
 import com.example.rocketnews.presentation.ui.theme.spacing
 import com.seiko.imageloader.rememberAsyncImagePainter
 import kotlin.math.roundToInt
@@ -112,13 +110,13 @@ fun NewsComponent(
         ProgressIndicator(Modifier.align(Alignment.Center))
 
         Image(
-            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density/1.8f),
+            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density / 1.8f),
             painter = rememberAsyncImagePainter(news.url),
             contentDescription = null
         )
 
         Image(
-            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density/1.8f),
+            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density / 1.8f),
             painter = rememberAsyncImagePainter(news.hdurl),
             contentDescription = null
         )
@@ -153,7 +151,8 @@ fun NewsComponent(
                     )
                 }
                 Box(
-                    Modifier.fillMaxWidth().verticalScroll(scrollState).padding(horizontal = MaterialTheme.spacing.horizontal)
+                    Modifier.fillMaxWidth().verticalScroll(scrollState)
+                        .padding(horizontal = MaterialTheme.spacing.horizontal)
                 ) {
                     Column {
                         Text(
@@ -164,7 +163,7 @@ fun NewsComponent(
                         )
                         Space()
                         Text(
-                            formatSimpleDate(news.date),
+                            formatNewsDate(news.date),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Color.Black.copy(0.85f)
@@ -180,14 +179,4 @@ fun NewsComponent(
             }
         }
     }
-}
-
-fun formatSimpleDate(date: String): String {
-
-    val parts = date.split("-")
-    val year = parts[0]
-    val month = parts[1]
-    val day = parts[2]
-
-    return "$year $month. $day."
 }

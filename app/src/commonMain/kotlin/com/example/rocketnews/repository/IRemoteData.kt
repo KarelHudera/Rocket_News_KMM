@@ -1,4 +1,4 @@
-package com.example.rocketnews.data_remote
+package com.example.rocketnews.repository
 
 import com.example.rocketnews.domain.model.News
 import com.example.rocketnews.domain.model.Rocket

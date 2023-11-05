@@ -28,6 +28,7 @@ class RocketsSearchViewModel(
                     event.idRocket
                 )
             }
+
             is RocketsSearchContract.Event.OnBackPressed -> setEffect { RocketsSearchContract.Effect.BackNavigation }
             is RocketsSearchContract.Event.OnSearchTextChanged -> {
                 val searchText = event.searchText
@@ -49,11 +50,10 @@ class RocketsSearchViewModel(
                                 ResourceUiState.Success(it)
                         )
                     }
-                    Logger.i { "$it" }
                     list = it
                 }
-                .onFailure { setState { copy(filteredRockets = ResourceUiState.Error()) }
-                    Logger.i { "$it " }
+                .onFailure {
+                    setState { copy(filteredRockets = ResourceUiState.Error()) }
                 }
         }
     }

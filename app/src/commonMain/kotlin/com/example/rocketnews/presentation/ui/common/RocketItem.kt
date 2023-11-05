@@ -3,30 +3,31 @@ package com.example.rocketnews.presentation.ui.common
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Warning
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.Rocket
+import com.example.rocketnews.helpers.formatRocketsDate
 import com.example.rocketnews.presentation.ui.theme.spacing
 import com.seiko.imageloader.rememberAsyncImagePainter
 
@@ -42,11 +43,11 @@ fun RocketItem(
             modifier = Modifier.clickable(onClick = onClick).fillMaxWidth()
         ) {
             Box {
-                if (rocket.patchLarge == "") {
+                if (rocket.patchLarge == "" && rocket.patchSmall == "") {
                     Box(
                         modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp),
                         contentAlignment = Alignment.Center
-                    ){
+                    ) {
                         Column {
                             Icon(
                                 imageVector = Icons.Rounded.Warning,
@@ -97,53 +98,13 @@ fun RocketItem(
                     )
                     Space()
                     Text(
-                        text = formatDate(rocket.date_utc),
+                        text = formatRocketsDate(rocket.date_utc),
                         color = Color.Black.copy(0.85f),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
                     )
                 }
-                // Space()
-//                Row {
-//                    IconButton(
-//                        onClick = { (rocket.youtube_id) }, //TODO: youtube
-//                        modifier = Modifier.clip(
-//                            RoundedCornerShape(16.dp)
-//                        ).width(56.dp).height(38.dp).background(Color.Red),
-//                    ) {
-//                        Icon(
-//                            imageVector = Icons.Rounded.PlayArrow,
-//                            tint = Color.White,
-//                            modifier = Modifier.size(26.dp),
-//                            contentDescription = null
-//                        )
-//                    }
-//                    Space()
-//                    Button(
-//                        onClick = { rocket.wikipedia }, //TODO: wikipedia
-//                        modifier = Modifier.clip(
-//                            RoundedCornerShape(16.dp)
-//                        ).height(38.dp).wrapContentWidth(),
-//                        colors = ButtonDefaults.buttonColors(Color.White),
-//                    ) {
-//                        Text(
-//                            "WIKI", fontFamily = FontFamily.Serif, fontWeight = FontWeight.Medium
-//                        )
-//                    }
-//                }
             }
         }
     }
-}
-
-fun formatDate(date: String): String {
-
-    val parts = date.split("T", "-", ":", ".", "Z")
-    val year = parts[0]
-    val month = parts[1]
-    val day = parts[2]
-    val hour = parts[3]
-    val minute = parts[4]
-
-    return "$year $month. $day. $hour:$minute"
 }

@@ -6,6 +6,7 @@ import com.example.rocketnews.data_remote.model.mapper.ApiNewsMapper
 import com.example.rocketnews.data_remote.model.mapper.ApiRocketMapper
 import com.example.rocketnews.domain.model.News
 import com.example.rocketnews.domain.model.Rocket
+import com.example.rocketnews.repository.IRemoteData
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*

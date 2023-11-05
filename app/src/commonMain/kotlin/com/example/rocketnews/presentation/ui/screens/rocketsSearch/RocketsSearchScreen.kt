@@ -1,9 +1,11 @@
 package com.example.rocketnews.presentation.ui.screens.rocketsSearch
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material3.OutlinedTextField
@@ -14,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
@@ -25,6 +28,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.ArrowBackIcon
 import com.example.rocketnews.presentation.ui.common.BackNavActionAppBar
 import com.example.rocketnews.presentation.ui.common.RocketsList
+import com.example.rocketnews.presentation.ui.common.Space
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
 import kotlinx.coroutines.flow.collectLatest
@@ -88,14 +92,31 @@ class RocketsSearchScreen : Screen {
                                 .fillMaxWidth(),
                             placeholder = { Text(text = "Search rocket") },
                         )
-                        RocketsList(
-                            rockets = rockets,
-                            onRocketClick = { idRocket ->
-                                rocketsSearchViewModel.setEvent(
-                                    RocketsSearchContract.Event.OnRocketClick(idRocket)
-                                )
+                        if (rockets.isEmpty()) {
+                            Box(Modifier.fillMaxSize(), Alignment.Center) {
+                                Column {
+                                    Text(
+                                        text = "Couldn't find \"$text\"",
+                                        style = MaterialTheme.typography.h5
+                                    )
+                                    Space()
+                                    Text(
+                                        text = "Try something else",
+                                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                                    )
+                                }
+
                             }
-                        )
+                        } else {
+                            RocketsList(
+                                rockets = rockets,
+                                onRocketClick = { idRocket ->
+                                    rocketsSearchViewModel.setEvent(
+                                        RocketsSearchContract.Event.OnRocketClick(idRocket)
+                                    )
+                                }
+                            )
+                        }
                     }
                 },
                 onTryAgain = { rocketsSearchViewModel.setEvent(RocketsSearchContract.Event.OnTryCheckAgainClick) },
@@ -104,4 +125,3 @@ class RocketsSearchScreen : Screen {
         }
     }
 }
-

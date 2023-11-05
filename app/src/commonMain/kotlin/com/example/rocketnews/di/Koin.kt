@@ -1,14 +1,14 @@
 package com.example.rocketnews.di
 
 import com.example.rocketnews.data_cache.CacheDataImp
-import com.example.rocketnews.data_cache.ICacheData
+import com.example.rocketnews.repository.ICacheData
 import com.example.rocketnews.data_cache.sqldelight.SharedDatabase
-import com.example.rocketnews.data_remote.IRemoteData
+import com.example.rocketnews.repository.IRemoteData
 import com.example.rocketnews.data_remote.RemoteDataImp
 import com.example.rocketnews.data_remote.model.mapper.ApiNewsMapper
 import com.example.rocketnews.data_remote.model.mapper.ApiRocketMapper
 import com.example.rocketnews.domain.IRepository
-import com.example.rocketnews.domain.RepositoryImp
+import com.example.rocketnews.repository.RepositoryImp
 import com.example.rocketnews.domain.interactors.GetNewsUseCase
 import com.example.rocketnews.domain.interactors.GetRocketUseCase
 import com.example.rocketnews.domain.interactors.GetRocketsFavoritesUseCase

@@ -3,6 +3,7 @@ package com.example.rocketnews.data_cache
 import app.cash.sqldelight.coroutines.asFlow
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.data_cache.sqldelight.SharedDatabase
+import com.example.rocketnews.repository.ICacheData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
