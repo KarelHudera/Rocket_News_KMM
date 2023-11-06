@@ -1,33 +1,19 @@
 package com.example.rocketnews.presentation.ui.common
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Warning
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType.Companion.Uri
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.helpers.formatRocketsDate
@@ -84,34 +70,34 @@ fun RocketDetail(rocket: Rocket) {
             style = MaterialTheme.typography.h6,
             color = color
         )
-        Space(52.dp)
-        Row {
-            IconButton(
-                onClick = { (rocket.youtube_id) }, //TODO: youtube
-                modifier = Modifier.clip(
-                    RoundedCornerShape(16.dp)
-                ).width(56.dp).height(38.dp).background(Color.Red),
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.PlayArrow,
-                    tint = Color.White,
-                    modifier = Modifier.size(26.dp),
-                    contentDescription = null
-                )
-            }
-            Space()
-            Button(
-                onClick = { rocket.wikipedia }, //TODO: wikipedia
-                elevation = ButtonDefaults.buttonElevation(0.1.dp),
-                modifier = Modifier.clip(
-                    RoundedCornerShape(16.dp)
-                ).height(38.dp).wrapContentWidth(),
-                colors = ButtonDefaults.buttonColors(Color.White),
-            ) {
-                Text(
-                    "WIKI", fontFamily = FontFamily.Serif, fontWeight = FontWeight.Medium
-                )
-            }
-        }
+//        Space(52.dp)
+//        Row {
+//            IconButton(
+//                onClick = { rocket.youtube_id },
+//                modifier = Modifier.clip(
+//                    RoundedCornerShape(16.dp)
+//                ).width(56.dp).height(38.dp).background(Color.Red),
+//            ) {
+//                Icon(
+//                    imageVector = Icons.Rounded.PlayArrow,
+//                    tint = Color.White,
+//                    modifier = Modifier.size(26.dp),
+//                    contentDescription = null
+//                )
+//            }
+//            Space()
+//            Button(
+//                onClick = { rocket.wikipedia },
+//                elevation = ButtonDefaults.buttonElevation(0.1.dp),
+//                modifier = Modifier.clip(
+//                    RoundedCornerShape(16.dp)
+//                ).height(38.dp).wrapContentWidth(),
+//                colors = ButtonDefaults.buttonColors(Color.White),
+//            ) {
+//                Text(
+//                    "WIKI", fontFamily = FontFamily.Serif, fontWeight = FontWeight.Medium
+//                )
+//            }
+//        }
     }
 }

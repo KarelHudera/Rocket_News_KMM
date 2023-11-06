@@ -93,20 +93,7 @@ class RocketsSearchScreen : Screen {
                             placeholder = { Text(text = "Search rocket") },
                         )
                         if (rockets.isEmpty()) {
-                            Box(Modifier.fillMaxSize(), Alignment.Center) {
-                                Column {
-                                    Text(
-                                        text = "Couldn't find \"$text\"",
-                                        style = MaterialTheme.typography.h5
-                                    )
-                                    Space()
-                                    Text(
-                                        text = "Try something else",
-                                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                                    )
-                                }
-
-                            }
+                            SearchErrorMessage(text)
                         } else {
                             RocketsList(
                                 rockets = rockets,
@@ -122,6 +109,23 @@ class RocketsSearchScreen : Screen {
                 onTryAgain = { rocketsSearchViewModel.setEvent(RocketsSearchContract.Event.OnTryCheckAgainClick) },
                 onCheckAgain = { rocketsSearchViewModel.setEvent(RocketsSearchContract.Event.OnTryCheckAgainClick) },
             )
+        }
+    }
+
+    @Composable
+    private fun SearchErrorMessage(text: String) {
+        Box(Modifier.fillMaxSize(), Alignment.Center) {
+            Column {
+                Text(
+                    text = "Couldn't find \"$text\"",
+                    style = MaterialTheme.typography.h5
+                )
+                Space()
+                Text(
+                    text = "Try something else",
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+            }
         }
     }
 }
