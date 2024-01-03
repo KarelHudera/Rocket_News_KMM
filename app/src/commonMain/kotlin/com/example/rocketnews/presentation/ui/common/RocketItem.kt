@@ -33,14 +33,20 @@ import com.seiko.imageloader.rememberAsyncImagePainter
 
 @Composable
 fun RocketItem(
-    rocket: Rocket, onClick: () -> Unit
+    rocket: Rocket,
+    onClick: () -> Unit,
+    alpha: Float
 ) {
     Card(
         Modifier.padding(vertical = 8.dp, horizontal = MaterialTheme.spacing.horizontal)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable(onClick = onClick).fillMaxWidth()
+            modifier = Modifier
+                .clickable(onClick = onClick)
+                .fillMaxWidth()
+                .background(Color.LightGray)
+                .background(Color.White.copy(alpha = alpha))
         ) {
             Box {
                 if (rocket.patchLarge == "" && rocket.patchSmall == "") {

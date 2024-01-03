@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
@@ -110,15 +111,17 @@ fun NewsComponent(
         ProgressIndicator(Modifier.align(Alignment.Center))
 
         Image(
-            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density / 1.2f),
             painter = rememberAsyncImagePainter(news.url),
-            contentDescription = null
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
         )
 
         Image(
-            modifier = Modifier.fillMaxSize().scale(LocalDensity.current.density / 1.2f),
             painter = rememberAsyncImagePainter(news.hdurl),
-            contentDescription = null
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
         )
 
         Box(Modifier.swipeable(
