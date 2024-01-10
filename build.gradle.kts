@@ -8,8 +8,3 @@ plugins {
     alias(libs.plugins.sqlDelight).apply(false)
 }
 
-//buildscript {
-//    dependencies {
-//        classpath(libs.moko.generator)
-//    }
-//}

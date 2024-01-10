@@ -30,7 +30,7 @@ kotlin {
         ios.deploymentTarget = "11.0"
         podfile = project.file("../iosApp/Podfile")
         framework {
-            baseName = "ComposeApp"
+            baseName = "App"
             isStatic = true
         }
     }
@@ -58,7 +58,6 @@ kotlin {
                 implementation(libs.koin.compose)
                 implementation(libs.sqlDelight.extensions)
                 implementation(libs.kermit)
-                implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
             }
         }
 
@@ -77,7 +76,6 @@ kotlin {
                 implementation(libs.ktor.client.okhttp)
                 implementation(libs.sqlDelight.driver.android)
                 implementation(libs.koin.android)
-                implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
             }
         }
 

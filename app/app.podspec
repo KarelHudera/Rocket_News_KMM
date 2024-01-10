@@ -6,14 +6,14 @@ Pod::Spec.new do |spec|
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Compose application framework'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/ComposeApp.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/App.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '11.0'
                 
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':app',
-        'PRODUCT_MODULE_NAME' => 'ComposeApp',
+        'PRODUCT_MODULE_NAME' => 'App',
     }
                 
     spec.script_phases = [
