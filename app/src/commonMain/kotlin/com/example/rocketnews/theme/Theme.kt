@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.theme
+package com.example.rocketnews.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,13 +10,17 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-private val lightColors = lightColorScheme(
+private val LightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -48,8 +52,7 @@ private val lightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-
-private val darkColors = darkColorScheme(
+private val DarkColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,
@@ -81,7 +84,7 @@ private val darkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
-private val shapes = Shapes(
+private val AppShapes = Shapes(
     extraSmall = RoundedCornerShape(2.dp),
     small = RoundedCornerShape(4.dp),
     medium = RoundedCornerShape(8.dp),
@@ -89,7 +92,7 @@ private val shapes = Shapes(
     extraLarge = RoundedCornerShape(32.dp)
 )
 
-private val typography = Typography(
+private val AppTypography = Typography(
     bodyMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
@@ -97,28 +100,29 @@ private val typography = Typography(
     )
 )
 
+internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(true) }
+
 @Composable
 internal fun AppTheme(
-    useDarkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable() () -> Unit
 ) {
-    val colors = if (useDarkTheme) {
-        darkColors
-    } else {
-        darkColors
-    }
-
-    //val systemUiController = rememberSystemUiController()
-
-
-    CompositionLocalProvider(LocalSpacing  provides Spacing()){
+    val systemIsDark = isSystemInDarkTheme()
+    val isDarkState = remember { mutableStateOf(systemIsDark) }
+    CompositionLocalProvider(
+        LocalThemeIsDark provides isDarkState
+    ) {
+        val isDark by isDarkState
+        SystemAppearance(!isDark)
         MaterialTheme(
-            colorScheme = colors,
-            typography = typography,
-            shapes = shapes,
+            colorScheme = if (isDark) DarkColorScheme else LightColorScheme,
+            typography = AppTypography,
+            shapes = AppShapes,
             content = {
                 Surface(content = content)
             }
         )
     }
 }
+
+@Composable
+internal expect fun SystemAppearance(isDark: Boolean)

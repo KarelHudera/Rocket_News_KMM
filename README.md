@@ -15,5 +15,10 @@ This application uses data from [NASA] and [SpaceX] API.
   </tr>
 </table>
 
+## Before running!
+- check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
+- install JDK 17 on your machine
+- add `local.properties` file to the project root and set a path to Android SDK there
+
 [NASA]: https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY
 [SpaceX]: https://api.spacexdata.com/v5/launches/

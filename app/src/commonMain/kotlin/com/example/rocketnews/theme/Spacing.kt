@@ -1,6 +1,6 @@
-package com.example.rocketnews.presentation.ui.theme
+package com.example.rocketnews.theme
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf

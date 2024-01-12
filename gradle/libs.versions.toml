@@ -1,8 +1,8 @@
 [versions]
 
-kotlin = "1.9.0"
-agp = "8.1.0"
-compose = "1.5.0"
+kotlin = "1.9.21"
+agp = "8.2.0"
+compose = "1.5.11"
 androidx-appcompat = "1.6.1"
 androidx-activityCompose = "1.8.0"
 compose-uitooling = "1.5.4"
@@ -55,9 +55,7 @@ moko-api = { module = "dev.icerock.moko:resources", version.ref = "moko-generato
 [plugins]
 
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 android-application = { id = "com.android.application", version.ref = "agp" }
-libres = { id = "io.github.skeptick.libres", version.ref = "libres" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
