@@ -31,6 +31,7 @@ class RocketDetailViewModel(
         when (event) {
             is RocketDetailContract.Event.OnFavoriteClick -> switchRocketFavorite(rocketId)
             is RocketDetailContract.Event.OnTryCheckAgainClick -> getRocket(rocketId)
+            is RocketDetailContract.Event.OnEmptyUrlClick -> setEffect { RocketDetailContract.Effect.EmptyUrl }
             is RocketDetailContract.Event.OnBackPressed -> setEffect { RocketDetailContract.Effect.BackNavigation }
         }
     }

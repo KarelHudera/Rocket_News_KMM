@@ -17,6 +17,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.RocketsList
 import com.example.rocketnews.presentation.ui.common.RocketsActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
+import com.example.rocketnews.presentation.ui.screens.news.NewsScreen
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesScreen
 import com.example.rocketnews.presentation.ui.screens.rocketsSearch.RocketsSearchScreen
@@ -45,7 +46,7 @@ class RocketsScreen : Screen {
                     is RocketsContract.Effect.NavigateToSearch ->
                         navigator.push(RocketsSearchScreen())
 
-                    is RocketsContract.Effect.BackNavigation -> navigator.pop()
+                    is RocketsContract.Effect.BackNavigation -> navigator.push(NewsScreen()) // TODO: hack back to pop
                 }
             }
         }

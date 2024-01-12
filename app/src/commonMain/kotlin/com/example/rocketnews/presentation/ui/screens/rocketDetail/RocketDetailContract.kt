@@ -10,6 +10,7 @@ interface RocketDetailContract {
     sealed interface Event : UiEvent {
         data object OnFavoriteClick : Event
         data object OnTryCheckAgainClick : Event
+        data object OnEmptyUrlClick : Event
         data object OnBackPressed : Event
     }
 
@@ -21,6 +22,7 @@ interface RocketDetailContract {
     sealed interface Effect : UiEffect {
         data object RocketAdded : Effect
         data object RocketRemoved : Effect
+        data object EmptyUrl : Effect
         data object BackNavigation : Effect
     }
 }

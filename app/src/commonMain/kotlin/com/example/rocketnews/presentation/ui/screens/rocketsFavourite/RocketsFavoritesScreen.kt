@@ -19,6 +19,7 @@ import com.example.rocketnews.presentation.ui.common.RocketsList
 import com.example.rocketnews.presentation.ui.common.BackNavActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
+import com.example.rocketnews.presentation.ui.screens.rockets.RocketsScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class RocketsFavoritesScreen : Screen {
@@ -38,7 +39,9 @@ class RocketsFavoritesScreen : Screen {
                     is RocketsFavoritesContract.Effect.NavigateToDetailRocket ->
                         navigator.push(RocketDetailScreen(effect.idRocket))
 
-                    is RocketsFavoritesContract.Effect.BackNavigation -> navigator.pop()
+                    is RocketsFavoritesContract.Effect.BackNavigation -> navigator.push(
+                        RocketsScreen()
+                    ) // TODO: hack back to pop
                 }
             }
         }
