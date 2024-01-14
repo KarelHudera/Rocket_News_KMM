@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.helpers.formatRocketsDate
 import com.example.rocketnews.theme.spacing
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.rememberImagePainter
 
 @Composable
 fun RocketItem(
@@ -68,12 +68,12 @@ fun RocketItem(
                 } else {
                     ProgressIndicator(Modifier.align(Alignment.Center))
                     Image(
-                        painter = rememberAsyncImagePainter(rocket.patchSmall),
+                        painter = rememberImagePainter(rocket.patchSmall),
                         contentDescription = null,
                         modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
                     )
                     Image(
-                        painter = rememberAsyncImagePainter(rocket.patchLarge),
+                        painter = rememberImagePainter(rocket.patchLarge),
                         contentDescription = null,
                         modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
                     )

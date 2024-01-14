@@ -19,7 +19,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.material.swipeable
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +41,7 @@ import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.News
 import com.example.rocketnews.helpers.formatNewsDate
 import com.example.rocketnews.theme.spacing
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.rememberImagePainter
 import kotlin.math.roundToInt
 
 enum class BottomStates {
@@ -111,14 +110,14 @@ fun NewsComponent(
         ProgressIndicator(Modifier.align(Alignment.Center))
 
         Image(
-            painter = rememberAsyncImagePainter(news.url),
+            painter = rememberImagePainter(news.url),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
 
         Image(
-            painter = rememberAsyncImagePainter(news.hdurl),
+            painter = rememberImagePainter(news.hdurl),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()

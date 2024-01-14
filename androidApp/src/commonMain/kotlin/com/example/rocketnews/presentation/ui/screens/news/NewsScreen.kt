@@ -5,11 +5,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -35,7 +33,6 @@ import kotlinx.coroutines.flow.collectLatest
 class NewsScreen : Screen {
     override val key: ScreenKey = uniqueScreenKey
 
-    @OptIn(ExperimentalMaterialApi::class)
     @Composable
     override fun Content() {
         val newsViewModel = getScreenModel<NewsViewModel>()

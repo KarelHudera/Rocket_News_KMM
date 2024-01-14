@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
@@ -22,24 +21,19 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ViewConfiguration
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.helpers.formatRocketsDate
 import com.example.rocketnews.openUrl
-import com.example.rocketnews.presentation.mvi.BaseViewModel
-import com.example.rocketnews.presentation.mvi.UiEffect
-import com.example.rocketnews.presentation.mvi.UiEvent
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailContract
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
-import com.seiko.imageloader.rememberAsyncImagePainter
+import com.seiko.imageloader.rememberImagePainter
 
 @Composable
 fun RocketDetail(rocket: Rocket, rocketDetailViewModel: RocketDetailViewModel) {
@@ -68,12 +62,12 @@ fun RocketDetail(rocket: Rocket, rocketDetailViewModel: RocketDetailViewModel) {
                 ProgressIndicator(Modifier.align(Alignment.Center))
                 Image(
                     modifier = Modifier.size(300.dp),
-                    painter = rememberAsyncImagePainter(rocket.patchSmall),
+                    painter = rememberImagePainter(rocket.patchSmall),
                     contentDescription = null
                 )
                 Image(
                     modifier = Modifier.size(300.dp),
-                    painter = rememberAsyncImagePainter(rocket.patchLarge),
+                    painter = rememberImagePainter(rocket.patchLarge),
                     contentDescription = null
                 )
             }

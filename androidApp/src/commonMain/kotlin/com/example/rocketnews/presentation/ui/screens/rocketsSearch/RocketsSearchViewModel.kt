@@ -1,7 +1,6 @@
 package com.example.rocketnews.presentation.ui.screens.rocketsSearch
 
-import cafe.adriel.voyager.core.model.coroutineScope
-import co.touchlab.kermit.Logger
+import cafe.adriel.voyager.core.model.screenModelScope
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.presentation.model.ResourceUiState
@@ -39,7 +38,7 @@ class RocketsSearchViewModel(
 
     private fun getRockets() {
         setState { copy(filteredRockets = ResourceUiState.Loading) }
-        coroutineScope.launch {
+        screenModelScope.launch {
             getRocketsUseCase(Unit)
                 .onSuccess {
                     setState {

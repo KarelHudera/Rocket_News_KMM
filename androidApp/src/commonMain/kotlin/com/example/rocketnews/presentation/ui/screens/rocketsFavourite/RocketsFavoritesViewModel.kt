@@ -1,6 +1,6 @@
 package com.example.rocketnews.presentation.ui.screens.rocketsFavourite
 
-import cafe.adriel.voyager.core.model.coroutineScope
+import cafe.adriel.voyager.core.model.screenModelScope
 import com.example.rocketnews.domain.interactors.GetRocketsFavoritesUseCase
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.BaseViewModel
@@ -32,7 +32,7 @@ class RocketsFavoritesViewModel(
 
     private fun getRocketsFavorites() {
         setState { copy(rocketsFavorites = ResourceUiState.Loading) }
-        coroutineScope.launch {
+        screenModelScope.launch {
             getRocketsFavoritesUseCase(Unit).collect {
                 it.onSuccess {
                     setState {

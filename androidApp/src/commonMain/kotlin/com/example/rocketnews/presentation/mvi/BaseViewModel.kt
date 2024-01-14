@@ -1,7 +1,7 @@
 package com.example.rocketnews.presentation.mvi
 
 import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.coroutineScope
+import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -34,7 +34,7 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
      * Start listening to Event
      */
     private fun subscribeEvents() {
-        coroutineScope.launch {
+        screenModelScope.launch {
             event.collect {
                 handleEvent(it)
             }
@@ -51,7 +51,7 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
      */
     fun setEvent(event: Event) {
         val newEvent = event
-        coroutineScope.launch { _event.emit(newEvent) }
+        screenModelScope.launch { _event.emit(newEvent) }
     }
 
     /**
@@ -67,7 +67,7 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
      */
     protected fun setEffect(builder: () -> Effect) {
         val effectValue = builder()
-        coroutineScope.launch { _effect.send(effectValue) }
+        screenModelScope.launch { _effect.send(effectValue) }
     }
 
 }

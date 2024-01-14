@@ -1,5 +1,5 @@
 rootProject.name = "Rocket_News_KMM"
-include(":app")
+include(":androidApp")
 
 pluginManagement {
     repositories {

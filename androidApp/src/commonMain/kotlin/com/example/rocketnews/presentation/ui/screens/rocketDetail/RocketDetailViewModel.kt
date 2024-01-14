@@ -1,6 +1,6 @@
 package com.example.rocketnews.presentation.ui.screens.rocketDetail
 
-import cafe.adriel.voyager.core.model.coroutineScope
+import cafe.adriel.voyager.core.model.screenModelScope
 import co.touchlab.kermit.Logger
 import com.example.rocketnews.domain.interactors.GetRocketUseCase
 import com.example.rocketnews.domain.interactors.IsRocketFavoriteUseCase
@@ -38,7 +38,7 @@ class RocketDetailViewModel(
 
     private fun getRocket(rocketId: String) {
         setState { copy(rocket = ResourceUiState.Loading) }
-        coroutineScope.launch {
+        screenModelScope.launch {
             getRocketUseCase(rocketId)
                 .onSuccess {
                     setState { copy(rocket = ResourceUiState.Success(it)) }
@@ -53,7 +53,7 @@ class RocketDetailViewModel(
 
     private fun checkIfIsFavorite(idRocket: String) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
-        coroutineScope.launch {
+        screenModelScope.launch {
             isRocketFavoriteUseCase(idRocket)
                 .onSuccess { setState { copy(isFavorite = ResourceUiState.Success(it)) } }
                 .onFailure { setState { copy(isFavorite = ResourceUiState.Error()) } }
@@ -62,7 +62,7 @@ class RocketDetailViewModel(
 
     private fun switchRocketFavorite(idRocket: String) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
-        coroutineScope.launch {
+        screenModelScope.launch {
             switchRocketFavoriteUseCase(idRocket)
                 .onSuccess {
                     setState { copy(isFavorite = ResourceUiState.Success(it)) }

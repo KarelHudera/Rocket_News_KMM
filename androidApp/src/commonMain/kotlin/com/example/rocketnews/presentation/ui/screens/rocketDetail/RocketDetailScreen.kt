@@ -19,7 +19,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.ActionBar
 import com.example.rocketnews.presentation.ui.common.RocketDetail
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
-import com.example.rocketnews.presentation.ui.screens.rockets.RocketsScreen
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.core.parameter.parametersOf
 
@@ -47,11 +46,10 @@ class RocketDetailScreen(
                     is RocketDetailContract.Effect.RocketRemoved ->
                         scaffoldState.snackbarHostState.showSnackbar("Rocket removed from favorites")
 
-                    is RocketDetailContract.Effect.BackNavigation ->
-                        navigator.push(RocketsScreen()) // TODO: hack back to pop
-
                     is RocketDetailContract.Effect.EmptyUrl ->
                     scaffoldState.snackbarHostState.showSnackbar("Sorry, no URL to open")
+
+                    is RocketDetailContract.Effect.BackNavigation -> navigator.pop()
                 }
             }
         }

@@ -1,6 +1,6 @@
 package com.example.rocketnews.presentation.ui.screens.rockets
 
-import cafe.adriel.voyager.core.model.coroutineScope
+import cafe.adriel.voyager.core.model.screenModelScope
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.BaseViewModel
@@ -33,7 +33,7 @@ class RocketsViewModel(
 
     private fun getRockets() {
         setState { copy(rockets = ResourceUiState.Loading) }
-        coroutineScope.launch {
+        screenModelScope.launch {
             getRocketsUseCase(Unit)
                 .onSuccess {
                     setState {

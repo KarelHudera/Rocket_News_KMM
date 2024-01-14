@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.compose)
     alias(libs.plugins.android.application)
-    //alias(libs.plugins.buildConfig)
+    alias(libs.plugins.buildConfig)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.sqlDelight)
 }
@@ -36,7 +36,7 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
+            implementation(compose.material) //TODO: remove
             implementation(compose.material3)
             implementation(compose.materialIconsExtended)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
@@ -44,17 +44,18 @@ kotlin {
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.koin)
             implementation(libs.composeImageLoader)
+            implementation(libs.napier)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.insetsx)
-            //implementation(libs.moko.mvvm)
+//            implementation(libs.moko.mvvm)
             implementation(libs.ktor.core)
             implementation(libs.ktor.json)
             implementation(libs.ktor.logging)
             implementation(libs.ktor.negotiation)
-            //implementation(libs.composeIcons.featherIcons)
+//            implementation(libs.composeIcons.featherIcons)
             implementation(libs.kotlinx.serialization.json)
-            //implementation(libs.kotlinx.datetime)
-            //implementation(libs.multiplatformSettings)
+//            implementation(libs.kotlinx.datetime)
+//            implementation(libs.multiplatformSettings)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.sqlDelight.extensions)
@@ -111,10 +112,10 @@ android {
     }
 }
 
-//buildConfig {
-//    // BuildConfig configuration here.
-//    // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
-//}
+buildConfig {
+    // BuildConfig configuration here.
+    // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
+}
 
 sqldelight {
     databases {

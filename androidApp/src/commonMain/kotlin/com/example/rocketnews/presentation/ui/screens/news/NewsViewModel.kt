@@ -1,6 +1,6 @@
 package com.example.rocketnews.presentation.ui.screens.news
 
-import cafe.adriel.voyager.core.model.coroutineScope
+import cafe.adriel.voyager.core.model.screenModelScope
 import co.touchlab.kermit.Logger
 import com.example.rocketnews.domain.interactors.GetNewsUseCase
 import com.example.rocketnews.presentation.model.ResourceUiState
@@ -27,7 +27,7 @@ class NewsViewModel(
 
     private fun getNews() {
         setState { copy(news = ResourceUiState.Loading) }
-        coroutineScope.launch {
+        screenModelScope.launch {
             getNewsUseCase(Unit)
                 .onSuccess {
                     setState {

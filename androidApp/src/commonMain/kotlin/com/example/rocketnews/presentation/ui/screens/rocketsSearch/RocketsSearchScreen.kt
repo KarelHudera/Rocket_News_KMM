@@ -31,7 +31,6 @@ import com.example.rocketnews.presentation.ui.common.RocketsList
 import com.example.rocketnews.presentation.ui.common.Space
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
-import com.example.rocketnews.presentation.ui.screens.rockets.RocketsScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class RocketsSearchScreen : Screen {
@@ -50,11 +49,10 @@ class RocketsSearchScreen : Screen {
         LaunchedEffect(key1 = Unit) {
             rocketsSearchViewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    is RocketsSearchContract.Effect.BackNavigation ->
-                        navigator.push(RocketsScreen()) // TODO: hack back to pop
-
                     is RocketsSearchContract.Effect.NavigateToDetailRocket ->
                         navigator.push(RocketDetailScreen(effect.idRocket))
+
+                    is RocketsSearchContract.Effect.BackNavigation -> navigator.pop()
                 }
             }
         }
