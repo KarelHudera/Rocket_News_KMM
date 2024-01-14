@@ -1,46 +1,51 @@
 [versions]
 
 kotlin = "1.9.21"
-agp = "8.2.0"
+agp = "8.2.1"
 compose = "1.5.11"
 androidx-appcompat = "1.6.1"
-androidx-activityCompose = "1.8.0"
+androidx-activityCompose = "1.8.2"
 compose-uitooling = "1.5.4"
-libres = "1.1.8"
 voyager = "1.0.0"
 composeImageLoader = "1.7.1"
-napier = "2.6.1"
+#napier = "2.7.1"
+buildConfig = "4.1.1"
 kotlinx-coroutines = "1.7.3"
 insetsx = "0.1.0-alpha07"
-ktor = "2.3.2"
-kotlinx-serialization = "1.5.1"
-koin = "3.4.3"
+moko-mvvm = "0.16.1"
+ktor = "2.3.7"
+composeIcons = "1.1.0"
+kotlinx-serialization = "1.6.2"
+kotlinx-datetime = "0.5.0"
+multiplatformSettings = "1.1.1"
+koin = "3.4.3" # important
 koinCompose = "1.0.4"
-sqlDelight = "2.0.0-alpha05"
+sqlDelight = "2.0.0-alpha05" # important
 kermit = "2.0.0-RC4"
-moko-generator = "0.23.0"
-buildConfig = "4.1.1"
 
 [libraries]
 
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-uitooling" }
-libres = { module = "io.github.skeptick.libres:libres-compose", version.ref = "libres" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 composeImageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "composeImageLoader" }
-napier = { module = "io.github.aakira:napier", version.ref = "napier" }
+#napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 insetsx = { module = "com.moriatsushi.insetsx:insetsx", version.ref = "insetsx" }
+moko-mvvm = { module = "dev.icerock.moko:mvvm-compose", version.ref = "moko-mvvm" }
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor"}
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor"}
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+composeIcons-featherIcons = { module = "br.com.devsrsouza.compose.icons:feather", version.ref = "composeIcons" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+multiplatformSettings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
@@ -50,14 +55,12 @@ sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", versi
 sqlDelight-driver-sqljs = { module = "app.cash.sqldelight:sqljs-driver", version.ref = "sqlDelight" }
 sqlDelight-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
-moko-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko-generator" }
-moko-api = { module = "dev.icerock.moko:resources", version.ref = "moko-generator" }
 
 [plugins]
 
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 android-application = { id = "com.android.application", version.ref = "agp" }
+buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
-buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
