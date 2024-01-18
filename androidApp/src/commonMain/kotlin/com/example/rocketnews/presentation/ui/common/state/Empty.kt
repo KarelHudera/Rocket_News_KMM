@@ -1,14 +1,13 @@
 package com.example.rocketnews.presentation.ui.common.state
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.example.rocketnews.presentation.ui.common.Space
 
 @Composable
@@ -22,7 +21,7 @@ fun Empty(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = msg, style = MaterialTheme.typography.h5
+                text = msg, style = MaterialTheme.typography.headlineSmall
             )
             Space()
             OutlinedButton(
@@ -30,8 +29,7 @@ fun Empty(
             ) {
                 Text(
                     text = "Check Again",
-                    style = MaterialTheme.typography.h6,
-                    color = Color.Black.copy(0.85f),
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         }
