@@ -315,7 +315,7 @@
         App,
        );
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.rocketnews.iosApp;
-				PRODUCT_NAME = "Rocket_News_KMM";
+				PRODUCT_NAME = "Rocket News";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -352,7 +352,7 @@
        	App,
        );
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.rocketnews.iosApp;
-				PRODUCT_NAME = "Rocket_News_KMM";
+				PRODUCT_NAME = "Rocket News";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
