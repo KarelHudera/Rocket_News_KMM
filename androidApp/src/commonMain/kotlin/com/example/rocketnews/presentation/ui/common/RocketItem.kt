@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Warning
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,15 +39,16 @@ fun RocketItem(
     alpha: Float
 ) {
     Card(
-        Modifier.padding(vertical = 8.dp, horizontal = MaterialTheme.spacing.horizontal)
+        modifier = Modifier.padding(vertical = 8.dp, horizontal = MaterialTheme.spacing.horizontal),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 1.dp
+        )
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .clickable(onClick = onClick)
                 .fillMaxWidth()
-                .background(Color.LightGray)
-                .background(Color.White.copy(alpha = alpha))
         ) {
             Box {
                 if (rocket.patchLarge == "" && rocket.patchSmall == "") {
@@ -83,7 +85,6 @@ fun RocketItem(
             Column {
                 Text(
                     text = rocket.name,
-                    color = Color.Black.copy(0.85f),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Medium,
                 )
@@ -105,7 +106,6 @@ fun RocketItem(
                     Space()
                     Text(
                         text = formatRocketsDate(rocket.date_utc),
-                        color = Color.Black.copy(0.85f),
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
                     )

@@ -7,7 +7,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -16,8 +15,6 @@ fun BackNavActionAppBar(
     title: String
 ) {
     TopAppBar(
-//        backgroundColor = Color(0xFF434343),
-//        contentColor = Color.White,
         title = { Text(text = title) },
         navigationIcon = navIcon,
     )
@@ -29,8 +26,6 @@ fun MainActionAppBar(
     title: String
 ) {
     TopAppBar(
-//        backgroundColor = Color(0xFF434343),
-//        contentColor = Color.White,
         title = { Text(text = title) },
     )
 }
@@ -45,8 +40,6 @@ fun RocketsActionAppBar(
 ) {
     TopAppBar(
         title = { Text(text = title) },
-//        backgroundColor = Color(0xFF434343),
-//        contentColor = Color.White,
         navigationIcon = { ArrowBackIcon(onBackPressed) },
         actions = {
             ActionBarIcon(

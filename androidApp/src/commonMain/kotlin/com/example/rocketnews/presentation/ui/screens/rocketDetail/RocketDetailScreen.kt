@@ -2,13 +2,14 @@ package com.example.rocketnews.presentation.ui.screens.rocketDetail
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
@@ -29,7 +30,8 @@ class RocketDetailScreen(
 
     @Composable
     override fun Content() {
-        val scaffoldState: ScaffoldState = rememberScaffoldState()
+        val snackbarHostState = remember { SnackbarHostState() }
+
         val rocketDetailViewModel =
             getScreenModel<RocketDetailViewModel> { parametersOf(rocketId) }
 
@@ -41,13 +43,13 @@ class RocketDetailScreen(
             rocketDetailViewModel.effect.collectLatest { effect ->
                 when (effect) {
                     is RocketDetailContract.Effect.RocketAdded ->
-                        scaffoldState.snackbarHostState.showSnackbar("Rocket added to favorites")
+                        snackbarHostState.showSnackbar("Rocket added to favorites")
 
                     is RocketDetailContract.Effect.RocketRemoved ->
-                        scaffoldState.snackbarHostState.showSnackbar("Rocket removed from favorites")
+                        snackbarHostState.showSnackbar("Rocket removed from favorites")
 
                     is RocketDetailContract.Effect.EmptyUrl ->
-                    scaffoldState.snackbarHostState.showSnackbar("Sorry, no URL to open")
+                        snackbarHostState.showSnackbar("Sorry, no URL to open")
 
                     is RocketDetailContract.Effect.BackNavigation -> navigator.pop()
                 }
@@ -55,7 +57,7 @@ class RocketDetailScreen(
         }
 
         Scaffold(
-            scaffoldState = scaffoldState,
+            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
             topBar = {
                 ActionBar(
                     rocket = state.rocket,
