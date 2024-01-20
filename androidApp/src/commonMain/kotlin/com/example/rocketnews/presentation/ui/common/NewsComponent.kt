@@ -8,12 +8,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,22 +34,37 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.News
 import com.example.rocketnews.helpers.formatNewsDate
+import com.example.rocketnews.presentation.ui.screens.news.NewsViewModel
 import com.example.rocketnews.theme.LocalThemeIsDark
 import com.example.rocketnews.theme.md_theme_dark_surface
 import com.example.rocketnews.theme.md_theme_light_surface
 import com.example.rocketnews.theme.spacing
 import com.seiko.imageloader.rememberImagePainter
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsComponent(
-    news: News
+    news: News,
+    newsViewModel: NewsViewModel
 ) {
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(true) }
 
     val isDark by LocalThemeIsDark.current
     val bgColor = if (isDark) md_theme_dark_surface else md_theme_light_surface
+
+
+    val newsDatePickerState = rememberDatePickerState(
+        initialSelectedDateMillis = Clock.System.now().toEpochMilliseconds(),
+    )
+
+    val showNewsDatePickerDialog = newsViewModel.showNewsDatePickerDialog.collectAsState().value
+
 
     Box(Modifier.pointerInput(Unit) {
         detectDragGestures { change, dragAmount ->
@@ -53,7 +74,7 @@ fun NewsComponent(
                 showBottomSheet = true
             }
             change.consume()
-        }
+        } // TODO("pass this to viewModel")
     }) {
         Box(Modifier.fillMaxSize().background(Color.LightGray))
 
@@ -72,6 +93,20 @@ fun NewsComponent(
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
+
+        if (showNewsDatePickerDialog) {
+            NewsDatePicker(
+                datePickerState = newsDatePickerState,
+                dismiss = {
+                    newsViewModel.setNewsDatePickerDialog(false)
+                },
+                onConfirmDate = {
+                    newsViewModel.setNewsDatePickerDialog(false)
+                    // TODO("implement fun")
+                },
+            )
+        }
+
         if (showBottomSheet) {
             ModalBottomSheet(
                 onDismissRequest = {
@@ -112,4 +147,38 @@ fun BottomSheetContent(news: News) {
             fontSize = 20.sp,
         )
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun NewsDatePicker(
+    datePickerState: DatePickerState,
+    dismiss: () -> Unit,
+    onConfirmDate: (LocalDateTime) -> Unit,
+) {
+    DatePickerDialog(
+        onDismissRequest = { dismiss() },
+        dismissButton = {
+            TextButton(onClick = dismiss) {
+                Text(text = "Cancel")
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    onConfirmDate(datePickerState.selectedDateMillis.selectedDateMillisToLocalDateTime())
+                    dismiss()
+                },
+            ) {
+                Text(text = "OK")
+            }
+        },
+    ) {
+        DatePicker(state = datePickerState)
+    }
+}
+
+fun Long?.selectedDateMillisToLocalDateTime(): LocalDateTime {
+    return Instant.fromEpochMilliseconds(this ?: 0)
+        .toLocalDateTime(TimeZone.currentSystemDefault())
 }

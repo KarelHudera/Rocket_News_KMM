@@ -48,12 +48,21 @@ class NewsScreen : Screen {
                 when (effect) {
                     is NewsContract.Effect.NavigateToRockets ->
                         navigator.push(RocketsScreen())
+
+                    is  NewsContract.Effect.PickDate -> {
+                        newsViewModel.setNewsDatePickerDialog(true)
+                    }
                 }
             }
         }
 
         Scaffold(
-            topBar = { MainActionAppBar(title = "Daily News From NASA") },
+            topBar = {
+                MainActionAppBar(
+                    title = "Daily News From NASA",
+                    onClickDatePicker = { newsViewModel.setEvent(NewsContract.Event.OnDatePickerClick) },
+                )
+            },
             floatingActionButton = {
                 IconButton(
                     onClick = { newsViewModel.setEvent(NewsContract.Event.OnRocketButtonClick) },
@@ -77,7 +86,7 @@ class NewsScreen : Screen {
                     .fillMaxSize(),
                 resourceUiState = state.news,
                 successView = { news ->
-                    NewsComponent(news)
+                    NewsComponent(news, newsViewModel)
                 },
                 onTryAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
                 onCheckAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },

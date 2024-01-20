@@ -10,7 +10,7 @@ interface NewsContract {
     sealed interface Event : UiEvent {
         data object OnTryCheckAgainClick : Event
         data object OnRocketButtonClick : Event
-
+        data object OnDatePickerClick : Event
     }
 
     data class State(
@@ -19,5 +19,6 @@ interface NewsContract {
 
     sealed interface Effect : UiEffect {
         data object NavigateToRockets : Effect
+        data object PickDate : Effect
     }
 }

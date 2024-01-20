@@ -5,6 +5,8 @@ import co.touchlab.kermit.Logger
 import com.example.rocketnews.domain.interactors.GetNewsUseCase
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.BaseViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class NewsViewModel(
@@ -15,6 +17,12 @@ class NewsViewModel(
         getNews()
     }
 
+    private val _showNewsDatePickerDialog = MutableStateFlow(false)
+    val showNewsDatePickerDialog = _showNewsDatePickerDialog.asStateFlow()
+    fun setNewsDatePickerDialog(show: Boolean) {
+        _showNewsDatePickerDialog.value = show
+    }
+
     override fun createInitialState(): NewsContract.State =
         NewsContract.State(news = ResourceUiState.Idle)
 
@@ -22,6 +30,7 @@ class NewsViewModel(
         when (event) {
             NewsContract.Event.OnTryCheckAgainClick -> getNews()
             NewsContract.Event.OnRocketButtonClick -> setEffect { NewsContract.Effect.NavigateToRockets }
+            NewsContract.Event.OnDatePickerClick -> setEffect { NewsContract.Effect.PickDate }
         }
     }
 
