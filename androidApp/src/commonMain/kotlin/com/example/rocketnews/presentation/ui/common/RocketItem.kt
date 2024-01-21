@@ -36,7 +36,6 @@ import com.seiko.imageloader.rememberImagePainter
 fun RocketItem(
     rocket: Rocket,
     onClick: () -> Unit,
-    alpha: Float
 ) {
     Card(
         modifier = Modifier.padding(vertical = 8.dp, horizontal = MaterialTheme.spacing.horizontal),

@@ -17,7 +17,7 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.rocketnews.presentation.ui.common.ActionBar
+import com.example.rocketnews.presentation.ui.common.RocketActionBar
 import com.example.rocketnews.presentation.ui.common.RocketDetail
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import kotlinx.coroutines.flow.collectLatest
@@ -59,7 +59,7 @@ class RocketDetailScreen(
         Scaffold(
             snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
             topBar = {
-                ActionBar(
+                RocketActionBar(
                     rocket = state.rocket,
                     favorite = state.isFavorite,
                     onActionFavorite = { rocketDetailViewModel.setEvent(RocketDetailContract.Event.OnFavoriteClick) },

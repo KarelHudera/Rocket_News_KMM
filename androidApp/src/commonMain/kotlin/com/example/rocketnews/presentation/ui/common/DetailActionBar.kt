@@ -8,12 +8,14 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import com.example.rocketnews.domain.model.Rocket
+import com.example.rocketnews.domain.model.SpaceFlightNews
+import com.example.rocketnews.helpers.TruncateText
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ActionBar(
+fun RocketActionBar(
     rocket: ResourceUiState<Rocket>,
     favorite: ResourceUiState<Boolean>,
     onActionFavorite: () -> Unit,
@@ -53,3 +55,22 @@ fun ActionBar(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SpaceFlightNewsActionBar(
+    spaceFlightNews: ResourceUiState<SpaceFlightNews>,
+    onBackPressed: () -> Unit,
+) {
+    TopAppBar(
+        title = {
+            ManagementResourceUiState(
+                resourceUiState = spaceFlightNews,
+                successView = { Text(text = TruncateText(it.title)) },
+                loadingView = { Text(text = "....") },
+                onCheckAgain = {},
+                onTryAgain = {}
+            )
+        },
+        navigationIcon = { ArrowBackIcon(onBackPressed) },
+    )
+}

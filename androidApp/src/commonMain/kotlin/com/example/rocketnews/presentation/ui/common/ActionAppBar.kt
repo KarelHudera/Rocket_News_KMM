@@ -1,11 +1,12 @@
 package com.example.rocketnews.presentation.ui.common
 
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -22,8 +23,26 @@ fun BackNavActionAppBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainActionAppBar(
-    title: String
+fun NewsActionAppBar(
+    title: String,
+    onClickDatePicker: () -> Unit
+
+    ) {
+    TopAppBar(
+        title = { Text(text = title) },
+        actions = {
+            ActionBarIcon(
+                onClick = onClickDatePicker,
+                icon = Icons.Filled.Menu
+            )
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SpaceFlightNewsActionAppBar(
+    title: String,
 ) {
     TopAppBar(
         title = { Text(text = title) },
@@ -32,15 +51,14 @@ fun MainActionAppBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
 fun RocketsActionAppBar(
     onClickFavorite: () -> Unit,
     onClickSearch: () -> Unit,
-    onBackPressed: () -> Unit,
     title: String
 ) {
     TopAppBar(
         title = { Text(text = title) },
-        navigationIcon = { ArrowBackIcon(onBackPressed) },
         actions = {
             ActionBarIcon(
                 onClick = onClickSearch,

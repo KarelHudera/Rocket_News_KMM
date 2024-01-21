@@ -1,24 +1,23 @@
-package com.example.rocketnews.presentation.ui.screens.news
+package com.example.rocketnews.presentation.ui.screens.spaceFlightNews
 
-import com.example.rocketnews.domain.model.News
+import com.example.rocketnews.domain.model.SpaceFlightNews
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.UiEffect
 import com.example.rocketnews.presentation.mvi.UiEvent
 import com.example.rocketnews.presentation.mvi.UiState
 
-interface NewsContract {
+interface SpaceFlightNewsContract {
     sealed interface Event : UiEvent {
         data object OnTryCheckAgainClick : Event
-        data object OnRocketButtonClick : Event
-        data object OnDatePickerClick : Event
+        data class OnSpaceFlightNewsClick(val idSpaceFlightNews: String) :Event
+
     }
 
     data class State(
-        val news: ResourceUiState<News>
+        val spaceFlightNews: ResourceUiState<List<SpaceFlightNews>>
     ) : UiState
 
     sealed interface Effect : UiEffect {
-        data object NavigateToRockets : Effect
-        data object PickDate : Effect
+        data class NavigateToDetailSpaceFlightNews(val idSpaceFlightNews: String) : Effect
     }
 }
