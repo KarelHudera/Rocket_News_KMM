@@ -2,12 +2,12 @@ package com.example.rocketnews.domain.interactors
 
 import com.example.rocketnews.domain.IRepository
 import com.example.rocketnews.domain.interactors.type.BaseUseCase
-import com.example.rocketnews.helpers.RocketId
+import com.example.rocketnews.domain.model.SpaceFlightNews
 import kotlinx.coroutines.CoroutineDispatcher
 
-class IsRocketFavoriteUseCase(
+class GetSpaceFlightNewUseCase(
     private val repository: IRepository,
     dispatcher: CoroutineDispatcher,
-) : BaseUseCase<RocketId, Boolean>(dispatcher) {
-    override suspend fun block(param: RocketId): Boolean = repository.isRocketFavorite(param)
+) : BaseUseCase<String, SpaceFlightNews>(dispatcher){
+    override suspend fun block(param: String): SpaceFlightNews = repository.getSpaceFlightNew(param)
 }

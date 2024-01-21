@@ -5,6 +5,7 @@ import co.touchlab.kermit.Logger
 import com.example.rocketnews.domain.interactors.GetRocketUseCase
 import com.example.rocketnews.domain.interactors.IsRocketFavoriteUseCase
 import com.example.rocketnews.domain.interactors.SwitchRocketFavoriteUseCase
+import com.example.rocketnews.helpers.RocketId
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.BaseViewModel
 import kotlinx.coroutines.launch
@@ -13,7 +14,7 @@ class RocketDetailViewModel(
     private val getRocketUseCase: GetRocketUseCase,
     private val isRocketFavoriteUseCase: IsRocketFavoriteUseCase,
     private val switchRocketFavoriteUseCase: SwitchRocketFavoriteUseCase,
-    private val rocketId: String,
+    private val rocketId: RocketId,
 ) : BaseViewModel<RocketDetailContract.Event, RocketDetailContract.State, RocketDetailContract.Effect>() {
 
     init {
@@ -36,7 +37,7 @@ class RocketDetailViewModel(
         }
     }
 
-    private fun getRocket(rocketId: String) {
+    private fun getRocket(rocketId: RocketId) {
         setState { copy(rocket = ResourceUiState.Loading) }
         screenModelScope.launch {
             getRocketUseCase(rocketId)
@@ -51,7 +52,7 @@ class RocketDetailViewModel(
         }
     }
 
-    private fun checkIfIsFavorite(idRocket: String) {
+    private fun checkIfIsFavorite(idRocket: RocketId) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
         screenModelScope.launch {
             isRocketFavoriteUseCase(idRocket)
@@ -60,7 +61,7 @@ class RocketDetailViewModel(
         }
     }
 
-    private fun switchRocketFavorite(idRocket: String) {
+    private fun switchRocketFavorite(idRocket: RocketId) {
         setState { copy(isFavorite = ResourceUiState.Loading) }
         screenModelScope.launch {
             switchRocketFavoriteUseCase(idRocket)
