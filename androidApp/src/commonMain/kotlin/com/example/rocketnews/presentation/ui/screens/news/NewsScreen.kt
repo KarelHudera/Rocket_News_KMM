@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -22,12 +22,9 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.MainActionAppBar
 import com.example.rocketnews.presentation.ui.common.NewsComponent
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
-import com.example.rocketnews.presentation.ui.screens.rockets.RocketsScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class NewsScreen : Screen {
@@ -39,15 +36,13 @@ class NewsScreen : Screen {
 
         val state by newsViewModel.uiState.collectAsState()
 
-        val navigator = LocalNavigator.currentOrThrow
-
         val lightBlue = Color(0xFF10aef8)
 
         LaunchedEffect(key1 = Unit) {
             newsViewModel.effect.collectLatest { effect ->
                 when (effect) {
                     is NewsContract.Effect.NavigateToRockets ->
-                        navigator.push(RocketsScreen())
+                        newsViewModel.setNewsInfoDialog(true)
 
                     is  NewsContract.Effect.PickDate -> {
                         newsViewModel.setNewsDatePickerDialog(true)
@@ -72,7 +67,7 @@ class NewsScreen : Screen {
                         .size(58.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.Star,
+                        imageVector = Icons.Outlined.Info,
                         modifier = Modifier.size(38.dp),
                         tint = Color.White,
                         contentDescription = null

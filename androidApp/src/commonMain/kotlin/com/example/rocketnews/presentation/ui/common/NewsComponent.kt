@@ -2,7 +2,6 @@ package com.example.rocketnews.presentation.ui.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,13 +20,9 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -53,7 +48,6 @@ fun NewsComponent(
     newsViewModel: NewsViewModel
 ) {
     val sheetState = rememberModalBottomSheetState()
-    var showBottomSheet by remember { mutableStateOf(true) }
 
     val isDark by LocalThemeIsDark.current
     val bgColor = if (isDark) md_theme_dark_surface else md_theme_light_surface
@@ -65,17 +59,10 @@ fun NewsComponent(
 
     val showNewsDatePickerDialog = newsViewModel.showNewsDatePickerDialog.collectAsState().value
 
+    val showNewsInfoDialog = newsViewModel.showNewsInfoDialog.collectAsState().value
 
-    Box(Modifier.pointerInput(Unit) {
-        detectDragGestures { change, dragAmount ->
-            if (dragAmount.y >= 10) {
-                showBottomSheet = false
-            } else if (dragAmount.y <= 0) {
-                showBottomSheet = true
-            }
-            change.consume()
-        } // TODO("pass this to viewModel")
-    }) {
+
+    Box {
         Box(Modifier.fillMaxSize().background(Color.LightGray))
 
         ProgressIndicator(Modifier.align(Alignment.Center))
@@ -107,10 +94,10 @@ fun NewsComponent(
             )
         }
 
-        if (showBottomSheet) {
+        if (showNewsInfoDialog) {
             ModalBottomSheet(
                 onDismissRequest = {
-                    showBottomSheet = false
+                    newsViewModel.setNewsInfoDialog(false)
                 },
                 sheetState = sheetState,
                 containerColor = bgColor,

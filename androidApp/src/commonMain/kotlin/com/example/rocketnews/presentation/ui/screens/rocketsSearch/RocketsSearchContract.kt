@@ -1,6 +1,7 @@
 package com.example.rocketnews.presentation.ui.screens.rocketsSearch
 
 import com.example.rocketnews.domain.model.Rocket
+import com.example.rocketnews.helpers.RocketId
 import com.example.rocketnews.presentation.model.ResourceUiState
 import com.example.rocketnews.presentation.mvi.UiEffect
 import com.example.rocketnews.presentation.mvi.UiEvent
@@ -10,7 +11,7 @@ interface RocketsSearchContract {
     sealed interface Event : UiEvent {
         data object OnTryCheckAgainClick : Event
         data object OnBackPressed : Event
-        data class OnRocketClick(val idRocket: String) : Event
+        data class OnRocketClick(val idRocket: RocketId) : Event
         data class OnSearchTextChanged(val searchText: String) : Event
     }
 
@@ -19,7 +20,7 @@ interface RocketsSearchContract {
     ) : UiState
 
     sealed interface Effect : UiEffect {
-        data class NavigateToDetailRocket(val idRocket: String) : Effect
+        data class NavigateToDetailRocket(val idRocket: RocketId) : Effect
         data object BackNavigation : Effect
 
     }
