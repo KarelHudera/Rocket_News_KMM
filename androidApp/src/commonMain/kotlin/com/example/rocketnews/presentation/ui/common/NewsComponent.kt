@@ -15,11 +15,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,12 +28,8 @@ import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.News
 import com.example.rocketnews.helpers.formatNewsDate
 import com.example.rocketnews.presentation.ui.screens.news.NewsViewModel
-import com.example.rocketnews.theme.LocalThemeIsDark
-import com.example.rocketnews.theme.md_theme_dark_surface
-import com.example.rocketnews.theme.md_theme_light_surface
 import com.example.rocketnews.theme.spacing
 import com.seiko.imageloader.rememberImagePainter
-import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -48,16 +42,6 @@ fun NewsComponent(
     newsViewModel: NewsViewModel
 ) {
     val sheetState = rememberModalBottomSheetState()
-
-    val isDark by LocalThemeIsDark.current
-    val bgColor = if (isDark) md_theme_dark_surface else md_theme_light_surface
-
-
-    val newsDatePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = Clock.System.now().toEpochMilliseconds(),
-    )
-
-    val showNewsDatePickerDialog = newsViewModel.showNewsDatePickerDialog.collectAsState().value
 
     val showNewsInfoDialog = newsViewModel.showNewsInfoDialog.collectAsState().value
 
@@ -81,26 +65,12 @@ fun NewsComponent(
             modifier = Modifier.fillMaxSize()
         )
 
-        if (showNewsDatePickerDialog) {
-            NewsDatePicker(
-                datePickerState = newsDatePickerState,
-                dismiss = {
-                    newsViewModel.setNewsDatePickerDialog(false)
-                },
-                onConfirmDate = {
-                    newsViewModel.setNewsDatePickerDialog(false)
-                    // TODO("implement fun")
-                },
-            )
-        }
-
         if (showNewsInfoDialog) {
             ModalBottomSheet(
                 onDismissRequest = {
                     newsViewModel.setNewsInfoDialog(false)
                 },
                 sheetState = sheetState,
-                containerColor = bgColor,
                 scrimColor = Color.Transparent,
                 shape = RoundedCornerShape(16.dp, 16.dp),
                 tonalElevation = 0.dp

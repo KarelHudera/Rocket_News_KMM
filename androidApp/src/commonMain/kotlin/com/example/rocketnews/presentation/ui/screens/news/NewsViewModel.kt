@@ -9,15 +9,21 @@ import com.example.rocketnews.presentation.mvi.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
 
 class NewsViewModel(
     private val getNewsUseCase: GetNewsUseCase,
 ) : BaseViewModel<NewsContract.Event, NewsContract.State, NewsContract.Effect>() {
 
-    private val newsDateFromDatePicker = ""
+    private val newsDateFromDatePicker = MutableStateFlow("")
 
     init {
-        getNews(newsDateFromDatePicker)
+        getNews(newsDateFromDatePicker.value)
+    }
+
+    fun setNewsDateFromDatePicker(time: LocalDate) {
+        newsDateFromDatePicker.value = time.toString()
+        getNews(newsDateFromDatePicker.value)
     }
 
     private val _showNewsDatePickerDialog = MutableStateFlow(false)
@@ -37,7 +43,7 @@ class NewsViewModel(
 
     override fun handleEvent(event: NewsContract.Event) {
         when (event) {
-            NewsContract.Event.OnTryCheckAgainClick -> getNews(newsDateFromDatePicker)
+            NewsContract.Event.OnTryCheckAgainClick -> getNews(newsDateFromDatePicker.value)
             NewsContract.Event.OnRocketButtonClick -> setEffect { NewsContract.Effect.NavigateToRockets }
             NewsContract.Event.OnDatePickerClick -> setEffect { NewsContract.Effect.PickDate }
         }
