@@ -24,7 +24,11 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.rocketnews.presentation.ui.common.Space
 import com.example.rocketnews.presentation.ui.screens.news.NewsScreenTab
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsScreenTab
+<<<<<<< HEAD
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNews.SpaceFlightNewsScreenTab
+=======
+import com.example.rocketnews.presentation.ui.screens.roverInfo.RoverInfoScreenTab
+>>>>>>> origin/rover_photos
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Regular
 import compose.icons.fontawesomeicons.Solid
@@ -51,7 +55,11 @@ fun MainScreen() {
                     tonalElevation = 0.dp
                 ) {
                     TabNavigationItem(NewsScreenTab)
+<<<<<<< HEAD
                     TabNavigationItem(SpaceFlightNewsScreenTab)
+=======
+                    TabNavigationItem(RoverInfoScreenTab)
+>>>>>>> origin/rover_photos
                     TabNavigationItem(RocketsScreenTab)
                 }
             }
