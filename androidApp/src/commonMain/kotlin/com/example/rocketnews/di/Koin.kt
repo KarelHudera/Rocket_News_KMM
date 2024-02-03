@@ -1,25 +1,32 @@
 package com.example.rocketnews.di
 
 import com.example.rocketnews.data_cache.CacheDataImp
-import com.example.rocketnews.repository.ICacheData
 import com.example.rocketnews.data_cache.sqldelight.SharedDatabase
-import com.example.rocketnews.repository.IRemoteData
 import com.example.rocketnews.data_remote.RemoteDataImp
 import com.example.rocketnews.data_remote.model.mapper.ApiNewsMapper
 import com.example.rocketnews.data_remote.model.mapper.ApiRocketMapper
+import com.example.rocketnews.data_remote.model.mapper.ApiSpaceFlightMapper
 import com.example.rocketnews.domain.IRepository
-import com.example.rocketnews.repository.RepositoryImp
 import com.example.rocketnews.domain.interactors.GetNewsUseCase
 import com.example.rocketnews.domain.interactors.GetRocketUseCase
 import com.example.rocketnews.domain.interactors.GetRocketsFavoritesUseCase
 import com.example.rocketnews.domain.interactors.GetRocketsUseCase
+import com.example.rocketnews.domain.interactors.GetSpaceFlightNewUseCase
+import com.example.rocketnews.domain.interactors.GetSpaceFlightNewsUseCase
 import com.example.rocketnews.domain.interactors.IsRocketFavoriteUseCase
 import com.example.rocketnews.domain.interactors.SwitchRocketFavoriteUseCase
 import com.example.rocketnews.presentation.ui.screens.news.NewsViewModel
+import com.example.rocketnews.presentation.ui.screens.newsImage.NewsImageViewModel
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsViewModel
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesViewModel
 import com.example.rocketnews.presentation.ui.screens.rocketsSearch.RocketsSearchViewModel
+import com.example.rocketnews.presentation.ui.screens.spaceFlightNews.SpaceFlightNewsViewModel
+import com.example.rocketnews.presentation.ui.screens.spaceFlightNewsDetail.SpaceFlightNewsDetailViewModel
+import com.example.rocketnews.presentation.ui.screens.spaceFlightNewsSearch.SpaceFlightNewsSearchViewModel
+import com.example.rocketnews.repository.ICacheData
+import com.example.rocketnews.repository.IRemoteData
+import com.example.rocketnews.repository.RepositoryImp
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
@@ -53,7 +60,11 @@ val viewModelModule = module {
     factory { RocketsFavoritesViewModel(get()) }
     factory { params -> RocketDetailViewModel(get(), get(), get(), params.get()) }
     factory { NewsViewModel(get()) }
+    factory { NewsImageViewModel() }
     factory { RocketsSearchViewModel(get()) }
+    factory { SpaceFlightNewsViewModel(get()) }
+    factory { SpaceFlightNewsDetailViewModel(get(), get()) }
+    factory { SpaceFlightNewsSearchViewModel(get()) }
 }
 
 val useCasesModule: Module = module {
@@ -63,13 +74,14 @@ val useCasesModule: Module = module {
     factory { IsRocketFavoriteUseCase(get(), get()) }
     factory { SwitchRocketFavoriteUseCase(get(), get()) }
     factory { GetNewsUseCase(get(), get()) }
-
+    factory { GetSpaceFlightNewsUseCase(get(), get()) }
+    factory { GetSpaceFlightNewUseCase(get(), get()) }
 }
 
 val repositoryModule = module {
     single<IRepository> { RepositoryImp(get(), get()) }
     single<ICacheData> { CacheDataImp(get()) }
-    single<IRemoteData> { RemoteDataImp(get(), get(), get()) }
+    single<IRemoteData> { RemoteDataImp(get(), get(), get(), get()) }
 }
 
 val ktorModule = module {
@@ -109,6 +121,7 @@ val dispatcherModule = module {
 val mapperModule = module {
     factory { ApiRocketMapper() }
     factory { ApiNewsMapper() }
+    factory { ApiSpaceFlightMapper() }
 }
 
 fun initKoin() = initKoin {}
