@@ -37,13 +37,17 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
+            implementation(compose.material)
             implementation(compose.materialIconsExtended)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
             implementation(libs.voyager.navigator)
+            implementation(libs.voyager.screenModel)
+            implementation(libs.voyager.bottomSheetNavigator)
+            implementation(libs.voyager.tabNavigator)
+            implementation(libs.voyager.transitions)
             implementation(libs.voyager.koin)
             implementation(libs.composeImageLoader)
-//            implementation(libs.napier)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.insetsx)
             implementation(libs.moko.mvvm)
@@ -52,6 +56,7 @@ kotlin {
             implementation(libs.ktor.logging)
             implementation(libs.ktor.negotiation)
             implementation(libs.composeIcons.featherIcons)
+            implementation(libs.composeIcons.fontAwesome)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
             implementation(libs.multiplatformSettings)
@@ -87,7 +92,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
 
         applicationId = "com.example.rocketnews.androidApp"

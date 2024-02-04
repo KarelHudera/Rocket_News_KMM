@@ -9,8 +9,9 @@ import com.example.rocketnews.presentation.mvi.UiState
 interface NewsContract {
     sealed interface Event : UiEvent {
         data object OnTryCheckAgainClick : Event
-        data object OnRocketButtonClick : Event
+        data object OnInfoBottomSheetClick : Event
         data object OnDatePickerClick : Event
+        data object OnImageClick : Event
     }
 
     data class State(
@@ -18,7 +19,8 @@ interface NewsContract {
     ) : UiState
 
     sealed interface Effect : UiEffect {
-        data object NavigateToRockets : Effect
-        data object PickDate : Effect
+        data object ShowInfoBottomSheet : Effect
+        data object ShowDatePicker : Effect
+        data object NavigateToNewsImage : Effect
     }
 }

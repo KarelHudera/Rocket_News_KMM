@@ -11,7 +11,6 @@ interface RocketsContract {
     sealed interface Event : UiEvent {
         data object OnTryCheckAgainClick : Event
         data object OnFavoritesClick : Event
-        data object OnBackPressed : Event
         data object OnSearchClick : Event
         data class OnRocketClick(val idRocket: RocketId) : Event
     }
@@ -24,9 +23,5 @@ interface RocketsContract {
         data class NavigateToDetailRocket(val idRocket: RocketId) : Effect
         data object NavigateToFavorites : Effect
         data object NavigateToSearch : Effect
-        data object BackNavigation : Effect
-
     }
 }
-
-

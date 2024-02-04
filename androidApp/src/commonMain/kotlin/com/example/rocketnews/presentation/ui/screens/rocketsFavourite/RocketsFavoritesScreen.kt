@@ -15,9 +15,9 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.ArrowBackIcon
-import com.example.rocketnews.presentation.ui.common.RocketsList
-import com.example.rocketnews.presentation.ui.common.BackNavActionAppBar
+import com.example.rocketnews.presentation.ui.common.screenComponents.RocketsFavoritesScreenComponent
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
+import com.example.rocketnews.presentation.ui.common.topBars.BackNavActionAppBar
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
 import kotlinx.coroutines.flow.collectLatest
 
@@ -53,9 +53,9 @@ class RocketsFavoritesScreen : Screen {
                                 RocketsFavoritesContract.Event.OnBackPressed
                             )
                         }
-                    },
+                    }
                 )
-            },
+            }
         ) { padding ->
             ManagementResourceUiState(
                 modifier = Modifier
@@ -63,15 +63,9 @@ class RocketsFavoritesScreen : Screen {
                     .fillMaxSize(),
                 resourceUiState = state.rocketsFavorites,
                 successView = { favorites ->
-                    RocketsList(
-                        rockets = favorites,
-                        onRocketClick = { idRocket ->
-                            rocketsFavoritesViewModel.setEvent(
-                                RocketsFavoritesContract.Event.OnRocketClick(
-                                    idRocket
-                                )
-                            )
-                        }
+                    RocketsFavoritesScreenComponent(
+                        favorites = favorites,
+                        rocketsFavoritesViewModel = rocketsFavoritesViewModel
                     )
                 },
                 onTryAgain = { rocketsFavoritesViewModel.setEvent(RocketsFavoritesContract.Event.OnTryCheckAgainClick) },
@@ -81,4 +75,3 @@ class RocketsFavoritesScreen : Screen {
         }
     }
 }
-

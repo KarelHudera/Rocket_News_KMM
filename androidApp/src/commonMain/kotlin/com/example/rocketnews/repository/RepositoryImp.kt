@@ -3,7 +3,9 @@ package com.example.rocketnews.repository
 import com.example.rocketnews.domain.IRepository
 import com.example.rocketnews.domain.model.News
 import com.example.rocketnews.domain.model.Rocket
+import com.example.rocketnews.domain.model.SpaceFlightNews
 import com.example.rocketnews.helpers.NewsDate
+import com.example.rocketnews.helpers.NewsOffset
 import com.example.rocketnews.helpers.RocketId
 import kotlinx.coroutines.flow.Flow
 
@@ -32,4 +34,10 @@ class RepositoryImp(
 
     override suspend fun isRocketFavorite(idRocket: RocketId): Boolean =
         cacheData.isRocketFavorite(idRocket)
+
+    override suspend fun getSpaceFlightNews(newsOffset: NewsOffset): List<SpaceFlightNews> =
+        remoteData.getSpaceFlightNewsFromApi(newsOffset)
+
+    override suspend fun getSpaceFlightNew(idSpaceFlightNews: String): SpaceFlightNews =
+        remoteData.getSpaceFlightNewFromApi(idSpaceFlightNews)
 }

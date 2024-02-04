@@ -17,8 +17,8 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.rocketnews.presentation.ui.common.ActionBar
-import com.example.rocketnews.presentation.ui.common.RocketDetail
+import com.example.rocketnews.presentation.ui.common.topBars.RocketActionBar
+import com.example.rocketnews.presentation.ui.common.RocketDetailScreenComponent
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.core.parameter.parametersOf
@@ -59,7 +59,7 @@ class RocketDetailScreen(
         Scaffold(
             snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
             topBar = {
-                ActionBar(
+                RocketActionBar(
                     rocket = state.rocket,
                     favorite = state.isFavorite,
                     onActionFavorite = { rocketDetailViewModel.setEvent(RocketDetailContract.Event.OnFavoriteClick) },
@@ -73,7 +73,7 @@ class RocketDetailScreen(
                     .fillMaxSize(),
                 resourceUiState = state.rocket,
                 successView = { rocket ->
-                    RocketDetail(rocket, rocketDetailViewModel)
+                    RocketDetailScreenComponent(rocket, rocketDetailViewModel)
                 },
                 onTryAgain = { rocketDetailViewModel.setEvent(RocketDetailContract.Event.OnTryCheckAgainClick) },
                 onCheckAgain = { rocketDetailViewModel.setEvent(RocketDetailContract.Event.OnTryCheckAgainClick) },

@@ -16,6 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -24,12 +27,15 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
-import com.example.rocketnews.presentation.ui.common.MainActionAppBar
-import com.example.rocketnews.presentation.ui.common.NewsComponent
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.rocketnews.presentation.ui.common.NewsDatePicker
 import com.example.rocketnews.presentation.ui.common.Space
+import com.example.rocketnews.presentation.ui.common.screenComponents.NewsScreenComponent
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceComponentState
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
+import com.example.rocketnews.presentation.ui.common.topBars.NewsActionAppBar
+import com.example.rocketnews.presentation.ui.screens.newsImage.NewsImageScreen
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.datetime.Clock
 
@@ -44,30 +50,38 @@ class NewsScreen : Screen {
         val state by newsViewModel.uiState.collectAsState()
 
         val newsDatePickerState = rememberDatePickerState(
-            initialSelectedDateMillis = Clock.System.now().toEpochMilliseconds(),
+            initialSelectedDateMillis = Clock.System.now().toEpochMilliseconds()
         )
 
         val showNewsDatePickerDialog = newsViewModel.showNewsDatePickerDialog.collectAsState().value
 
+        val navigator = LocalNavigator.currentOrThrow
+
         val lightBlue = Color(0xFF10aef8)
+
+        var url by remember { mutableStateOf("") }
+        var hdUrl by remember { mutableStateOf("") }
 
         LaunchedEffect(key1 = Unit) {
             newsViewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    is NewsContract.Effect.NavigateToRockets ->
-                        newsViewModel.setNewsInfoDialog(true)
+                    is NewsContract.Effect.ShowInfoBottomSheet ->
+                        newsViewModel.setNewsInfoBottomSheet(true)
 
-                    is NewsContract.Effect.PickDate -> {
+                    is NewsContract.Effect.ShowDatePicker -> {
                         newsViewModel.setNewsDatePickerDialog(true)
                     }
+
+                    is NewsContract.Effect.NavigateToNewsImage ->
+                        navigator.push(NewsImageScreen(url = url, hdUrl = hdUrl))
                 }
             }
         }
 
         Scaffold(
             topBar = {
-                MainActionAppBar(
-                    title = "Daily News From NASA",
+                NewsActionAppBar(
+                    title = "Astronomy Picture of the Day",
                     onClickDatePicker = { newsViewModel.setEvent(NewsContract.Event.OnDatePickerClick) },
                 )
             },
@@ -76,7 +90,7 @@ class NewsScreen : Screen {
                     resourceUiState = state.news,
                     successView = {
                         IconButton(
-                            onClick = { newsViewModel.setEvent(NewsContract.Event.OnRocketButtonClick) },
+                            onClick = { newsViewModel.setEvent(NewsContract.Event.OnInfoBottomSheetClick) },
                             modifier = Modifier
                                 .clip(RoundedCornerShape(24.dp))
                                 .background(lightBlue)
@@ -90,8 +104,7 @@ class NewsScreen : Screen {
                             )
                         }
                     },
-                    loadingView = { Space() },
-
+                    loadingView = { Space() }
                 )
             }
         ) { padding ->
@@ -101,7 +114,9 @@ class NewsScreen : Screen {
                     .fillMaxSize(),
                 resourceUiState = state.news,
                 successView = { news ->
-                    NewsComponent(news, newsViewModel)
+                    url = news.url
+                    hdUrl = news.hdurl
+                    NewsScreenComponent(news, newsViewModel)
                 },
                 onTryAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
                 onCheckAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },

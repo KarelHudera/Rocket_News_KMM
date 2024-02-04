@@ -14,8 +14,8 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.rocketnews.presentation.ui.common.topBars.RocketsActionAppBar
 import com.example.rocketnews.presentation.ui.common.RocketsList
-import com.example.rocketnews.presentation.ui.common.RocketsActionAppBar
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesScreen
@@ -44,8 +44,6 @@ class RocketsScreen : Screen {
 
                     is RocketsContract.Effect.NavigateToSearch ->
                         navigator.push(RocketsSearchScreen())
-
-                    is RocketsContract.Effect.BackNavigation -> navigator.pop()
                 }
             }
         }
@@ -55,8 +53,7 @@ class RocketsScreen : Screen {
                 RocketsActionAppBar(
                     title = "SpaceX Rockets",
                     onClickFavorite = { rocketsViewModel.setEvent(RocketsContract.Event.OnFavoritesClick) },
-                    onClickSearch = { rocketsViewModel.setEvent(RocketsContract.Event.OnSearchClick) },
-                    onBackPressed = { rocketsViewModel.setEvent(RocketsContract.Event.OnBackPressed) }
+                    onClickSearch = { rocketsViewModel.setEvent(RocketsContract.Event.OnSearchClick) }
                 )
             },
         ) { padding ->

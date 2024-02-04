@@ -76,5 +76,4 @@ class RocketDetailViewModel(
                 }.onFailure { setState { copy(isFavorite = ResourceUiState.Error()) } }
         }
     }
-
 }
