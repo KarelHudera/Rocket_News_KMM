@@ -1,4 +1,4 @@
-package com.example.rocketnews.theme
+package com.example.rocketnews.presentation.theme
 
 import android.app.Activity
 import android.graphics.Color

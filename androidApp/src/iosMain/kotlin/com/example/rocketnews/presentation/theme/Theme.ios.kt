@@ -1,4 +1,4 @@
-package com.example.rocketnews.theme
+package com.example.rocketnews.presentation.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

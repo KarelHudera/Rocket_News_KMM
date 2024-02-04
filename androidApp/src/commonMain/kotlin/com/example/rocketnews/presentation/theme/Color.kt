@@ -1,12 +1,12 @@
-package com.example.rocketnews.theme
+package com.example.rocketnews.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-val black = Color(0xFF0A0A0A)
-val onBlack = Color(0xFF0F0F0F)
-val white = Color(0xFFFDFDFB)
-val onWhite = Color(0xFFFAFAFA)
-val debugColor = Color.Red
+internal val black = Color(0xFF0A0A0A)
+internal val onBlack = Color(0xFF1B1B1B)
+internal val white = Color(0xFFFDFDFB)
+internal val onWhite = Color(0xFFFAFAFA)
+internal val debugColor = Color.Red
 
 internal val md_theme_light_primary = black
 internal val md_theme_light_onPrimary = black
@@ -14,7 +14,7 @@ internal val md_theme_light_onPrimary = black
 //internal val md_theme_light_onPrimaryContainer = debugColor
 //internal val md_theme_light_secondary = debugColor
 //internal val md_theme_light_onSecondary = debugColor
-//internal val md_theme_light_secondaryContainer = debugColor
+internal val md_theme_light_secondaryContainer = white
 //internal val md_theme_light_onSecondaryContainer = debugColor
 //internal val md_theme_light_tertiary = debugColor
 //internal val md_theme_light_onTertiary = debugColor
@@ -45,7 +45,7 @@ internal val md_theme_dark_onPrimary = white
 //internal val md_theme_dark_onPrimaryContainer = debugColor
 //internal val md_theme_dark_secondary = debugColor
 //internal val md_theme_dark_onSecondary = debugColor
-//internal val md_theme_dark_secondaryContainer = debugColor
+internal val md_theme_dark_secondaryContainer = black
 //internal val md_theme_dark_onSecondaryContainer = debugColor
 //internal val md_theme_dark_tertiary = debugColor
 //internal val md_theme_dark_onTertiary = debugColor

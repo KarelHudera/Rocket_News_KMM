@@ -34,7 +34,7 @@ class NewsViewModel(
 
     private val _showNewsInfoDialog = MutableStateFlow(false)
     val showNewsInfoDialog = _showNewsInfoDialog.asStateFlow()
-    fun setNewsInfoDialog(show: Boolean) {
+    fun setNewsInfoBottomSheet(show: Boolean) {
         _showNewsInfoDialog.value = show
     }
 
@@ -44,8 +44,9 @@ class NewsViewModel(
     override fun handleEvent(event: NewsContract.Event) {
         when (event) {
             NewsContract.Event.OnTryCheckAgainClick -> getNews(newsDateFromDatePicker.value)
-            NewsContract.Event.OnRocketButtonClick -> setEffect { NewsContract.Effect.NavigateToRockets }
-            NewsContract.Event.OnDatePickerClick -> setEffect { NewsContract.Effect.PickDate }
+            NewsContract.Event.OnInfoBottomSheetClick -> setEffect { NewsContract.Effect.ShowInfoBottomSheet }
+            NewsContract.Event.OnDatePickerClick -> setEffect { NewsContract.Effect.ShowDatePicker }
+            NewsContract.Event.OnImageClick -> setEffect { NewsContract.Effect.NavigateToNewsImage }
         }
     }
 

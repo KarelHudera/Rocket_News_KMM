@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 class RocketsSearchViewModel(
     private val getRocketsUseCase: GetRocketsUseCase,
 ) : BaseViewModel<RocketsSearchContract.Event, RocketsSearchContract.State, RocketsSearchContract.Effect>() {
+
     var list = emptyList<Rocket>()
 
     init {

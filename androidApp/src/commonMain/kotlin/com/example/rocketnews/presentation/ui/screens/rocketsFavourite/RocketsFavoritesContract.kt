@@ -20,6 +20,5 @@ interface RocketsFavoritesContract {
     sealed interface Effect : UiEffect {
         data class NavigateToDetailRocket(val idRocket: String) : Effect
         data object BackNavigation : Effect
-
     }
 }

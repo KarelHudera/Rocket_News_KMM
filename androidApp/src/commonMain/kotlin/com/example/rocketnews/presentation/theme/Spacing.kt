@@ -1,4 +1,4 @@
-package com.example.rocketnews.theme
+package com.example.rocketnews.presentation.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

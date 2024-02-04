@@ -29,14 +29,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.helpers.formatRocketsDate
-import com.example.rocketnews.theme.spacing
+import com.example.rocketnews.presentation.theme.spacing
 import com.seiko.imageloader.rememberImagePainter
 
 @Composable
 fun RocketItem(
     rocket: Rocket,
     onClick: () -> Unit,
-    alpha: Float
 ) {
     Card(
         modifier = Modifier.padding(vertical = 8.dp, horizontal = MaterialTheme.spacing.horizontal),

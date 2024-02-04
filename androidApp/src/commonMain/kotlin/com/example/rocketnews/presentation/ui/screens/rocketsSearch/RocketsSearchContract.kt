@@ -22,6 +22,5 @@ interface RocketsSearchContract {
     sealed interface Effect : UiEffect {
         data class NavigateToDetailRocket(val idRocket: RocketId) : Effect
         data object BackNavigation : Effect
-
     }
 }
