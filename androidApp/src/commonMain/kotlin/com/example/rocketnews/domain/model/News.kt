@@ -1,5 +1,8 @@
 package com.example.rocketnews.domain.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class News (
     val date: String,
     val explanation: String,

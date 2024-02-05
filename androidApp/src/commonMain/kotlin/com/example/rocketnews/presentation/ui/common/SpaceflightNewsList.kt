@@ -21,7 +21,10 @@ fun SpaceflightNewsList(
         state = listState,
         modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top
     ) {
-        items(spaceflightNews) { spaceflightNews ->
+        items(
+            items = spaceflightNews,
+            key = { it.id }
+        ) { spaceflightNews ->
             SpaceFlightNewsItem(
                 spaceFlightNews = spaceflightNews,
                 onClick = { onSpaceflightNewsClick(spaceflightNews.id.toString()) }

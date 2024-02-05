@@ -1,5 +1,8 @@
 package com.example.rocketnews.domain.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class SpaceFlightNews(
     val id: Int,
     val image_url: String,

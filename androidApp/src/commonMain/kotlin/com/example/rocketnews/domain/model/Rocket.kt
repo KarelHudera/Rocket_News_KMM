@@ -1,5 +1,8 @@
 package com.example.rocketnews.domain.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class Rocket(
     val patchSmall: String, // image
     val patchLarge: String, // image
