@@ -68,9 +68,8 @@ class NewsScreen : Screen {
                     is NewsContract.Effect.ShowInfoBottomSheet ->
                         newsViewModel.setNewsInfoBottomSheet(true)
 
-                    is NewsContract.Effect.ShowDatePicker -> {
+                    is NewsContract.Effect.ShowDatePicker ->
                         newsViewModel.setNewsDatePickerDialog(true)
-                    }
 
                     is NewsContract.Effect.NavigateToNewsImage ->
                         navigator.push(NewsImageScreen(url = url, hdUrl = hdUrl))

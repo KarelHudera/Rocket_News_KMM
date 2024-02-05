@@ -17,7 +17,10 @@ fun RocketsList(
     LazyColumn(
         modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top
     ) {
-        items(rockets) { rocket ->
+        items(
+            items = rockets,
+            key = { it.id }
+        ) { rocket ->
             RocketItem(
                 rocket = rocket,
                 onClick = { onRocketClick(rocket.id) }
