@@ -1,6 +1,6 @@
 package com.example.rocketnews.presentation.ui.screens.rocketDetail
 
-import androidx.compose.foundation.layout.fillMaxSize
+ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -17,9 +17,10 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.rocketnews.presentation.ui.common.topBars.RocketActionBar
+import co.touchlab.kermit.Logger
 import com.example.rocketnews.presentation.ui.common.RocketDetailScreenComponent
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
+import com.example.rocketnews.presentation.ui.common.topBars.RocketActionBar
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.core.parameter.parametersOf
 
@@ -42,11 +43,15 @@ class RocketDetailScreen(
         LaunchedEffect(key1 = Unit) {
             rocketDetailViewModel.effect.collectLatest { effect ->
                 when (effect) {
-                    is RocketDetailContract.Effect.RocketAdded ->
+                    is RocketDetailContract.Effect.RocketAdded -> {
                         snackbarHostState.showSnackbar("Rocket added to favorites")
+                        Logger.d("\uD83D\uDFE2 Rocket added to favorites")
+                    }
 
-                    is RocketDetailContract.Effect.RocketRemoved ->
+                    is RocketDetailContract.Effect.RocketRemoved -> {
                         snackbarHostState.showSnackbar("Rocket removed from favorites")
+                        Logger.d("\uD83D\uDFE2 Rocket removed from favorites")
+                    }
 
                     is RocketDetailContract.Effect.EmptyUrl ->
                         snackbarHostState.showSnackbar("Sorry, no URL to open")
@@ -57,7 +62,7 @@ class RocketDetailScreen(
         }
 
         Scaffold(
-            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+            snackbarHost = { SnackbarHost(snackbarHostState) },
             topBar = {
                 RocketActionBar(
                     rocket = state.rocket,
