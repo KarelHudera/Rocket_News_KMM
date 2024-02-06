@@ -35,7 +35,7 @@ class NewsImageScreen(
 
         Scaffold(
             topBar = {
-                NewsItemActionBar(title = "Astronomy Picture of the Day",
+                NewsItemActionBar(
                     onBackPressed = {
                         newsImageViewModel.setEvent(
                             NewsImageContract.Event.OnBackPressed
