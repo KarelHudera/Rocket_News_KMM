@@ -3,7 +3,9 @@ package com.example.rocketnews.presentation.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -32,7 +34,7 @@ fun MainScreen() {
             content = {
                 Column(
                     modifier = Modifier
-                        .padding(bottom = 74.dp),
+                        .padding(bottom = 60.dp),
                     content = {
                         CurrentTab()
                     }
@@ -40,7 +42,7 @@ fun MainScreen() {
             },
             bottomBar = {
                 NavigationBar(
-                    //modifier = Modifier.height(80.dp),
+                    modifier = Modifier.safeDrawingPadding().height(62.dp),
                     tonalElevation = 0.dp
                 ) {
                     TabNavigationItem(NewsScreenTab)
