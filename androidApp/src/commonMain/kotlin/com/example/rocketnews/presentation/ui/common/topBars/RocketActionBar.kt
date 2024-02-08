@@ -27,7 +27,7 @@ fun RocketActionBar(
             ManagementResourceComponentState(
                 resourceUiState = rocket,
                 successView = { Text(text = it.name) },
-                loadingView = { Text(text = "....") }
+                loadingView = { Text(text = "") }
             )
         },
         navigationIcon = { ArrowBackIcon(onBackPressed) },

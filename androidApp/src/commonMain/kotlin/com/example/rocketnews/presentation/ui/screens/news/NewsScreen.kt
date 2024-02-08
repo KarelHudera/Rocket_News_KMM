@@ -81,7 +81,10 @@ class NewsScreen : Screen {
             topBar = {
                 NewsActionAppBar(
                     title = "Astronomy Picture of the Day",
-                    onClickDatePicker = { newsViewModel.setEvent(NewsContract.Event.OnDatePickerClick) },
+                    onClickDatePicker = {
+                        newsViewModel.setEvent(NewsContract.Event.OnDatePickerClick)
+                    },
+                    isShadowEnabled = true
                 )
             },
             floatingActionButton = {

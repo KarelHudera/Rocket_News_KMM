@@ -53,7 +53,8 @@ class RocketsFavoritesScreen : Screen {
                                 RocketsFavoritesContract.Event.OnBackPressed
                             )
                         }
-                    }
+                    },
+                    isShadowEnabled = true
                 )
             }
         ) { padding ->

@@ -53,7 +53,8 @@ class RocketsScreen : Screen {
                 RocketsActionAppBar(
                     title = "SpaceX Rockets",
                     onClickFavorite = { rocketsViewModel.setEvent(RocketsContract.Event.OnFavoritesClick) },
-                    onClickSearch = { rocketsViewModel.setEvent(RocketsContract.Event.OnSearchClick) }
+                    onClickSearch = { rocketsViewModel.setEvent(RocketsContract.Event.OnSearchClick) },
+                    isShadowEnabled = true
                 )
             },
         ) { padding ->
