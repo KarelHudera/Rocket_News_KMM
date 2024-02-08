@@ -30,7 +30,9 @@ import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.helpers.formatRocketsDate
 import com.example.rocketnews.presentation.theme.spacing
-import com.seiko.imageloader.rememberImagePainter
+import com.seiko.imageloader.model.ImageAction
+import com.seiko.imageloader.rememberImageSuccessPainter
+import com.seiko.imageloader.ui.AutoSizeBox
 
 @Composable
 fun RocketItem(
@@ -67,17 +69,42 @@ fun RocketItem(
 
                     }
                 } else {
-                    ProgressIndicator(Modifier.align(Alignment.Center))
-                    Image(
-                        painter = rememberImagePainter(rocket.patchSmall),
-                        contentDescription = null,
-                        modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
-                    )
-                    Image(
-                        painter = rememberImagePainter(rocket.patchLarge),
-                        contentDescription = null,
-                        modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
-                    )
+                    AutoSizeBox(rocket.patchSmall) { action ->
+                        when (action) {
+                            is ImageAction.Success -> {
+                                Image(
+                                    painter = rememberImageSuccessPainter(action),
+                                    contentDescription = null,
+                                    modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
+                                )
+                            }
+
+                            is ImageAction.Loading -> {
+                                Box(
+                                    modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
+                                ) {
+                                    ProgressIndicator(Modifier.align(Alignment.Center))
+                                }
+                            }
+
+                            is ImageAction.Failure -> {}
+                        }
+                    }
+                    AutoSizeBox(rocket.patchLarge) { action ->
+                        when (action) {
+                            is ImageAction.Success -> {
+                                Image(
+                                    painter = rememberImageSuccessPainter(action),
+                                    contentDescription = null,
+                                    modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
+                                )
+                            }
+
+                            is ImageAction.Loading -> {}
+
+                            is ImageAction.Failure -> {}
+                        }
+                    }
                 }
             }
             Space()
