@@ -17,9 +17,9 @@ fun GoToArticleButton(spaceFlightNew: SpaceFlightNews, modifier: Modifier) {
         onClick = {
             openUrl(spaceFlightNew.url)
         },
-        elevation = ButtonDefaults.buttonElevation(3.dp),
+        elevation = ButtonDefaults.buttonElevation(1.dp),
         modifier = modifier,
-        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.background),
+        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.surfaceVariant),
     ) {
         Text(
             "Go to: ${spaceFlightNew.news_site}",

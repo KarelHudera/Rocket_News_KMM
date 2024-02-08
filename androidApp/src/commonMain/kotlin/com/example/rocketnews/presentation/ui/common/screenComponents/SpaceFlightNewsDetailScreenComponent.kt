@@ -1,7 +1,6 @@
 package com.example.rocketnews.presentation.ui.common.screenComponents
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,36 +17,42 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.SpaceFlightNews
 import com.example.rocketnews.helpers.formatRocketsDate
-import com.example.rocketnews.presentation.ui.common.ProgressIndicator
 import com.example.rocketnews.presentation.ui.common.Space
 import com.example.rocketnews.presentation.ui.common.buttons.GoToArticleButton
-import com.seiko.imageloader.rememberImagePainter
+import com.example.rocketnews.presentation.ui.common.LoadingComponent
+import com.seiko.imageloader.model.ImageAction
+import com.seiko.imageloader.rememberImageSuccessPainter
+import com.seiko.imageloader.ui.AutoSizeBox
 
 @Composable
 fun SpaceFlightNewsDetailScreenComponent(spaceFlightNew: SpaceFlightNews) {
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
-            Box {
-                Box(Modifier.fillMaxSize().background(Color.LightGray))
+            AutoSizeBox(spaceFlightNew.image_url) { action ->
+                when (action) {
+                    is ImageAction.Success -> {
+                        Image(
+                            rememberImageSuccessPainter(action),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxWidth().height(300.dp)
+                        )
+                    }
 
-                ProgressIndicator(Modifier.align(Alignment.Center))
+                    is ImageAction.Loading -> {
+                        LoadingComponent(modifier = Modifier.fillMaxWidth().height(300.dp))
+                    }
 
-                Image(
-                    painter = rememberImagePainter(spaceFlightNew.image_url),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxWidth().height(300.dp)
-                )
+                    is ImageAction.Failure -> {}
+                }
             }
 
-            Column(Modifier.padding(8.dp)) {
-                Space()
+            Column(Modifier.padding(16.dp)) {
                 Text(
                     text = formatRocketsDate(spaceFlightNew.published_at),
                     fontSize = MaterialTheme.typography.headlineSmall.fontSize,
@@ -62,11 +67,15 @@ fun SpaceFlightNewsDetailScreenComponent(spaceFlightNew: SpaceFlightNews) {
                 Space(120.dp)
             }
         }
+
         GoToArticleButton(
             spaceFlightNew = spaceFlightNew,
-            modifier = Modifier.padding(bottom = 24.dp).align(Alignment.BottomCenter).clip(
-                RoundedCornerShape(16.dp)
-            ).height(38.dp).wrapContentWidth()
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .clip(RoundedCornerShape(16.dp))
+                .padding(22.dp)
+                .wrapContentWidth()
+                .height(38.dp)
         )
     }
 }

@@ -18,7 +18,9 @@ import com.example.rocketnews.helpers.formatRocketsDate
 import com.example.rocketnews.presentation.ui.common.buttons.WikipediaButton
 import com.example.rocketnews.presentation.ui.common.buttons.YoutubeButton
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
-import com.seiko.imageloader.rememberImagePainter
+import com.seiko.imageloader.model.ImageAction
+import com.seiko.imageloader.rememberImageSuccessPainter
+import com.seiko.imageloader.ui.AutoSizeBox
 
 @Composable
 fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDetailViewModel) {
@@ -38,17 +40,40 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
             NoImageError(imageSize)
         } else {
             Box {
-                ProgressIndicator(Modifier.align(Alignment.Center))
-                Image(
-                    modifier = Modifier.size(imageSize),
-                    painter = rememberImagePainter(rocket.patchSmall),
-                    contentDescription = null
-                )
-                Image(
-                    modifier = Modifier.size(imageSize),
-                    painter = rememberImagePainter(rocket.patchLarge),
-                    contentDescription = null
-                )
+                AutoSizeBox(rocket.patchSmall) { action ->
+                    when (action) {
+                        is ImageAction.Success -> {
+                            Image(
+                                painter = rememberImageSuccessPainter(action),
+                                modifier = Modifier.size(imageSize),
+                                contentDescription = null
+                            )
+                        }
+
+                        is ImageAction.Loading -> {
+                            Box(modifier = Modifier.size(imageSize)) {
+                                ProgressIndicator(Modifier.align(Alignment.Center))
+                            }
+                        }
+
+                        is ImageAction.Failure -> {}
+                    }
+                }
+                AutoSizeBox(rocket.patchLarge) { action ->
+                    when (action) {
+                        is ImageAction.Success -> {
+                            Image(
+                                painter = rememberImageSuccessPainter(action),
+                                modifier = Modifier.size(imageSize),
+                                contentDescription = null
+                            )
+                        }
+
+                        is ImageAction.Loading -> {}
+
+                        is ImageAction.Failure -> {}
+                    }
+                }
             }
         }
         Space(52.dp)

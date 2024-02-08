@@ -21,7 +21,7 @@ fun SpaceFlightNewsActionBar(
             ManagementResourceComponentState(
                 resourceUiState = spaceFlightNews,
                 successView = { Text(text = TruncateText(it.title)) },
-                loadingView = { Text(text = "....") }
+                loadingView = { Text(text = "") }
             )
         },
         navigationIcon = { ArrowBackIcon(onBackPressed) },
