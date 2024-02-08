@@ -40,7 +40,7 @@ fun SpaceFlightNewsSearchScreenComponent(
             },
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
-                .padding(bottom = 4.dp, end = 16.dp, start = 16.dp)
+                .padding(bottom = 8.dp, end = 16.dp, start = 16.dp)
                 .fillMaxWidth(),
             placeholder = { Text(text = "Search Spaceflight news") },
         )

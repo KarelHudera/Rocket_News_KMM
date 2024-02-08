@@ -52,8 +52,7 @@ fun SpaceFlightNewsDetailScreenComponent(spaceFlightNew: SpaceFlightNews) {
                 }
             }
 
-            Column(Modifier.padding(8.dp)) {
-                Space()
+            Column(Modifier.padding(16.dp)) {
                 Text(
                     text = formatRocketsDate(spaceFlightNew.published_at),
                     fontSize = MaterialTheme.typography.headlineSmall.fontSize,
@@ -68,14 +67,15 @@ fun SpaceFlightNewsDetailScreenComponent(spaceFlightNew: SpaceFlightNews) {
                 Space(120.dp)
             }
         }
+
         GoToArticleButton(
             spaceFlightNew = spaceFlightNew,
             modifier = Modifier
-                .padding(bottom = 24.dp)
                 .align(Alignment.BottomCenter)
                 .clip(RoundedCornerShape(16.dp))
-                .height(38.dp)
+                .padding(22.dp)
                 .wrapContentWidth()
+                .height(38.dp)
         )
     }
 }
