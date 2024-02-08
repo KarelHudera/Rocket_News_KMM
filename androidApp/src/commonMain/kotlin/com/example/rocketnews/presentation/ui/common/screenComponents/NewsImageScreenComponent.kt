@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.presentation.ui.common.ProgressIndicator
 import com.example.rocketnews.presentation.ui.common.ZoomableBox
-import com.example.rocketnews.presentation.ui.common.state.LoadingComponent
+import com.example.rocketnews.presentation.ui.common.LoadingComponent
 import com.seiko.imageloader.model.ImageAction
 import com.seiko.imageloader.rememberImageSuccessPainter
 import com.seiko.imageloader.ui.AutoSizeBox

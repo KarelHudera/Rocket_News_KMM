@@ -16,7 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.News
 import com.example.rocketnews.presentation.ui.common.BottomSheetContent
-import com.example.rocketnews.presentation.ui.common.state.LoadingComponent
+import com.example.rocketnews.presentation.ui.common.LoadingComponent
 import com.example.rocketnews.presentation.ui.screens.news.NewsContract
 import com.example.rocketnews.presentation.ui.screens.news.NewsViewModel
 import com.seiko.imageloader.model.ImageAction

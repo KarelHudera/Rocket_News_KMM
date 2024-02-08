@@ -1,4 +1,4 @@
-package com.example.rocketnews.presentation.ui.common.state
+package com.example.rocketnews.presentation.ui.common
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -9,7 +9,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -41,12 +40,9 @@ fun Modifier.shimmerLoadingAnimation(
     return composed {
 
         val shimmerColors = listOf(
-            MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-            MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-            MaterialTheme.colorScheme.primary.copy(alpha = 0.4f),
-            MaterialTheme.colorScheme.primary.copy(alpha = 0.4f),
-            MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-            MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+            Color.Gray.copy(alpha = 0.2f),
+            Color.Gray.copy(alpha = 0.4f),
+            Color.Gray.copy(alpha = 0.2f),
         )
 
         val transition = rememberInfiniteTransition(label = "")

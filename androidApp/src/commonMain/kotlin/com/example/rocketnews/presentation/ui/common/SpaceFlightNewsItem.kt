@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.SpaceFlightNews
 import com.example.rocketnews.helpers.formatRocketsDate
 import com.example.rocketnews.presentation.theme.spacing
-import com.example.rocketnews.presentation.ui.common.state.LoadingComponent
 import com.seiko.imageloader.model.ImageAction
 import com.seiko.imageloader.rememberImageSuccessPainter
 import com.seiko.imageloader.ui.AutoSizeBox

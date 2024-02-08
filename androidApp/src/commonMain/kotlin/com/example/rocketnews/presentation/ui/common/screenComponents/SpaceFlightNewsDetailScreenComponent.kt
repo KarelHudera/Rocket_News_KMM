@@ -24,7 +24,7 @@ import com.example.rocketnews.domain.model.SpaceFlightNews
 import com.example.rocketnews.helpers.formatRocketsDate
 import com.example.rocketnews.presentation.ui.common.Space
 import com.example.rocketnews.presentation.ui.common.buttons.GoToArticleButton
-import com.example.rocketnews.presentation.ui.common.state.LoadingComponent
+import com.example.rocketnews.presentation.ui.common.LoadingComponent
 import com.seiko.imageloader.model.ImageAction
 import com.seiko.imageloader.rememberImageSuccessPainter
 import com.seiko.imageloader.ui.AutoSizeBox
