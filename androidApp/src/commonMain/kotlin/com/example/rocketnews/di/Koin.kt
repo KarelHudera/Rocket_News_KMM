@@ -23,7 +23,6 @@ import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFa
 import com.example.rocketnews.presentation.ui.screens.rocketsSearch.RocketsSearchViewModel
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNews.SpaceFlightNewsViewModel
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNewsDetail.SpaceFlightNewsDetailViewModel
-import com.example.rocketnews.presentation.ui.screens.spaceFlightNewsSearch.SpaceFlightNewsSearchViewModel
 import com.example.rocketnews.repository.ICacheData
 import com.example.rocketnews.repository.IRemoteData
 import com.example.rocketnews.repository.RepositoryImp
@@ -64,7 +63,6 @@ val viewModelModule = module {
     factory { RocketsSearchViewModel(get()) }
     factory { SpaceFlightNewsViewModel(get()) }
     factory { SpaceFlightNewsDetailViewModel(get(), get()) }
-    factory { SpaceFlightNewsSearchViewModel(get()) }
 }
 
 val useCasesModule: Module = module {
