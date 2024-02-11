@@ -50,7 +50,6 @@ class SpaceFlightNewsScreen : Screen {
             topBar = {
                 SpaceFlightNewsActionAppBar(
                     title = "Daily News From Spaceflight",
-                    onClickSearch = { spaceFlightNewsViewModel.setEvent(SpaceFlightNewsContract.Event.OnSearchClick) },
                     spaceFlightNewsViewModel = spaceFlightNewsViewModel,
                     isShadowEnabled = true
                 )

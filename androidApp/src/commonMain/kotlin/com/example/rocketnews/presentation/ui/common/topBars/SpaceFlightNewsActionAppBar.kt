@@ -24,7 +24,6 @@ import com.example.rocketnews.presentation.ui.screens.spaceFlightNews.SpaceFligh
 @Composable
 fun SpaceFlightNewsActionAppBar(
     title: String,
-    onClickSearch: () -> Unit,
     isShadowEnabled: Boolean = false,
     spaceFlightNewsViewModel: SpaceFlightNewsViewModel
 ) {
@@ -71,7 +70,7 @@ fun SpaceFlightNewsActionAppBar(
             title = { Text(text = title) },
             actions = {
                 ActionBarIcon(
-                    onClick = onClickSearch,
+                    onClick = { spaceFlightNewsViewModel.setEvent(SpaceFlightNewsContract.Event.OnSearchClick) },
                     icon = Icons.Filled.Search
                 )
             },

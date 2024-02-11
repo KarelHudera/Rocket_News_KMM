@@ -18,7 +18,6 @@ class SpaceFlightNewsViewModel(
 ) : BaseViewModel<SpaceFlightNewsContract.Event, SpaceFlightNewsContract.State, SpaceFlightNewsContract.Effect>() {
 
     var list = emptyList<SpaceFlightNews>()
-
     var searchText = MutableStateFlow(mutableStateOf(TextFieldValue("")))
 
     private val _newsOffset = MutableStateFlow(0)

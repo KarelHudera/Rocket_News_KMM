@@ -14,12 +14,11 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.rocketnews.presentation.ui.common.topBars.RocketsActionAppBar
-import com.example.rocketnews.presentation.ui.common.RocketsList
+import com.example.rocketnews.presentation.ui.common.screenComponents.RocketsScreenComponent
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
+import com.example.rocketnews.presentation.ui.common.topBars.RocketsActionAppBar
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailScreen
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesScreen
-import com.example.rocketnews.presentation.ui.screens.rocketsSearch.RocketsSearchScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class RocketsScreen : Screen {
@@ -42,8 +41,11 @@ class RocketsScreen : Screen {
                     is RocketsContract.Effect.NavigateToFavorites ->
                         navigator.push(RocketsFavoritesScreen())
 
-                    is RocketsContract.Effect.NavigateToSearch ->
-                        navigator.push(RocketsSearchScreen())
+                    is RocketsContract.Effect.ShowSearch ->
+                        rocketsViewModel.setSearchBarVisibility(true)
+
+                    is RocketsContract.Effect.HideSearch ->
+                        rocketsViewModel.setSearchBarVisibility(false)
                 }
             }
         }
@@ -52,8 +54,7 @@ class RocketsScreen : Screen {
             topBar = {
                 RocketsActionAppBar(
                     title = "SpaceX Rockets",
-                    onClickFavorite = { rocketsViewModel.setEvent(RocketsContract.Event.OnFavoritesClick) },
-                    onClickSearch = { rocketsViewModel.setEvent(RocketsContract.Event.OnSearchClick) },
+                    rocketsViewModel = rocketsViewModel,
                     isShadowEnabled = true
                 )
             },
@@ -64,7 +65,7 @@ class RocketsScreen : Screen {
                     .fillMaxSize(),
                 resourceUiState = state.rockets,
                 successView = { rockets ->
-                    RocketsList(
+                    RocketsScreenComponent(
                         rockets = rockets,
                         onRocketClick = { idRocket ->
                             rocketsViewModel.setEvent(
@@ -72,7 +73,8 @@ class RocketsScreen : Screen {
                                     idRocket
                                 )
                             )
-                        }
+                        },
+                        rocketsViewModel = rocketsViewModel
                     )
                 },
                 onTryAgain = { rocketsViewModel.setEvent(RocketsContract.Event.OnTryCheckAgainClick) },
