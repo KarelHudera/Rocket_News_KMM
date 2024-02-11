@@ -50,11 +50,13 @@ fun SpaceFlightNewsActionAppBar(
                             SpaceFlightNewsContract.Event.OnSearchTextChanged("")
                         )
                         spaceFlightNewsViewModel.setEvent(SpaceFlightNewsContract.Event.OnBackClick)
+                        textState.value = TextFieldValue("")
                     },
                     onTrailingIconClick = {
                         spaceFlightNewsViewModel.setEvent(
                             SpaceFlightNewsContract.Event.OnSearchTextChanged("")
                         )
+                        textState.value = TextFieldValue("")
                     }
                 )
             },

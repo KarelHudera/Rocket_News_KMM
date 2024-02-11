@@ -1,5 +1,7 @@
 package com.example.rocketnews.presentation.ui.screens.spaceFlightNews
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.text.input.TextFieldValue
 import cafe.adriel.voyager.core.model.screenModelScope
 import co.touchlab.kermit.Logger
 import com.example.rocketnews.domain.interactors.GetSpaceFlightNewsUseCase
@@ -17,6 +19,8 @@ class SpaceFlightNewsViewModel(
 
     var list = emptyList<SpaceFlightNews>()
 
+    var searchText = MutableStateFlow(mutableStateOf(TextFieldValue("")))
+
     private val _newsOffset = MutableStateFlow(0)
     private val newsOffset = _newsOffset.asStateFlow()
 
@@ -26,6 +30,7 @@ class SpaceFlightNewsViewModel(
 
     private val _showSearchBar = MutableStateFlow(false)
     val showSearchBar = _showSearchBar.asStateFlow()
+
     fun setSearchBarVisibility(show: Boolean) {
         _showSearchBar.value = show
     }
@@ -49,8 +54,8 @@ class SpaceFlightNewsViewModel(
             is SpaceFlightNewsContract.Event.OnSearchClick -> setEffect { SpaceFlightNewsContract.Effect.ShowSearch }
             is SpaceFlightNewsContract.Event.OnBackClick -> setEffect { SpaceFlightNewsContract.Effect.HideSearch }
             is SpaceFlightNewsContract.Event.OnSearchTextChanged -> {
-                val searchText = event.searchText
-                filterNews(searchText)
+                searchText.value.value = TextFieldValue(event.searchText)
+                filterNews(searchText.value.value.text)
             }
         }
     }
