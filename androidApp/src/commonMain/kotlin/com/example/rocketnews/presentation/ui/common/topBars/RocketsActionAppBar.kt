@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -18,6 +19,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.presentation.ui.common.ActionBarIcon
 import com.example.rocketnews.presentation.ui.common.SearchView
+import com.example.rocketnews.presentation.ui.common.Space
+import com.example.rocketnews.presentation.ui.common.state.ManagementResourceComponentState
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsContract
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsViewModel
 
@@ -30,6 +33,8 @@ fun RocketsActionAppBar(
 ) {
     val showSearch = rocketsViewModel.showSearchBar.collectAsState().value
     val textState = remember { mutableStateOf(TextFieldValue("")) }
+    val state by rocketsViewModel.uiState.collectAsState()
+
     if (showSearch) {
         TopAppBar(
             title = {},
@@ -69,9 +74,15 @@ fun RocketsActionAppBar(
         TopAppBar(
             title = { Text(text = title) },
             actions = {
-                ActionBarIcon(
-                    onClick = { rocketsViewModel.setEvent(RocketsContract.Event.OnSearchClick) },
-                    icon = Icons.Filled.Search
+                ManagementResourceComponentState(
+                    resourceUiState = state.rockets,
+                    successView = {
+                        ActionBarIcon(
+                            onClick = { rocketsViewModel.setEvent(RocketsContract.Event.OnSearchClick) },
+                            icon = Icons.Filled.Search
+                        )
+                    },
+                    loadingView = { Space() }
                 )
                 ActionBarIcon(
                     onClick = { rocketsViewModel.setEvent(RocketsContract.Event.OnFavoritesClick) },

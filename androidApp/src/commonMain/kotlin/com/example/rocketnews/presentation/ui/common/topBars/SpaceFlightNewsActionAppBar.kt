@@ -17,6 +17,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.presentation.ui.common.ActionBarIcon
 import com.example.rocketnews.presentation.ui.common.SearchView
+import com.example.rocketnews.presentation.ui.common.Space
+import com.example.rocketnews.presentation.ui.common.state.ManagementResourceComponentState
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNews.SpaceFlightNewsContract
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNews.SpaceFlightNewsViewModel
 
@@ -27,6 +29,7 @@ fun SpaceFlightNewsActionAppBar(
     isShadowEnabled: Boolean = false,
     spaceFlightNewsViewModel: SpaceFlightNewsViewModel
 ) {
+    val state = spaceFlightNewsViewModel.uiState.collectAsState().value
     val showSearch = spaceFlightNewsViewModel.showSearchBar.collectAsState().value
     val textState = remember { mutableStateOf(TextFieldValue("")) }
 
@@ -69,9 +72,15 @@ fun SpaceFlightNewsActionAppBar(
         TopAppBar(
             title = { Text(text = title) },
             actions = {
-                ActionBarIcon(
-                    onClick = { spaceFlightNewsViewModel.setEvent(SpaceFlightNewsContract.Event.OnSearchClick) },
-                    icon = Icons.Filled.Search
+                ManagementResourceComponentState(
+                    resourceUiState = state.spaceFlightNews,
+                    successView = {
+                        ActionBarIcon(
+                            onClick = { spaceFlightNewsViewModel.setEvent(SpaceFlightNewsContract.Event.OnSearchClick) },
+                            icon = Icons.Filled.Search
+                        )
+                    },
+                    loadingView = { Space() }
                 )
             },
             modifier = if (isShadowEnabled) {
