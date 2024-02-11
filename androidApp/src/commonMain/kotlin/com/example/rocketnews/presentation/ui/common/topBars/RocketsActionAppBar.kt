@@ -2,6 +2,7 @@ package com.example.rocketnews.presentation.ui.common.topBars
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
@@ -18,8 +19,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.presentation.ui.common.ActionBarIcon
+import com.example.rocketnews.presentation.ui.common.LoadingComponent
 import com.example.rocketnews.presentation.ui.common.SearchView
-import com.example.rocketnews.presentation.ui.common.Space
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceComponentState
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsContract
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsViewModel
@@ -82,7 +83,14 @@ fun RocketsActionAppBar(
                             icon = Icons.Filled.Search
                         )
                     },
-                    loadingView = { Space() }
+                    loadingView = {
+                        LoadingComponent(
+                            modifier = Modifier
+                                .padding(end = 12.dp)
+                                .size(22.dp),
+                            cornerShape = 16.dp
+                        )
+                    }
                 )
                 ActionBarIcon(
                     onClick = { rocketsViewModel.setEvent(RocketsContract.Event.OnFavoritesClick) },

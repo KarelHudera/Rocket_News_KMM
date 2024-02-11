@@ -29,6 +29,7 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.rocketnews.presentation.ui.common.LoadingComponent
 import com.example.rocketnews.presentation.ui.common.NewsDatePicker
 import com.example.rocketnews.presentation.ui.common.Space
 import com.example.rocketnews.presentation.ui.common.screenComponents.NewsScreenComponent
@@ -120,6 +121,7 @@ class NewsScreen : Screen {
                     hdUrl = news.hdurl
                     NewsScreenComponent(news, newsViewModel)
                 },
+                loadingView = { LoadingComponent(modifier = Modifier.fillMaxSize()) },
                 onTryAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
                 onCheckAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
             )
