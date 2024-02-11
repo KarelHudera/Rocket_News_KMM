@@ -18,7 +18,6 @@ import com.example.rocketnews.presentation.ui.common.screenComponents.SpaceFligh
 import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiState
 import com.example.rocketnews.presentation.ui.common.topBars.SpaceFlightNewsActionAppBar
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNewsDetail.SpaceFlightNewsDetailScreen
-import com.example.rocketnews.presentation.ui.screens.spaceFlightNewsSearch.SpaceFlightNewsSearchScreen
 import kotlinx.coroutines.flow.collectLatest
 
 class SpaceFlightNewsScreen : Screen {
@@ -38,8 +37,11 @@ class SpaceFlightNewsScreen : Screen {
                     is SpaceFlightNewsContract.Effect.NavigateToDetailSpaceFlightNews ->
                         navigator.push(SpaceFlightNewsDetailScreen(effect.idSpaceFlightNews))
 
-                    is SpaceFlightNewsContract.Effect.NavigateToSearch ->
-                        navigator.push(SpaceFlightNewsSearchScreen())
+                    is SpaceFlightNewsContract.Effect.ShowSearch ->
+                        spaceFlightNewsViewModel.setSearchBarVisibility(true)
+
+                    is SpaceFlightNewsContract.Effect.HideSearch ->
+                        spaceFlightNewsViewModel.setSearchBarVisibility(false)
                 }
             }
         }
@@ -48,7 +50,7 @@ class SpaceFlightNewsScreen : Screen {
             topBar = {
                 SpaceFlightNewsActionAppBar(
                     title = "Daily News From Spaceflight",
-                    onClickSearch = { spaceFlightNewsViewModel.setEvent(SpaceFlightNewsContract.Event.OnSearchClick) },
+                    spaceFlightNewsViewModel = spaceFlightNewsViewModel,
                     isShadowEnabled = true
                 )
             }

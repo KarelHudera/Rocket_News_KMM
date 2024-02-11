@@ -20,10 +20,8 @@ import com.example.rocketnews.presentation.ui.screens.newsImage.NewsImageViewMod
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
 import com.example.rocketnews.presentation.ui.screens.rockets.RocketsViewModel
 import com.example.rocketnews.presentation.ui.screens.rocketsFavourite.RocketsFavoritesViewModel
-import com.example.rocketnews.presentation.ui.screens.rocketsSearch.RocketsSearchViewModel
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNews.SpaceFlightNewsViewModel
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNewsDetail.SpaceFlightNewsDetailViewModel
-import com.example.rocketnews.presentation.ui.screens.spaceFlightNewsSearch.SpaceFlightNewsSearchViewModel
 import com.example.rocketnews.repository.ICacheData
 import com.example.rocketnews.repository.IRemoteData
 import com.example.rocketnews.repository.RepositoryImp
@@ -61,10 +59,8 @@ val viewModelModule = module {
     factory { params -> RocketDetailViewModel(get(), get(), get(), params.get()) }
     factory { NewsViewModel(get()) }
     factory { NewsImageViewModel() }
-    factory { RocketsSearchViewModel(get()) }
     factory { SpaceFlightNewsViewModel(get()) }
     factory { SpaceFlightNewsDetailViewModel(get(), get()) }
-    factory { SpaceFlightNewsSearchViewModel(get()) }
 }
 
 val useCasesModule: Module = module {

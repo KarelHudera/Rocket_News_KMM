@@ -11,6 +11,8 @@ interface SpaceFlightNewsContract {
         data object OnTryCheckAgainClick : Event
         data class OnSpaceFlightNewsClick(val idSpaceFlightNews: String) :Event
         data object OnSearchClick : Event
+        data object OnBackClick : Event
+        data class OnSearchTextChanged(val searchText: String) : Event
     }
 
     data class State(
@@ -19,6 +21,7 @@ interface SpaceFlightNewsContract {
 
     sealed interface Effect : UiEffect {
         data class NavigateToDetailSpaceFlightNews(val idSpaceFlightNews: String) : Effect
-        data object NavigateToSearch : Effect
+        data object ShowSearch : Effect
+        data object HideSearch : Effect
     }
 }

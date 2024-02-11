@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 internal val black = Color(0xFF0A0A0A)
 internal val onBlack = Color(0xFF1B1B1B)
 internal val white = Color(0xFFFDFDFB)
-internal val onWhite = Color(0xFFFAFAFA)
+internal val onWhite = Color(0xFFF4F4F4)
 internal val debugColor = Color.Unspecified
 
 internal val md_theme_light_primary = black
