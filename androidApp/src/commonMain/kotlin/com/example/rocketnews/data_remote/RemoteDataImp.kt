@@ -24,32 +24,35 @@ class RemoteDataImp(
     private val apiNewsMapper: ApiNewsMapper,
     private val apiSpaceFlightMapper: ApiSpaceFlightMapper
 ) : IRemoteData {
-    private val endPointSpaceFlight = "https://api.spaceflightnewsapi.net/v4/articles/"
-    private val endPointSpaceX = "https://api.spacexdata.com/v5/launches/"
-    private val endPointNASA = "https://api.nasa.gov/planetary/apod"
-    private val apiKey = "428D3IouMHvoxKD8eaefoZKwe0w2Syv3t5eFbklA"
 
     override suspend fun getRocketsFromApi(): List<Rocket> =
         apiRocketMapper.map(
-            httpClient.get(endPointSpaceX).body<List<ApiRocket>>()
+            httpClient.get("$SPACEX_URL$SPACEX_LAUNCHES").body<List<ApiRocket>>()
         )
+
     override suspend fun getRocketFromApi(id: RocketId): Rocket =
         apiRocketMapper.map(
-            httpClient.get("$endPointSpaceX$id").body<ApiRocket>()
+            httpClient.get("$SPACEX_URL$SPACEX_LAUNCHES$id").body<ApiRocket>()
         )
+
     override suspend fun getNewsFromApi(date: NewsDate): News =
         apiNewsMapper.map(
-            httpClient.get("$endPointNASA?api_key=$apiKey&date=$date"){
-                header("X-Api-Key", apiKey)
+            httpClient.get("$NASA_URL$NASA_APOD") {
+                header("X-Api-Key", API_KEY)
+                parameter("date", date)
             }.body<ApiNews>()
-    )
+        )
+
     override suspend fun getSpaceFlightNewsFromApi(newsOffset: NewsOffset): List<SpaceFlightNews> =
         apiSpaceFlightMapper.map(
-            (httpClient.get("$endPointSpaceFlight?format=json&limit=50&offset=$newsOffset").body<ApiSpaceFlightNews>()).results
+            (httpClient.get("$SPACEFLIGHT_NEWS_URL$SPACEFLIGHT_NEWS_ARTICLES?format=json&limit=50&offset=$newsOffset")
+                .body<ApiSpaceFlightNews>()).results
         )
 
     override suspend fun getSpaceFlightNewFromApi(idSpaceFlightNews: String): SpaceFlightNews =
         apiSpaceFlightMapper.map(
-            httpClient.get("$endPointSpaceFlight$idSpaceFlightNews/?format=json").body<Result>()
+            httpClient.get("$SPACEFLIGHT_NEWS_URL$SPACEFLIGHT_NEWS_ARTICLES$idSpaceFlightNews") {
+                parameter("format", "json")
+            }.body<Result>()
         )
 }
