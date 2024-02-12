@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -37,21 +35,15 @@ import com.example.rocketnews.presentation.ui.common.state.ManagementResourceUiS
 import com.example.rocketnews.presentation.ui.common.topBars.NewsActionAppBar
 import com.example.rocketnews.presentation.ui.screens.newsImage.NewsImageScreen
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.datetime.Clock
 
 class NewsScreen : Screen {
     override val key: ScreenKey = uniqueScreenKey
 
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
         val newsViewModel = getScreenModel<NewsViewModel>()
 
         val state by newsViewModel.uiState.collectAsState()
-
-        val newsDatePickerState = rememberDatePickerState(
-            initialSelectedDateMillis = Clock.System.now().toEpochMilliseconds()
-        )
 
         val showNewsDatePickerDialog = newsViewModel.showNewsDatePickerDialog.collectAsState().value
 
@@ -125,7 +117,6 @@ class NewsScreen : Screen {
             )
             if (showNewsDatePickerDialog) {
                 NewsDatePicker(
-                    datePickerState = newsDatePickerState,
                     dismiss = {
                         newsViewModel.setNewsDatePickerDialog(false)
                     },
