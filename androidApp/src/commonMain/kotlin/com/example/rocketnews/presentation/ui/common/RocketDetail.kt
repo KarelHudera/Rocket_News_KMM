@@ -62,7 +62,7 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
                     }
 
                     is ImageAction.Failure -> {
-                        NoImageError(imageSize)
+                        NoImageError(imageSize, 0.dp)
                     }
                 }
             }

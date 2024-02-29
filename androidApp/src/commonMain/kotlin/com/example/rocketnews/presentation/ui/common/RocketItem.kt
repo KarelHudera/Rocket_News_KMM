@@ -2,7 +2,6 @@ package com.example.rocketnews.presentation.ui.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rocketnews.domain.model.Rocket
@@ -77,21 +75,7 @@ fun RocketItem(
                     }
 
                     is ImageAction.Failure -> {
-                        Box(
-                            modifier = Modifier
-                                .padding(21.dp)
-                                .width(88.dp)
-                                .height(88.dp)
-                                .clip(RoundedCornerShape(64.dp))
-                                .border(6.dp, Color.LightGray, shape = RoundedCornerShape(64.dp)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                "Mission patch",
-                                textAlign = TextAlign.Center,
-                                color = Color.LightGray
-                            )
-                        }
+                        NoImageError(88.dp, 21.dp)
                     }
                 }
             }
