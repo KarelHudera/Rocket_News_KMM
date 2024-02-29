@@ -89,6 +89,7 @@ fun RocketItem(
                             Text(
                                 "Mission patch",
                                 textAlign = TextAlign.Center,
+                                color = Color.LightGray
                             )
                         }
                     }
