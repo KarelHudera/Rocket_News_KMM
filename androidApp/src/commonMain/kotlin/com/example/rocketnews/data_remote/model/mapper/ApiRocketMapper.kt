@@ -9,6 +9,7 @@ class ApiRocketMapper : Mapper<ApiRocket, Rocket>() {
         Rocket(
             links.patch.small ?: "", // image
             links.patch.large ?: "", // image
+            links.flickr.original,
             links.webcast ?: "",
             links.youtube_id ?: "",
             links.article ?: "",

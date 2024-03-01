@@ -16,6 +16,7 @@ class CacheDataImp(
             it.appDatabaseQueries.insertRocketFavorite(
                 rocket.patchSmall, // image
                 rocket.patchLarge, // image
+                rocket.flickr,
                 rocket.webcast,
                 rocket.youtube_id,
                 rocket.article,
@@ -51,6 +52,7 @@ class CacheDataImp(
     private fun mapFavorite(
         patchSmall: String,
         patchLarge: String,
+        filckr: List<String>,
         webcast: String,
         youtube_id: String,
         article: String,
@@ -65,6 +67,7 @@ class CacheDataImp(
     ): Rocket = Rocket(
         patchSmall,
         patchLarge,
+        filckr,
         webcast,
         youtube_id,
         article,

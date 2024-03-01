@@ -6,6 +6,7 @@ import androidx.compose.runtime.Immutable
 data class Rocket(
     val patchSmall: String, // image
     val patchLarge: String, // image
+    val flickr: List<String>, // images
     val webcast: String,
     val youtube_id: String,
     val article: String,
