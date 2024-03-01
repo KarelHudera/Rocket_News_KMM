@@ -9,6 +9,7 @@ CREATE TABLE RocketFavorite(
      wikipedia TEXT NOT NULL,
      static_fire_date_utc TEXT NOT NULL,
      success TEXT AS Boolean NOT NULL,
+     details TEXT NOT NULL,
      date_utc TEXT NOT NULL,
      name TEXT NOT NULL,
      upcoming TEXT AS Boolean NOT NULL,
@@ -16,7 +17,7 @@ CREATE TABLE RocketFavorite(
 );
 
 insertRocketFavorite:
-INSERT OR REPLACE INTO RocketFavorite(patchSmal, patchLarge, webcast, youtube_id, article, wikipedia, static_fire_date_utc, success, date_utc, name, upcoming, id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);
+INSERT OR REPLACE INTO RocketFavorite(patchSmal, patchLarge, webcast, youtube_id, article, wikipedia, static_fire_date_utc, success, details, date_utc, name, upcoming, id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 removeRocketFavorite:
 DELETE FROM RocketFavorite WHERE id = ?;

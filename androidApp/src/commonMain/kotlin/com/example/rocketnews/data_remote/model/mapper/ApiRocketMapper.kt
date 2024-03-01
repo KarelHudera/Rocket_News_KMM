@@ -15,6 +15,7 @@ class ApiRocketMapper : Mapper<ApiRocket, Rocket>() {
             links.wikipedia ?: "",
             static_fire_date_utc ?: "",
             success ?: false,
+            details ?: "No details for this mission",
             date_utc,
             name,
             upcoming,

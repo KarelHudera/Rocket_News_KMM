@@ -12,6 +12,7 @@ data class Rocket(
     val wikipedia: String,
     val static_fire_date_utc: String,
     val success: Boolean,
+    val details: String,
     val date_utc: String,
     val name: String,
     val upcoming: Boolean,
