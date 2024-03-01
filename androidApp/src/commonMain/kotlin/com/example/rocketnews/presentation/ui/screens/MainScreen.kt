@@ -51,7 +51,7 @@ fun MainScreen() {
                 ) {
                     Divider(
                         color = Color.Transparent,
-                        thickness =0.dp,
+                        thickness = 0.dp,
                         modifier = Modifier.shadow(1.dp, spotColor = Color.Black)
                     )
                     NavigationBar(

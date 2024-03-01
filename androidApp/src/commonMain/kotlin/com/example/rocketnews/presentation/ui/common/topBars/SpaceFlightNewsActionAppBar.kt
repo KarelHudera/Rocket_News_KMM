@@ -1,7 +1,6 @@
 package com.example.rocketnews.presentation.ui.common.topBars
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -29,7 +28,7 @@ import com.example.rocketnews.presentation.ui.common.state.ManagementResourceCom
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNews.SpaceFlightNewsContract
 import com.example.rocketnews.presentation.ui.screens.spaceFlightNews.SpaceFlightNewsViewModel
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SpaceFlightNewsActionAppBar(
     title: String,
