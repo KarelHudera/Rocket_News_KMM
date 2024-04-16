@@ -3,8 +3,6 @@ package com.example.rocketnews.data_cache.sqldelight
 import app.cash.sqldelight.ColumnAdapter
 import com.example.rocketnews.datacache.sqldelight.RocketFavorite
 
-
-
 class SharedDatabase(
     private val driverProvider: DatabaseDriverFactory,
 ) {
@@ -23,11 +21,21 @@ class SharedDatabase(
         }
     }
 
+    private val listAdapter = object : ColumnAdapter<List<String>, String> {
+        override fun decode(databaseValue: String) =
+            if (databaseValue.isEmpty()) {
+                listOf()
+            } else {
+                databaseValue.split(",")
+            }
+        override fun encode(value: List<String>) = value.joinToString(separator = ",")
+    }
+
     private suspend fun initDatabase() {
         if (database == null) {
             database = AppDatabase.invoke(
                 driverProvider.createDriver(),
-                RocketFavorite.Adapter(boolAdapter, boolAdapter)
+                RocketFavorite.Adapter(listAdapter, boolAdapter, boolAdapter)
             )
         }
     }

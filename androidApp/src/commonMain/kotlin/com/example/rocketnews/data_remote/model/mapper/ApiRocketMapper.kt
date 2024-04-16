@@ -9,12 +9,14 @@ class ApiRocketMapper : Mapper<ApiRocket, Rocket>() {
         Rocket(
             links.patch.small ?: "", // image
             links.patch.large ?: "", // image
+            links.flickr.original,
             links.webcast ?: "",
             links.youtube_id ?: "",
             links.article ?: "",
             links.wikipedia ?: "",
             static_fire_date_utc ?: "",
             success ?: false,
+            details ?: "No details for this mission",
             date_utc,
             name,
             upcoming,
