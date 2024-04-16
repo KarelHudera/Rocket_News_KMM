@@ -40,12 +40,22 @@ fun SpaceFlightNewsDetailScreenComponent(spaceFlightNew: SpaceFlightNews) {
                             rememberImageSuccessPainter(action),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxWidth().height(300.dp)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(300.dp)
+                                .padding(horizontal = 8.dp)
+                                .clip(RoundedCornerShape(16.dp))
                         )
                     }
 
                     is ImageAction.Loading -> {
-                        LoadingComponent(modifier = Modifier.fillMaxWidth().height(300.dp))
+                        LoadingComponent(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(300.dp)
+                                .padding(horizontal = 8.dp)
+                                .clip(RoundedCornerShape(16.dp))
+                        )
                     }
 
                     is ImageAction.Failure -> {}

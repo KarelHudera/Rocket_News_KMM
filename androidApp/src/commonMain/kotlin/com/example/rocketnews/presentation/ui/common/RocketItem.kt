@@ -37,6 +37,11 @@ fun RocketItem(
     rocket: Rocket,
     onClick: () -> Unit,
 ) {
+    val (text, color) = when (rocket.success) {
+        true -> "Mission Successful" to Color.Green
+        false -> "Mission Failed" to Color.Red
+    }
+
     Card(
         modifier = Modifier.padding(vertical = 8.dp, horizontal = MaterialTheme.spacing.horizontal),
         elevation = CardDefaults.cardElevation(
@@ -58,6 +63,7 @@ fun RocketItem(
                                 contentDescription = null,
                                 modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
                             )
+
                             Image(
                                 painter = rememberImagePainter(rocket.patchLarge),
                                 contentDescription = null,
@@ -79,35 +85,46 @@ fun RocketItem(
                     }
                 }
             }
+
             Space()
+
             Column {
                 Text(
                     text = rocket.name,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Medium,
                 )
+
                 Space(4.dp)
-                Row {
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Box(
-                        Modifier
+                        modifier = Modifier
                             .clip(RoundedCornerShape(16.dp))
                             .size(18.dp)
-                            .background(
-                                if (rocket.success) {
-                                    Color.Green.copy(0.7f)
-                                } else {
-                                    Color.Red.copy(0.7f)
-                                }
-                            )
+                            .background(color)
                             .align(Alignment.CenterVertically)
                     )
+
                     Space()
+
                     Text(
-                        text = formatRocketsDate(rocket.date_utc),
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
+                        text = text,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = color
                     )
                 }
+
+                Space()
+
+                Text(
+                    text = formatRocketsDate(rocket.date_utc),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium
+                )
             }
         }
     }

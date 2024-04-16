@@ -45,7 +45,7 @@ class RemoteDataImp(
 
     override suspend fun getSpaceFlightNewsFromApi(newsOffset: NewsOffset): List<SpaceFlightNews> =
         apiSpaceFlightMapper.map(
-            httpClient.get("$SPACEFLIGHT_NEWS_URL$SPACEFLIGHT_NEWS_ARTICLES"){
+            httpClient.get("$SPACEFLIGHT_NEWS_URL$SPACEFLIGHT_NEWS_ARTICLES") {
                 parameter("format", "json")
                 parameter("limit", "50")
                 parameter("offset", newsOffset)
