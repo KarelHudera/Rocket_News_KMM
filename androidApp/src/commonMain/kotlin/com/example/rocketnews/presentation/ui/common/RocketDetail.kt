@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,6 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.helpers.formatRocketsDate
@@ -19,6 +23,7 @@ import com.example.rocketnews.presentation.ui.common.buttons.WikipediaButton
 import com.example.rocketnews.presentation.ui.common.buttons.YoutubeButton
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
 import com.seiko.imageloader.model.ImageAction
+import com.seiko.imageloader.rememberImagePainter
 import com.seiko.imageloader.rememberImageSuccessPainter
 import com.seiko.imageloader.ui.AutoSizeBox
 
@@ -36,42 +41,32 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
         modifier = Modifier.fillMaxSize()
     ) {
         Space(52.dp)
-        if (rocket.patchLarge == "" && rocket.patchSmall == "") {
-            NoImageError(imageSize)
-        } else {
-            Box {
-                AutoSizeBox(rocket.patchSmall) { action ->
-                    when (action) {
-                        is ImageAction.Success -> {
+        Box {
+            AutoSizeBox(rocket.patchSmall) { action ->
+                when (action) {
+                    is ImageAction.Success -> {
+                        Box {
                             Image(
                                 painter = rememberImageSuccessPainter(action),
                                 modifier = Modifier.size(imageSize),
                                 contentDescription = null
                             )
+                            Image(
+                                painter = rememberImagePainter(rocket.patchLarge),
+                                modifier = Modifier.size(imageSize),
+                                contentDescription = null
+                            )
                         }
-
-                        is ImageAction.Loading -> {
-                            Box(modifier = Modifier.size(imageSize)) {
-                                ProgressIndicator(Modifier.align(Alignment.Center))
-                            }
-                        }
-
-                        is ImageAction.Failure -> {}
                     }
-                }
-                AutoSizeBox(rocket.patchLarge) { action ->
-                    when (action) {
-                        is ImageAction.Success -> {
-                            Image(
-                                painter = rememberImageSuccessPainter(action),
-                                modifier = Modifier.size(imageSize),
-                                contentDescription = null
-                            )
+
+                    is ImageAction.Loading -> {
+                        Box(modifier = Modifier.size(imageSize)) {
+                            ProgressIndicator(Modifier.align(Alignment.Center))
                         }
+                    }
 
-                        is ImageAction.Loading -> {}
-
-                        is ImageAction.Failure -> {}
+                    is ImageAction.Failure -> {
+                        NoImageError(imageSize, 0.dp)
                     }
                 }
             }
@@ -86,6 +81,13 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
             style = MaterialTheme.typography.headlineSmall,
             color = color
         )
+//        Space(22.dp)
+//        Text(
+//            text = rocket.details,
+//            modifier = Modifier.padding(horizontal = 16.dp),
+//            fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+//            fontWeight = FontWeight.Medium
+//        )
         Space(52.dp)
         Row {
             YoutubeButton(rocket, rocketDetailViewModel)

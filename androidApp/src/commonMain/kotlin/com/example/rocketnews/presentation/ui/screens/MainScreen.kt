@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
@@ -46,17 +46,17 @@ fun MainScreen() {
             bottomBar = {
                 Column(
                     modifier = Modifier
-                        .safeDrawingPadding()
+                        .navigationBarsPadding()
                         .height(62.dp)
                 ) {
                     Divider(
                         color = Color.Transparent,
                         thickness = 0.dp,
-                        modifier = Modifier.shadow(10.dp)
+                        modifier = Modifier.shadow(1.dp, spotColor = Color.Black)
                     )
                     NavigationBar(
                         modifier = Modifier
-                            .safeDrawingPadding()
+                            .padding(top = 4.dp)
                             .height(62.dp),
                         tonalElevation = 0.dp
                     ) {

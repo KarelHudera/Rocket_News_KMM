@@ -12,11 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +28,7 @@ import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.helpers.formatRocketsDate
 import com.example.rocketnews.presentation.theme.spacing
 import com.seiko.imageloader.model.ImageAction
+import com.seiko.imageloader.rememberImagePainter
 import com.seiko.imageloader.rememberImageSuccessPainter
 import com.seiko.imageloader.ui.AutoSizeBox
 
@@ -51,59 +49,33 @@ fun RocketItem(
                 .clickable(onClick = onClick)
                 .fillMaxWidth()
         ) {
-            Box {
-                if (rocket.patchLarge == "" && rocket.patchSmall == "") {
-                    Box(
-                        modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column {
-                            Icon(
-                                imageVector = Icons.Rounded.Warning,
-                                modifier = Modifier.align(Alignment.CenterHorizontally),
-                                contentDescription = null
+            AutoSizeBox(rocket.patchSmall) { action ->
+                when (action) {
+                    is ImageAction.Success -> {
+                        Box {
+                            Image(
+                                painter = rememberImageSuccessPainter(action),
+                                contentDescription = null,
+                                modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
                             )
-                            Space()
-                            Text("No image")
-                        }
-
-                    }
-                } else {
-                    AutoSizeBox(rocket.patchSmall) { action ->
-                        when (action) {
-                            is ImageAction.Success -> {
-                                Image(
-                                    painter = rememberImageSuccessPainter(action),
-                                    contentDescription = null,
-                                    modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
-                                )
-                            }
-
-                            is ImageAction.Loading -> {
-                                Box(
-                                    modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
-                                ) {
-                                    ProgressIndicator(Modifier.align(Alignment.Center))
-                                }
-                            }
-
-                            is ImageAction.Failure -> {}
+                            Image(
+                                painter = rememberImagePainter(rocket.patchLarge),
+                                contentDescription = null,
+                                modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
+                            )
                         }
                     }
-                    AutoSizeBox(rocket.patchLarge) { action ->
-                        when (action) {
-                            is ImageAction.Success -> {
-                                Image(
-                                    painter = rememberImageSuccessPainter(action),
-                                    contentDescription = null,
-                                    modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
-                                )
-                            }
 
-                            is ImageAction.Loading -> {}
-
-                            is ImageAction.Failure -> {}
+                    is ImageAction.Loading -> {
+                        Box(
+                            modifier = Modifier.padding(10.dp).width(110.dp).height(110.dp)
+                        ) {
+                            ProgressIndicator(Modifier.align(Alignment.Center))
                         }
+                    }
+
+                    is ImageAction.Failure -> {
+                        NoImageError(88.dp, 21.dp)
                     }
                 }
             }

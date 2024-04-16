@@ -20,6 +20,7 @@ import com.example.rocketnews.presentation.ui.common.LoadingComponent
 import com.example.rocketnews.presentation.ui.screens.news.NewsContract
 import com.example.rocketnews.presentation.ui.screens.news.NewsViewModel
 import com.seiko.imageloader.model.ImageAction
+import com.seiko.imageloader.rememberImagePainter
 import com.seiko.imageloader.rememberImageSuccessPainter
 import com.seiko.imageloader.ui.AutoSizeBox
 
@@ -39,34 +40,25 @@ fun NewsScreenComponent(
         AutoSizeBox(news.url) { action ->
             when (action) {
                 is ImageAction.Success -> {
-                    Image(
-                        rememberImageSuccessPainter(action),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
+                    Box {
+                        Image(
+                            rememberImageSuccessPainter(action),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                        Image(
+                            rememberImagePainter(news.hdurl),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
                 }
 
                 is ImageAction.Loading -> {
                     LoadingComponent(modifier = Modifier.fillMaxSize())
                 }
-
-                is ImageAction.Failure -> {}
-            }
-        }
-
-        AutoSizeBox(news.hdurl) { action ->
-            when (action) {
-                is ImageAction.Success -> {
-                    Image(
-                        rememberImageSuccessPainter(action),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-
-                is ImageAction.Loading -> {}
 
                 is ImageAction.Failure -> {}
             }
