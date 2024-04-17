@@ -35,13 +35,13 @@ import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.helpers.formatRocketsDate
 import com.example.rocketnews.presentation.theme.spacing
-import com.example.rocketnews.presentation.ui.common.buttons.WikipediaButton
-import com.example.rocketnews.presentation.ui.common.buttons.YoutubeButton
+import com.example.rocketnews.presentation.ui.common.buttons.UrlButton
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
 import com.seiko.imageloader.model.ImageAction
 import com.seiko.imageloader.rememberImagePainter
 import com.seiko.imageloader.rememberImageSuccessPainter
 import com.seiko.imageloader.ui.AutoSizeBox
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -93,16 +93,20 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
                 }
             }
         }
+
         Space(52.dp)
+
         Text(
             text = "Launch: ${formatRocketsDate(rocket.date_utc)}",
             style = MaterialTheme.typography.headlineSmall
         )
+
         Text(
             text = text,
             style = MaterialTheme.typography.headlineSmall,
             color = color
         )
+
         Space(22.dp)
 
         Card(
@@ -114,12 +118,24 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
             )
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
-                YoutubeButton(rocket, rocketDetailViewModel)
-                WikipediaButton(rocket, rocketDetailViewModel)
-                WikipediaButton(rocket, rocketDetailViewModel)
+                UrlButton(
+                    rocket.webcast,
+                    rocketDetailViewModel,
+                    painterResource("youtube_ic.xml"),
+                )
+                UrlButton(
+                    rocket.reddit,
+                    rocketDetailViewModel,
+                    painterResource("reddit_ic.xml"),
+                )
+                UrlButton(
+                    rocket.wikipedia,
+                    rocketDetailViewModel,
+                    painterResource("wikipedia_ic.xml"),
+                )
             }
         }
 
@@ -162,7 +178,7 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
                                     defaultElevation = 1.dp
                                 )
                             ) {
-                                Box {
+                                Column {
                                     Image(
                                         rememberImageSuccessPainter(action),
                                         contentDescription = null,
@@ -173,7 +189,6 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
                                     )
                                     Row(
                                         Modifier.background(MaterialTheme.colorScheme.surfaceVariant)
-                                            .align(Alignment.BottomCenter)
                                             .fillMaxWidth()
                                     ) {
                                         Text(
@@ -194,7 +209,7 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
                             LoadingComponent(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(imageSize)
+                                    .height(imageSize + 54.dp)
                                     .clip(RoundedCornerShape(8.dp))
                             )
                         }
