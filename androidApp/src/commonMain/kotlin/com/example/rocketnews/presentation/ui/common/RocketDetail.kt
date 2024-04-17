@@ -2,6 +2,8 @@ package com.example.rocketnews.presentation.ui.common
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,6 +18,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +34,7 @@ import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.Rocket
 import com.example.rocketnews.helpers.formatRocketsDate
+import com.example.rocketnews.presentation.theme.spacing
 import com.example.rocketnews.presentation.ui.common.buttons.WikipediaButton
 import com.example.rocketnews.presentation.ui.common.buttons.YoutubeButton
 import com.example.rocketnews.presentation.ui.screens.rocketDetail.RocketDetailViewModel
@@ -99,28 +104,52 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
             color = color
         )
         Space(22.dp)
-        Text(
-            text = rocket.details,
-            modifier = Modifier.padding(horizontal = 16.dp),
-            fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-            fontWeight = FontWeight.Medium,
-            style = TextStyle.Default.copy(
-                lineBreak = LineBreak.Paragraph
+
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(
+                horizontal = MaterialTheme.spacing.horizontal
+            ),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 1.dp
             )
-        )
-        Space(52.dp)
-        Row {
-            YoutubeButton(rocket, rocketDetailViewModel)
-            Space(22.dp)
-            WikipediaButton(rocket, rocketDetailViewModel)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+            ) {
+                YoutubeButton(rocket, rocketDetailViewModel)
+                WikipediaButton(rocket, rocketDetailViewModel)
+                WikipediaButton(rocket, rocketDetailViewModel)
+            }
         }
-        Space(22.dp)
+
+        Space(16.dp)
+
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(
+                horizontal = MaterialTheme.spacing.horizontal
+            ),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 1.dp
+            )
+        ) {
+            Text(
+                text = rocket.details,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 16.dp),
+                fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                fontWeight = FontWeight.Medium,
+                style = TextStyle.Default.copy(
+                    lineBreak = LineBreak.Paragraph
+                )
+            )
+        }
+
+        Space(16.dp)
 
         HorizontalPager(
             state = pagerState,
             contentPadding = PaddingValues(
                 horizontal = 16.dp,
-                vertical = 8.dp
             ),
             pageSpacing = 8.dp
         ) { page ->
@@ -128,15 +157,37 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
                 AutoSizeBox(rocket.flickr.getOrNull(page)!!) { action ->
                     when (action) {
                         is ImageAction.Success -> {
-                            Image(
-                                rememberImageSuccessPainter(action),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(imageSize)
-                                    .clip(RoundedCornerShape(16.dp)),
-                                contentScale = ContentScale.Crop
-                            )
+                            Card(
+                                elevation = CardDefaults.cardElevation(
+                                    defaultElevation = 1.dp
+                                )
+                            ) {
+                                Box {
+                                    Image(
+                                        rememberImageSuccessPainter(action),
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(imageSize),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                    Row(
+                                        Modifier.background(MaterialTheme.colorScheme.surfaceVariant)
+                                            .align(Alignment.BottomCenter)
+                                            .fillMaxWidth()
+                                    ) {
+                                        Text(
+                                            text = "Mission Flickr",
+                                            modifier = Modifier.padding(
+                                                horizontal = 8.dp,
+                                                vertical = 16.dp
+                                            ).align(Alignment.CenterVertically),
+                                            fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                                            fontWeight = FontWeight.Medium,
+                                        )
+                                    }
+                                }
+                            }
                         }
 
                         is ImageAction.Loading -> {
@@ -144,7 +195,7 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(imageSize)
-                                    .clip(RoundedCornerShape(16.dp))
+                                    .clip(RoundedCornerShape(8.dp))
                             )
                         }
 
@@ -153,5 +204,6 @@ fun RocketDetailScreenComponent(rocket: Rocket, rocketDetailViewModel: RocketDet
                 }
             }
         }
+        Space(32.dp)
     }
 }

@@ -2,8 +2,8 @@ package com.example.rocketnews.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-internal val black = Color(0xFF0A0A0A)
-internal val onBlack = Color(0xFF1B1B1B)
+internal val black = Color(0xFF121212)
+internal val onBlack = Color(0xFF292929)
 internal val white = Color(0xFFFDFDFB)
 internal val onWhite = Color(0xFFF4F4F4)
 internal val debugColor = Color.Unspecified

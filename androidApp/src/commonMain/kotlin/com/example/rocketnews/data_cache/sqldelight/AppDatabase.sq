@@ -5,6 +5,7 @@ import kotlin.collections.List;
 CREATE TABLE RocketFavorite(
      patchSmal TEXT NOT NULL,
      patchLarge TEXT NOT NULL,
+     reddit TEXT NOT NULL,
      flickr TEXT AS List<String> NOT NULL,
      webcast TEXT NOT NULL,
      youtube_id TEXT NOT NULL,
@@ -20,7 +21,7 @@ CREATE TABLE RocketFavorite(
 );
 
 insertRocketFavorite:
-INSERT OR REPLACE INTO RocketFavorite(patchSmal, patchLarge, flickr, webcast, youtube_id, article, wikipedia, static_fire_date_utc, success, details, date_utc, name, upcoming, id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+INSERT OR REPLACE INTO RocketFavorite(patchSmal, patchLarge, reddit, flickr, webcast, youtube_id, article, wikipedia, static_fire_date_utc, success, details, date_utc, name, upcoming, id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 removeRocketFavorite:
 DELETE FROM RocketFavorite WHERE id = ?;

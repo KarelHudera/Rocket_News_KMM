@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.rocketnews.domain.model.SpaceFlightNews
 import com.example.rocketnews.helpers.formatRocketsDate
+import com.example.rocketnews.presentation.theme.spacing
 import com.example.rocketnews.presentation.ui.common.Space
 import com.example.rocketnews.presentation.ui.common.buttons.GoToArticleButton
 import com.example.rocketnews.presentation.ui.common.LoadingComponent
@@ -43,8 +44,8 @@ fun SpaceFlightNewsDetailScreenComponent(spaceFlightNew: SpaceFlightNews) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(300.dp)
-                                .padding(horizontal = 8.dp)
-                                .clip(RoundedCornerShape(16.dp))
+                                .padding(horizontal = MaterialTheme.spacing.horizontal)
+                                .clip(RoundedCornerShape(8.dp))
                         )
                     }
 
@@ -53,8 +54,8 @@ fun SpaceFlightNewsDetailScreenComponent(spaceFlightNew: SpaceFlightNews) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(300.dp)
-                                .padding(horizontal = 8.dp)
-                                .clip(RoundedCornerShape(16.dp))
+                                .padding(horizontal = MaterialTheme.spacing.horizontal)
+                                .clip(RoundedCornerShape(8.dp))
                         )
                     }
 
