@@ -1,0 +1,129 @@
+package karel.hudera.rocketnews.presentation.ui.screens.news
+
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.FloatingActionButtonDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.ScreenKey
+import cafe.adriel.voyager.core.screen.uniqueScreenKey
+import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import karel.hudera.rocketnews.presentation.ui.common.NewsDatePicker
+import karel.hudera.rocketnews.presentation.ui.common.Space
+import karel.hudera.rocketnews.presentation.ui.common.screenComponents.NewsScreenComponent
+import karel.hudera.rocketnews.presentation.ui.common.state.ManagementResourceComponentState
+import karel.hudera.rocketnews.presentation.ui.common.state.ManagementResourceUiState
+import karel.hudera.rocketnews.presentation.ui.common.topBars.NewsActionAppBar
+import karel.hudera.rocketnews.presentation.ui.screens.newsImage.NewsImageScreen
+import kotlinx.coroutines.flow.collectLatest
+
+class NewsScreen : Screen {
+    override val key: ScreenKey = uniqueScreenKey
+
+    @Composable
+    override fun Content() {
+        val newsViewModel = getScreenModel<NewsViewModel>()
+
+        val state by newsViewModel.uiState.collectAsState()
+
+        val showNewsDatePickerDialog = newsViewModel.showNewsDatePickerDialog.collectAsState().value
+
+        val navigator = LocalNavigator.currentOrThrow
+
+        val lightBlue = Color(0xFF10aef8)
+
+        var url by remember { mutableStateOf("") }
+        var hdUrl by remember { mutableStateOf("") }
+
+        LaunchedEffect(key1 = Unit) {
+            newsViewModel.effect.collectLatest { effect ->
+                when (effect) {
+                    is NewsContract.Effect.ShowInfoBottomSheet ->
+                        newsViewModel.setNewsInfoBottomSheet(true)
+
+                    is NewsContract.Effect.ShowDatePicker ->
+                        newsViewModel.setNewsDatePickerDialog(true)
+
+                    is NewsContract.Effect.NavigateToNewsImage ->
+                        navigator.push(NewsImageScreen(url = url, hdUrl = hdUrl))
+                }
+            }
+        }
+
+        Scaffold(
+            topBar = {
+                NewsActionAppBar(
+                    title = "Astronomy Picture of the Day",
+                    onClickDatePicker = {
+                        newsViewModel.setEvent(NewsContract.Event.OnDatePickerClick)
+                    },
+                    isShadowEnabled = true
+                )
+            },
+            floatingActionButton = {
+                ManagementResourceComponentState(
+                    resourceUiState = state.news,
+                    successView = {
+                        FloatingActionButton(
+                            onClick = { newsViewModel.setEvent(NewsContract.Event.OnInfoBottomSheetClick) },
+                            backgroundColor = lightBlue,
+                            shape = RoundedCornerShape(24.dp),
+                            elevation = FloatingActionButtonDefaults.elevation(2.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                modifier = Modifier.size(38.dp),
+                                tint = Color.White,
+                                contentDescription = null
+                            )
+                        }
+                    },
+                    loadingView = { Space() }
+                )
+            }
+        ) { padding ->
+            ManagementResourceUiState(
+                modifier = Modifier
+                    .padding(padding)
+                    .fillMaxSize(),
+                resourceUiState = state.news,
+                successView = { news ->
+                    url = news.url
+                    hdUrl = news.hdurl
+                    NewsScreenComponent(news, newsViewModel)
+                },
+                onTryAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
+                onCheckAgain = { newsViewModel.setEvent(NewsContract.Event.OnTryCheckAgainClick) },
+            )
+            if (showNewsDatePickerDialog) {
+                NewsDatePicker(
+                    dismiss = {
+                        newsViewModel.setNewsDatePickerDialog(false)
+                    },
+                    onConfirmDate = {
+                        newsViewModel.setNewsDatePickerDialog(false)
+                        newsViewModel.setNewsDateFromDatePicker(it.date)
+                    }
+                )
+            }
+        }
+    }
+}

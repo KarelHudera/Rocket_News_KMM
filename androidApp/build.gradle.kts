@@ -88,14 +88,14 @@ kotlin {
 }
 
 android {
-    namespace = "com.example.rocketnews"
+    namespace = "karel.hudera.rocketnews"
     compileSdk = 34
 
     defaultConfig {
         minSdk = 26
         targetSdk = 34
 
-        applicationId = "com.example.rocketnews.androidApp"
+        applicationId = "karel.hudera.rocketnews.androidApp"
         versionCode = 1
         versionName = "1.0.0"
     }
@@ -124,7 +124,7 @@ buildConfig {
 sqldelight {
     databases {
         create("AppDatabase") {
-            packageName.set("com.example.rocketnews.data_cache.sqldelight")
+            packageName.set("karel.hudera.rocketnews.data_cache.sqldelight")
             sourceFolders.set(listOf("kotlin"))
         }
     }

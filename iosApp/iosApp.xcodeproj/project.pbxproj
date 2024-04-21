@@ -314,7 +314,7 @@
        	"-framework",
         App,
        );
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.rocketnews.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = karel.hudera.rocketnews.iosApp;
 				PRODUCT_NAME = "Rocket News";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -351,7 +351,7 @@
        	"-framework",
        	App,
        );
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.rocketnews.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = karel.hudera.rocketnews.iosApp;
 				PRODUCT_NAME = "Rocket News";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
